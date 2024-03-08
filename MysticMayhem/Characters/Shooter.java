@@ -29,7 +29,7 @@ public class Shooter implements Highlander, Archer {
     @Override
     public boolean removeArmour() {
         if(armour == null){
-            return false
+            return false;
         } else {
             armour = null;
             return true;
