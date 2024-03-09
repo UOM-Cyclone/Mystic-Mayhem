@@ -6,13 +6,15 @@ import MysticMayhem.Grounds.Ground;
 
 public class Shooter implements Highlander, Archer {
 
-    float health = 6;
-    int speed = 9;
-    int attack = 11;
-    int defence = 4;
-    int price = 80;
+    private float health = 6;
+    private float speed = 9;
+    private float attack = 11;
+    private float defence = 4;
+    static int price = 80;
+    private int current_value = 80;
+
     Armour armour = null;
-    Artefacts artefacts = null;
+    Artefacts artefact = null;
     Ground battleGround;
 
 
@@ -20,6 +22,10 @@ public class Shooter implements Highlander, Archer {
     public boolean addArmour(Armour armour) {
         if(this.armour == null){
             this.armour = armour;
+            health += armour.getHealth();
+            speed += armour.getSpeed();
+            attack += armour.getAttack();
+            defence += armour.getDefence();
             return true;
         } else {
             return false;
@@ -32,14 +38,22 @@ public class Shooter implements Highlander, Archer {
             return false;
         } else {
             armour = null;
+            health -= armour.getHealth();
+            speed -= armour.getSpeed();
+            attack -= armour.getAttack();
+            defence -= armour.getDefence();
             return true;
         }
     }
 
     @Override
-    public boolean addArtefacts(Artefacts artefacts) {
-        if(this.artefacts == null){
-            this.artefacts = artefacts;
+    public boolean addArtefacts(Artefacts artefact) {
+        if(this.artefact == null){
+            this.artefact = artefact;
+            health += artefact.getHealth();
+            speed += artefact.getSpeed();
+            attack += artefact.getAttack();
+            defence += artefact.getDefence();
             return true;
         } else {
             return false;
@@ -48,10 +62,15 @@ public class Shooter implements Highlander, Archer {
 
     @Override
     public boolean removeArtefacts() {
-        if(artefacts == null){
+        if(artefact == null){
             return false;
         } else {
-            artefacts = null;
+            artefact = null;
+            this.artefact = artefact;
+            health -= artefact.getHealth();
+            speed -= artefact.getSpeed();
+            attack -= artefact.getAttack();
+            defence -= artefact.getDefence();
             return true;
         }
     }
@@ -72,7 +91,7 @@ public class Shooter implements Highlander, Archer {
     }
 
     @Override
-    public float defence(int value) {
+    public float defence(float value) {
         float lostHealth = (float) (0.5 * value - 0.1 * defence);
         health = (lostHealth >= health) ? 0: (health-lostHealth);
         return health;
@@ -91,6 +110,11 @@ public class Shooter implements Highlander, Archer {
     @Override
     public float getDefense() {
         return defence;
+    }
+
+    @Override
+    public float getCurrentValue() {
+        return current_value;
     }
 
     @Override
