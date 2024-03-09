@@ -1,4 +1,4 @@
 package MysticMayhem.Characters;
 
-public interface MythicalCreature {
+public interface MythicalCreature extends Catogery {
 }
