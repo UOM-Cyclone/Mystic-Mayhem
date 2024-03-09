@@ -26,6 +26,8 @@ public class Shooter implements Highlander, Archer {
             speed += armour.getSpeed();
             attack += armour.getAttack();
             defence += armour.getDefence();
+
+            current_value += 0.2 * armour.getPrice();
             return true;
         } else {
             return false;
@@ -33,16 +35,19 @@ public class Shooter implements Highlander, Archer {
     }
 
     @Override
-    public boolean removeArmour() {
+    public Armour removeArmour() {
         if(armour == null){
-            return false;
+            return null;
         } else {
-            armour = null;
             health -= armour.getHealth();
             speed -= armour.getSpeed();
             attack -= armour.getAttack();
             defence -= armour.getDefence();
-            return true;
+
+            current_value -= 0.2 * armour.getPrice();
+            Armour temp = armour;
+            armour = null;
+            return temp;
         }
     }
 
@@ -54,6 +59,8 @@ public class Shooter implements Highlander, Archer {
             speed += artefact.getSpeed();
             attack += artefact.getAttack();
             defence += artefact.getDefence();
+
+            current_value += 0.2 * artefact.getPrice();
             return true;
         } else {
             return false;
@@ -61,17 +68,19 @@ public class Shooter implements Highlander, Archer {
     }
 
     @Override
-    public boolean removeArtefacts() {
+    public Artefacts removeArtefacts() {
         if(artefact == null){
-            return false;
+            return null;
         } else {
-            artefact = null;
-            this.artefact = artefact;
             health -= artefact.getHealth();
             speed -= artefact.getSpeed();
             attack -= artefact.getAttack();
             defence -= artefact.getDefence();
-            return true;
+
+            current_value -= 0.2 * artefact.getPrice();
+            Artefacts temp = artefact;
+            artefact = null;
+            return temp;
         }
     }
 

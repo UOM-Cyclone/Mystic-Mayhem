@@ -5,9 +5,9 @@ import MysticMayhem.Equipments.Artefacts;
 
 public interface Character {
     public boolean addArmour(Armour armour);
-    public boolean removeArmour();
+    public Armour removeArmour();
     public boolean addArtefacts(Artefacts artefacts);
-    public boolean removeArtefacts();
+    public Artefacts removeArtefacts();
     public void increaseHealth(float value);
     public void decreaseHealth(float value);
     public boolean attack(Character defender);
