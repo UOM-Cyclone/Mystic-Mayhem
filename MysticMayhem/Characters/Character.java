@@ -11,8 +11,9 @@ public interface Character {
     public void increaseHealth(float value);
     public void decreaseHealth(float value);
     public boolean attack(Character defender);
-    public float defence(int value);
+    public float defence(float value);
     public float getHealth();
     public float getSpeed();
     public float getDefense();
+    public float getCurrentValue();
 }
