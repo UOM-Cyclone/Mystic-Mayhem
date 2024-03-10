@@ -12,8 +12,10 @@ public class GameController {
     private static ArrayList<String> plyrs = new ArrayList<String>();
     private static ArrayList<String> pwds = new ArrayList<String>();
     
-    private static String inputStr="",curr_user="";
+    private static String inputStr="";
     private static Player currentPlayer;
+
+    static Player tempPlayer;
 
     private static void print(String phrase) {
         System.out.println(phrase);
@@ -31,16 +33,15 @@ public class GameController {
     }
 
     // to check and get the index of user
-    private static int playerName(String plyrName) {
-        int index = -1;
-        for (int i = 0; i < plyrs.size(); i++) {
-            if (plyrs.get(i).equals(plyrName)) {
-                index = i;
-                print("got user");
+    private static boolean isTakenUserName(String plyrName) {
+        boolean taken = false;
+        for (int i = 0; i < Player.getPlayerCount(); i++) {
+            if (Player.getUserNames().get(i).equals(plyrName)) {
+                taken = true;
                 break;
             }
         }
-        return index;
+        return taken;
     }
 
     // start the console
@@ -49,7 +50,7 @@ public class GameController {
         inputStr = CLI.display(stdin, "UI00");
         switch (inputStr) {
             case "1":
-                curr_user = LogIn();
+                LogIn();
                 break;
             case "2":
                 createAccount();
@@ -74,14 +75,14 @@ public class GameController {
         }
     }
 
-    public static String LogIn(){
+    public static void LogIn(){
         String plyr;
         int userIndex;
         while(true){
             print("Enter your User Name");
             inputStr = stdin.nextLine();
-            userIndex = playerName(inputStr);
-            if(userIndex>-1){
+            if(isTakenUserName(inputStr)){
+                tempPlayer = Player.getPlayers().get(inputStr);
                 break;
             }else{
                 print("Invalid User Name. Try it again.\n");
@@ -91,9 +92,10 @@ public class GameController {
         while(true){
             print("Enter your Password");
             inputStr = stdin.nextLine();
+            
 
-            if(inputStr.equals(pwds.get(userIndex))){
-                plyr = plyrs.get(userIndex);
+            if(inputStr.equals(tempPlayer.getPwd())){
+                currentPlayer = tempPlayer;
                 break;
             }else{
                 print("Incorrect Password. Try it again.");
@@ -136,21 +138,17 @@ public class GameController {
             print(e.getMessage());
         }
         
-        return plyr;
     }
 
     public static void createAccount(){
         int userIndex;
         String name, uName, pwd;
         print("Enter your name:");
-        inputStr = stdin.nextLine();
+        name = stdin.nextLine();
         while(true){
             print("Enter your username:");
-            name = stdin.nextLine();
-            userIndex = playerName(inputStr);
-            if(userIndex == -1){
-                // tempory
-                plyrs.add(inputStr);
+            inputStr = stdin.nextLine();
+            if(!isTakenUserName(inputStr)){
                 uName = inputStr;
                 break;
             }else{
@@ -158,11 +156,9 @@ public class GameController {
             }
         }
 
-        print("Enter password for your account:");
-        inputStr = stdin.nextLine();
-        pwds.add(inputStr); //tempory
-        pwd = inputStr;
-        Player newPlayer = new Player(name, uName, pwd);
+        print("Enter a password for your account:");
+        pwd = stdin.nextLine();
+        new Player(name, uName, pwd);
         print("Successfully created a new account..");
         start();
     }
