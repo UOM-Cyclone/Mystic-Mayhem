@@ -7,11 +7,23 @@ import MysticMayhem.Grounds.Ground;
 
 public class Player {
     private static int count = 0;
-    static Map<String,Player> players = new HashMap<>();
-    static ArrayList<String> usernames = new ArrayList<>();
+    private static Map<String,Player> players = new HashMap<>();
+    private static ArrayList<String> usernames = new ArrayList<>();
     private int gc, xp, uID;
     private String username, pwd, name;
     private Ground hg;
+
+    public static Map<String,Player> getPlayers(){
+        return players;
+    }
+
+    public static ArrayList<String> getUserNames(){
+        return usernames;
+    }
+
+    public static int getPlayerCount(){
+        return count;
+    }
 
     public Player(String name, String uName, String pwd){
         this.name = name;
