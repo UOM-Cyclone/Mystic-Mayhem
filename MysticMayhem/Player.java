@@ -2,6 +2,7 @@ package MysticMayhem;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 import MysticMayhem.Grounds.Ground;
 
@@ -23,6 +24,12 @@ public class Player {
 
     public static int getPlayerCount(){
         return count;
+    }
+
+    public static Player getRandomPlayer(){
+        Random rand = new Random();
+        int randomnum = rand.nextInt(usernames.size());
+        return players.get(usernames.get(randomnum));
     }
 
     public Player(String name, String uName, String pwd){
