@@ -11,8 +11,8 @@ public class GameController {
 
     private static ArrayList<String> plyrs = new ArrayList<String>();
     private static ArrayList<String> pwds = new ArrayList<String>();
-    
-    private static String inputStr="";
+
+    private static String inputStr = "";
     private static Player currentPlayer;
 
     static Player tempPlayer;
@@ -21,11 +21,11 @@ public class GameController {
         System.out.println(phrase);
     }
 
-    public static void setInput(Scanner scnr){
+    public static void setInput(Scanner scnr) {
         stdin = scnr;
     }
 
-    public static void setPlayers(){
+    public static void setPlayers() {
         plyrs.add("player-1");
         plyrs.add("player-2");
         pwds.add("player-1");
@@ -44,8 +44,16 @@ public class GameController {
         return taken;
     }
 
+    public static boolean areYouSure(String msg){
+        boolean answer;
+        print("Are you sure you want to "+msg+"(Y/N)");
+        inputStr = stdin.nextLine();
+        answer = (inputStr.equals("Y") || inputStr.equals("y"));
+        return answer;
+    }
+
     // start the console
-    public static void start(){
+    public static void start() {
         setPlayers();
         inputStr = CLI.display(stdin, "UI00");
         switch (inputStr) {
@@ -55,103 +63,101 @@ public class GameController {
             case "2":
                 createAccount();
                 break;
-            case "Q":
-            case "q":
+            case "99":
                 quitGame();
                 break;
             default:
-                System.out.println("Nothing special");
+                print("Nothing special");
 
         }
     }
 
-    public static void quitGame(){
+    public static void quitGame() {
         print("Are you sure, You want to quit the game? (Y/N)");
         inputStr = stdin.nextLine();
-        if(inputStr.equals("Y") || inputStr.equals("y")){
+        if (inputStr.equals("Y") || inputStr.equals("y")) {
             return;
-        }else{
+        } else {
             start();
         }
     }
 
-    public static void LogIn(){
+    public static void LogIn() {
         String plyr;
         int userIndex;
-        while(true){
+        while (true) {
             print("Enter your User Name");
             inputStr = stdin.nextLine();
-            if(isTakenUserName(inputStr)){
+            if (isTakenUserName(inputStr)) {
                 tempPlayer = Player.getPlayers().get(inputStr);
                 break;
-            }else{
+            } else {
                 print("Invalid User Name. Try it again.\n");
             }
         }
-        
-        while(true){
+
+        while (true) {
             print("Enter your Password");
             inputStr = stdin.nextLine();
-            
 
-            if(inputStr.equals(tempPlayer.getPwd())){
+            if (inputStr.equals(tempPlayer.getPwd())) {
                 currentPlayer = tempPlayer;
                 break;
-            }else{
+            } else {
                 print("Incorrect Password. Try it again.");
             }
         }
         System.out.print("Loading player data [     ]");
-        try{
+        try {
             Thread.sleep(500);
-        }catch(Exception e){
+        } catch (Exception e) {
             print(e.getMessage());
         }
         System.out.print("\rLoading player data [#    ]");
-        try{
+        try {
             Thread.sleep(500);
-        }catch(Exception e){
+        } catch (Exception e) {
             print(e.getMessage());
         }
         System.out.print("\rLoading player data [##   ]");
-        try{
+        try {
             Thread.sleep(500);
-        }catch(Exception e){
+        } catch (Exception e) {
             print(e.getMessage());
         }
         System.out.print("\rLoading player data [###  ]");
-        try{
+        try {
             Thread.sleep(500);
-        }catch(Exception e){
+        } catch (Exception e) {
             print(e.getMessage());
         }
         System.out.print("\rLoading player data [#### ]");
-        try{
+        try {
             Thread.sleep(500);
-        }catch(Exception e){
+        } catch (Exception e) {
             print(e.getMessage());
         }
         System.out.print("\rLoading player data [#####]");
-        try{
+        try {
             Thread.sleep(500);
-        }catch(Exception e){
+        } catch (Exception e) {
             print(e.getMessage());
         }
-        
+
     }
 
-    public static void createAccount(){
+    public static void createAccount() {
         int userIndex;
         String name, uName, pwd;
         print("Enter your name:");
         name = stdin.nextLine();
-        while(true){
+        while (true) {
             print("Enter your username:");
             inputStr = stdin.nextLine();
-            if(!isTakenUserName(inputStr)){
+            if (!isTakenUserName(inputStr)) {
                 uName = inputStr;
                 break;
-            }else{
+            } else {
                 print("User Name already exists. Please use another username.\n");
             }
         }
@@ -163,5 +169,33 @@ public class GameController {
         start();
     }
 
-    
+    public static void playerUI() {
+        if (currentPlayer == null) {
+            print("You should login first.");
+            return;
+        }
+
+        print(currentPlayer.getName() + "@" + currentPlayer.getUserName());
+        inputStr = CLI.display(stdin, "UI10");
+
+        switch (inputStr) {
+            case "1":
+                LogIn();
+                break;
+            case "2":
+                createAccount();
+                break;
+            case "3":
+                createAccount();
+                break;
+            case "98":
+                quitGame();
+                break;
+            default:
+                print("Invalid input. Try it again.");
+                playerUI();
+
+        }
+    }
+
 }
