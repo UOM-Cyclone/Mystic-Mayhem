@@ -3,9 +3,8 @@ package MysticMayhem;
 import MysticMayhem.Characters.*;
 import MysticMayhem.Equipments.Armour;
 import MysticMayhem.Equipments.Artefacts;
-import MysticMayhem.Equipments.Equipment;
 
-import java.lang.Character;
+
 
 public class Army {
     Archer archer;
