@@ -2,6 +2,8 @@ package MysticMayhem.Controllers;
 
 import java.util.*;
 
+import MysticMayhem.Characters.Catogery;
+import MysticMayhem.Characters.Character;
 import MysticMayhem.Player;
 import MysticMayhem.UIs.CLIConsole;
 
@@ -196,6 +198,40 @@ public class GameController {
                 playerUI();
 
         }
+    }
+
+    //print method
+    public void printTurnDetails(String attackingPlayer, String defendingPlayer, Character attackingChar, Character defendingChar, int turn){
+        if (defendingChar.getHealth()>0){
+            System.out.println(attackingPlayer+" Vs "+defendingPlayer+"\n"+
+                    "Turn "+turn+" : "+attackingPlayer+"\n"+
+                    attackingChar+" attacks "+defendingChar+"\n"+
+                    defendingChar+"'s health: "+defendingChar.getHealth()+"\n"+
+                    attackingChar+"'s health: "+attackingChar.getHealth()+"\n");
+        }
+        else{
+            System.out.println(attackingPlayer+" Vs "+defendingPlayer+"\n"+
+                    "Turn "+turn+" : "+attackingPlayer+"\n"+
+                    attackingChar+" attacks "+defendingChar+"\n"+
+                    attackingChar+"'s health: "+attackingChar.getHealth()+"\n"+
+                    defendingChar+" died!");
+        }
+    }
+
+    public void printRoundDetails(int finish,Player attackingPlayer,Player defendingPlayer){
+        switch (finish){
+            case 0:
+                System.out.println("draw");
+                break;
+            case 1:
+                System.out.println(attackingPlayer+" won!");
+                break;
+            case 2:
+                System.out.println(defendingPlayer+" won!");
+        }
+        System.out.println(attackingPlayer.getName()+" XP: "+attackingPlayer.getXP()+" gold coins: "+attackingPlayer.getGC());
+        System.out.println(defendingPlayer.getName()+" XP: "+defendingPlayer.getXP()+" gold coins: "+defendingPlayer.getGC());
+
     }
 
 }
