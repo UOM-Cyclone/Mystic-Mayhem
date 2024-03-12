@@ -2,11 +2,9 @@ package MysticMayhem.Characters;
 
 import MysticMayhem.Equipments.Armour;
 import MysticMayhem.Equipments.Artefacts;
-import MysticMayhem.Grounds.Arcane;
-import MysticMayhem.Grounds.Ground;
-import MysticMayhem.Grounds.Hillcrest;
+import MysticMayhem.Grounds.*;
 
-public abstract class Highlander implements Type {
+public abstract class Sunchildren implements Type {
     protected float health = 0;
     protected float speed = 0;
     protected float attack = 0;
@@ -16,7 +14,7 @@ public abstract class Highlander implements Type {
     protected Ground battleGround = null;
     protected boolean isBonusRound = false;
     protected float current_value = 0;
-    private boolean isBonusHealth = false;
+    protected boolean isBonusHealth = false;
 
 
     @Override
@@ -147,9 +145,12 @@ public abstract class Highlander implements Type {
     public boolean addBattleGround(Ground battleGround) {
 
         if(battleGround instanceof Hillcrest){
+            speed -= 1;
 
-        } else if (battleGround instanceof Arcane){
-
+        } else if (battleGround instanceof Marshland){
+            attack -= 1;
+        }else if(battleGround instanceof Desert) {
+            attack += 1;
         }
 
         this.battleGround = battleGround;
