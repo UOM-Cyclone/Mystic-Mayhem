@@ -5,18 +5,14 @@ import MysticMayhem.RoundSummery;
 
 import java.util.Vector;
 
-public class Shooter extends Highlander implements  Archer {
-    public final static int price = 80;
-    public final static float initialHealth = 6;
-    public final static float initialSpeed = 9;
-    public final static float initialAttack = 11;
-    public final static float initialDefence = 4;
+public class Illusionist extends Mystics implements  Mage {
+    static int price = 120;
 
     {
-        health += 6;
-        speed += 9;
-        attack += 11;
-        defence += 4;
+        attack += 13;
+        defence += 8;
+        health += 12;
+        speed += 14;
         current_value += price;
     }
 
@@ -36,3 +32,4 @@ public class Shooter extends Highlander implements  Archer {
         addBonusHealth();
     }
 }
+
