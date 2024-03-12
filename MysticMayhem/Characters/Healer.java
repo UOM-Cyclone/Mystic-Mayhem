@@ -1,4 +1,4 @@
 package MysticMayhem.Characters;
 
-public interface Healer extends Catogery{
+public interface Healer {
 }

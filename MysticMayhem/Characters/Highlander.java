@@ -16,7 +16,7 @@ public abstract class Highlander implements Type {
     protected Ground battleGround = null;
     protected boolean isBonusRound = false;
     protected float current_value = 0;
-    private boolean isBonusHealth = false;
+    protected boolean isBonusHealth = false;
 
 
     @Override
@@ -147,8 +147,13 @@ public abstract class Highlander implements Type {
     public boolean addBattleGround(Ground battleGround) {
 
         if(battleGround instanceof Hillcrest){
+            attack += 1;
+            defence += 1;
+            isBonusRound = true ;
 
         } else if (battleGround instanceof Arcane){
+            speed -=1 ;
+            defence -= 1;
 
         }
 

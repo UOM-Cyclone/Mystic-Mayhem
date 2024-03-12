@@ -6,15 +6,18 @@ import java.util.Vector;
 
 public  interface Archer extends Catogery{
     default Character chooseAndAttack(Vector<Character> attacker, Vector<Character> defender, float attack) {
-        Character lowestDefence = defender.getFirst();
+        Character lowestDefenceHolder = defender.getFirst();
 
         for (Character i : defender) {
-            if (lowestDefence.getDefense() > i.getDefense()) {
-                lowestDefence = i;
+            if (lowestDefenceHolder.getDefense() > i.getDefense()) {
+                lowestDefenceHolder = i;
             }
         }
 
-        lowestDefence.defence(attack);
-        return lowestDefence;
+        lowestDefenceHolder.defence(attack);
+        if(lowestDefenceHolder.getHealth()==0){
+            defender.remove(lowestDefenceHolder);
+        }
+        return lowestDefenceHolder;
     }
 }
