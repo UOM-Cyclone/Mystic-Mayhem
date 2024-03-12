@@ -13,7 +13,7 @@ public class GameController {
     private static ArrayList<String> pwds = new ArrayList<String>();
 
     private static String inputStr = "";
-    private static Player currentPlayer;
+    private static Player currentPlayer, opponentPlayer;
 
     static Player tempPlayer;
 
@@ -30,6 +30,10 @@ public class GameController {
         plyrs.add("player-2");
         pwds.add("player-1");
         pwds.add("player-2");
+        new Player("Thumul Dasun", "thumul", "1111");
+        new Player("Devinda Dilshan", "devinda", "2111");
+        new Player("Shanil Praveen", "shanil", "3111");
+        new Player("Dinara de. Silva", "dinara", "4111");
     }
 
     // to check and get the index of user
@@ -44,9 +48,9 @@ public class GameController {
         return taken;
     }
 
-    public static boolean areYouSure(String msg){
+    public static boolean areYouSure(String msg) {
         boolean answer;
-        print("Are you sure you want to "+msg+"(Y/N)");
+        print("Are you sure you want to " + msg + "? (Y/N)");
         inputStr = stdin.nextLine();
         answer = (inputStr.equals("Y") || inputStr.equals("y"));
         return answer;
@@ -73,18 +77,13 @@ public class GameController {
     }
 
     public static void quitGame() {
-        print("Are you sure, You want to quit the game? (Y/N)");
-        inputStr = stdin.nextLine();
-        if (inputStr.equals("Y") || inputStr.equals("y")) {
+        if (areYouSure("quit the game")) {
             return;
-        } else {
-            start();
         }
+        start();
     }
 
     public static void LogIn() {
-        String plyr;
-        int userIndex;
         while (true) {
             print("Enter your User Name");
             inputStr = stdin.nextLine();
@@ -143,11 +142,10 @@ public class GameController {
         } catch (Exception e) {
             print(e.getMessage());
         }
-
+        playerUI();
     }
 
     public static void createAccount() {
-        int userIndex;
         String name, uName, pwd;
         print("Enter your name:");
         name = stdin.nextLine();
@@ -175,26 +173,131 @@ public class GameController {
             return;
         }
 
-        print(currentPlayer.getName() + "@" + currentPlayer.getUserName());
+        print("\n" + currentPlayer.getName() + " @" + currentPlayer.getUserName());
         inputStr = CLI.display(stdin, "UI10");
 
         switch (inputStr) {
             case "1":
-                LogIn();
+                selectOpponentUI();
                 break;
             case "2":
-                createAccount();
+                viewProfile();
                 break;
             case "3":
-                createAccount();
+                armyUI();
                 break;
             case "98":
-                quitGame();
+                logOut();
                 break;
             default:
                 print("Invalid input. Try it again.");
                 playerUI();
 
+        }
+    }
+
+    public static void logOut() {
+        if (areYouSure("logout")) {
+            print("Saving data...");
+            currentPlayer = null;
+            start();
+        }else{
+            playerUI();
+        }
+    }
+
+    private static void viewProfile() {
+        print("-----My Profile-----");
+        System.out.print("\tName : " + currentPlayer.getName());
+        System.out.print("\n\tUsername : " + currentPlayer.getUserName());
+        System.out.print("\n\tXP : " + currentPlayer.getXP());
+        System.out.print("\n\tGold coins : " + currentPlayer.getGC());
+        System.out.print("\n\tHomeground : " + currentPlayer.getHomeGround() + "\n");
+        print("1. Change Name");
+        print("2. Change Password");
+        print("98. Back to Menu");
+        print("--------------------");
+
+        switch (stdin.nextLine()) {
+            case "1":
+                changeNameUI();
+                break;
+            case "98":
+                playerUI();
+                break;
+            default:
+                print("Invalid input. Try it again.");
+                playerUI();
+        }
+    }
+
+    private static void changeNameUI() {
+        print("-----Change Name-----");
+        print("Enter new name.\n(Enter 98 to go back)\n");
+        String tempName = stdin.nextLine();
+        switch (inputStr) {
+            case "98":
+                viewProfile();
+                break;
+            default:
+                if (areYouSure("change name to \"" + tempName + "\"")) {
+                    currentPlayer.changeName(tempName);
+                    currentPlayer.updateHashMap();
+                    print("Changed name successfully...");
+                }
+                viewProfile();
+        }
+    }
+
+    public static void selectOpponentUI() {
+        inputStr = "2";
+        while (inputStr.equals("2")) {
+            tempPlayer = Player.getRandomPlayer();
+            if (tempPlayer == currentPlayer) {
+                continue;
+            }
+            System.out.print("Select opponent to combat\n\t" + tempPlayer.getName() + "\n\t  -XP Level : "
+                    + tempPlayer.getXP() + "\n1. Challenge\n2.Skip\n98.Back to menu\n");
+            inputStr = stdin.nextLine();
+        }
+
+        switch (inputStr) {
+            case "1":
+                opponentPlayer = tempPlayer;
+                // combat();
+                break;
+            case "98":
+                playerUI();
+                break;
+            default:
+                print("Invalid input. Try it again.");
+                playerUI();
+        }
+
+    }
+
+    public static void armyUI(){
+        print("1. Soldiers");
+        print("2. Battle Deck");
+        print("3. Equipments");
+        print("98. Back");
+
+        switch (stdin.nextLine()) {
+            case "1":
+                selectOpponentUI();
+                break;
+            case "2":
+                viewProfile();
+                break;
+            case "3":
+                createAccount();
+                break;
+            case "98":
+                playerUI();
+                break;
+            default:
+                print("Invalid input. Try it again.");
+                armyUI();
         }
     }
 
