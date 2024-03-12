@@ -191,4 +191,4 @@ public abstract class Mystics implements Type{
         battleGround = getBattleGround();
     }
 }
-}
+

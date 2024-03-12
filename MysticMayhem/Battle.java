@@ -77,12 +77,23 @@ public class Battle {
 
         if (winner != null){
             if(winner == attacker){ //do battle final things if attacker win
+                 System.out.println(attacker + "Won !");
+                 attacker.increaseXP(1);
+                 attacker.changeGC((float) (0.1 * defender.getGC()));
+                 defender.changeGC((float) (-0.1 * defender.getGC()));
+                 System.out.println(attacker + " XP :" + attacker.getXP() + " Gold Coin : " + attacker.getGC());
+
 
             } else {//do battle final things if defender win
+                 System.out.println(defender + "Won !");
+                 defender.increaseXP(1);
+                 defender.changeGC((float) (0.1 * attacker.getGC()));
+                 attacker.changeGC((float) (-0.1 * attacker.getGC()));
+                 System.out.println(defender + " XP :" + defender.getXP() + " Gold Coin : " + defender.getGC());
 
             }
         } else {//do battle final things if battle draw
-
+                System.out.println("Draw !");
         }
 
     }

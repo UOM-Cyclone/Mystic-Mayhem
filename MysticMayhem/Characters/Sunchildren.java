@@ -189,4 +189,4 @@ public abstract class Sunchildren implements Type {
         battleGround = getBattleGround();
     }
 }
-}
+
