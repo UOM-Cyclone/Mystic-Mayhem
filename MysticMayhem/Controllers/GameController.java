@@ -3,7 +3,7 @@ package MysticMayhem.Controllers;
 import java.util.*;
 
 import MysticMayhem.Player;
-import MysticMayhem.UIs.CLI;
+import MysticMayhem.UIs.CLIConsole;
 
 public class GameController {
     static int UI_id_num;
@@ -55,7 +55,7 @@ public class GameController {
     // start the console
     public static void start() {
         setPlayers();
-        inputStr = CLI.display(stdin, "UI00");
+        inputStr = CLIConsole.display(stdin, "UI00");
         switch (inputStr) {
             case "1":
                 LogIn();
@@ -176,7 +176,7 @@ public class GameController {
         }
 
         print(currentPlayer.getName() + "@" + currentPlayer.getUserName());
-        inputStr = CLI.display(stdin, "UI10");
+        inputStr = CLIConsole.display(stdin, "UI10");
 
         switch (inputStr) {
             case "1":

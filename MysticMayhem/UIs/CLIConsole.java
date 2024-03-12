@@ -3,7 +3,7 @@ package MysticMayhem.UIs;
 import java.util.Scanner;
 import java.io.*;
 
-public class CLI {
+public class CLIConsole {
     public static void print(String line){
         System.out.println(line);
     }

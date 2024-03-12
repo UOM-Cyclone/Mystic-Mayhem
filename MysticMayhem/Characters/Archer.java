@@ -1,17 +1,20 @@
 package MysticMayhem.Characters;
 
+import MysticMayhem.RoundSummery;
+
+import java.util.Vector;
+
 public  interface Archer extends Catogery{
-    default void chooseAndAttack(Character attacker[], Character defender[], float attack) {
-        if (defender.length > 0) {
-            Character lowestDefence = defender[0];
+    default Character chooseAndAttack(Vector<Character> attacker, Vector<Character> defender, float attack) {
+        Character lowestDefence = defender.getFirst();
 
-            for (Character i : defender) {
-                if (lowestDefence.getDefense() > i.getDefense()) {
-                    lowestDefence = i;
-                }
+        for (Character i : defender) {
+            if (lowestDefence.getDefense() > i.getDefense()) {
+                lowestDefence = i;
             }
-
-            lowestDefence.defence(attack);
         }
+
+        lowestDefence.defence(attack);
+        return lowestDefence;
     }
 }

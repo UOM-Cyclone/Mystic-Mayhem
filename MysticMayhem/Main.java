@@ -3,7 +3,6 @@ package MysticMayhem;
 import java.util.Scanner;
 
 import MysticMayhem.Characters.Shooter;
-import MysticMayhem.UIs.CLI;
 import MysticMayhem.Controllers.GameController;
 
 public class Main {
@@ -20,4 +19,6 @@ public class Main {
         // System.out.println(obj.defence(3));
         stdin.close();
     }
+
+
 }
