@@ -5,14 +5,14 @@ import MysticMayhem.RoundSummery;
 
 import java.util.Vector;
 
-public class Ranger extends Highlander implements  Archer {
-    static int price = 115;
+public class Enchanter extends Highlander implements  Mage {
+    static int price = 160;
 
     {
-        health += 8;
-        speed += 10;
-        attack += 14;
-        defence += 5;
+        attack += 16;
+        defence += 10;
+        health += 13;
+        speed += 16;
         current_value += price;
     }
 
