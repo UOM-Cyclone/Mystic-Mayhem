@@ -36,6 +36,8 @@ public class Player {
         return players.get(usernames.get(randomnum));
     }
 
+    public void setArmy(Army army){this.army = army;}
+
     public Player(String name, String uName, String pwd){
         this.name = name;
         this.username = uName;

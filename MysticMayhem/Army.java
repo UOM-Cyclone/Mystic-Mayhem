@@ -22,10 +22,12 @@ public class Army {
 
 
     public Vector<Character> toBattle(Ground ground){ // to send army to battle
-        Vector<Character> battleArmy = null;
-        Archer clonedArcher = cloneArcher(archer);
-        clonedArcher.addBattleGround(ground);
-        battleArmy.add(clonedArcher);
+        Vector<Character> battleArmy = new Vector<>();
+        cloneCharacter(battleArmy, archer);
+        cloneCharacter(battleArmy, knight);
+        cloneCharacter(battleArmy, mage);
+        cloneCharacter(battleArmy, healer);
+        cloneCharacter(battleArmy, mythicalCreature);
         return battleArmy;
     }
 
@@ -92,6 +94,48 @@ public class Army {
         return clonedHealer;
     }
 
+    private Mage cloneMage(Mage mage){ //clone archer to send
+        Mage clonedMage = null;
+        if(mage instanceof Warlock){
+            clonedMage = new Warlock();
+            clonedMage.copy(mage);
+        } else if(mage instanceof Illusionist){
+            clonedMage = new Illusionist();
+            clonedMage.copy(mage);
+        }else if(mage instanceof Enchanter){
+            clonedMage = new Enchanter();
+            clonedMage.copy(mage);
+        }else if(mage instanceof Conjurer){
+            clonedMage = new Conjurer();
+            clonedMage.copy(mage);
+        }else if(mage instanceof Eldritch){
+            clonedMage = new Eldritch();
+            clonedMage.copy(mage);
+        }
+        return clonedMage;
+    }
+
+    private Knight cloneKnight(Knight knight){ //clone archer to send
+        Knight clonedKnight = null;
+        if(knight instanceof Squire){
+            clonedKnight = new Squire();
+            clonedKnight.copy(knight);
+        } else if(knight instanceof Cavalier){
+            clonedKnight = new Cavalier();
+            clonedKnight.copy(knight);
+        }else if(knight instanceof Templar){
+            clonedKnight = new Templar();
+            clonedKnight.copy(knight);
+        }else if(knight instanceof Zoro){
+            clonedKnight = new Zoro();
+            clonedKnight.copy(knight);
+        }else if(knight instanceof Swiftblade){
+            clonedKnight = new Swiftblade();
+            clonedKnight.copy(knight);
+        }
+        return clonedKnight;
+    }
+
     private void cloneCharacter(Vector<Character> list, Character character){
         if (character == null){
             return;
@@ -100,7 +144,7 @@ public class Army {
         } else if(character instanceof Knight){
             list.add(cloneKnight((Knight) character));
         } else if (character instanceof Mage){
-            list.add(cloneMage((Knight) character));
+            list.add(cloneMage((Mage) character));
         } else if (character instanceof Healer){
             list.add(cloneHealer((Healer) character));
         } else if (character instanceof MythicalCreature){

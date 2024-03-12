@@ -62,27 +62,26 @@ public class Battle {
             roundSummery.printSummery();
 
             //(i+1) th round defender attacking to attacker
-            roundSummery = new RoundSummery(i+1,attacker);
+            roundSummery = new RoundSummery(i+1,defender);
             attackingChar =findHighestSpeed(defenderAlive);
             attackingChar.attack(defenderAlive,attackerAlive, roundSummery);
             roundSummery.setAttackChar(attackingChar);
             roundSummery.setAttackerHealth(attackingChar.getHealth());
+            roundSummery.printSummery();
             if(attackerAlive.size() == 0){
                 setWinner(defender);
                 break;
             }
-
-            roundSummery.printSummery();
         }
 
         if (winner != null){
             if(winner == attacker){ //do battle final things if attacker win
-
+                System.out.println("attacker");
             } else {//do battle final things if defender win
-
+                System.out.println("defender");
             }
         } else {//do battle final things if battle draw
-
+            System.out.println("draw");
         }
 
     }

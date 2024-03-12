@@ -21,7 +21,7 @@ public class RoundSummery {
 
     public RoundSummery(int roundNo, Player attacker){
         this.roundNo = roundNo;
-        this.attackPlayer = String.valueOf(attacker.getClass());
+        this.attackPlayer = attacker.getName();
     }
 
     public void setAttackChar(Character attacker){
@@ -56,10 +56,20 @@ public class RoundSummery {
         this.bonusDefenderHealth = health;
     }
     public void printSummery(){
-        String summery =
-                """
-                /n
-                """;
+        String summery = String.format("""
+                Turn %d : %s
+                %s attacks %s
+                %s's health : %f
+                %s's health : %f
+                """,
+                roundNo, attackPlayer,
+                attackChar, defendChar,
+                defendChar, defenderHealth,
+                attackChar, attackerHealth);
+        if(defenderHealth == 0 ){
+            summery += String.format("\n%s Died !\n\n",defendChar);
+        }
+        System.out.print(summery);
     }
 
 }
