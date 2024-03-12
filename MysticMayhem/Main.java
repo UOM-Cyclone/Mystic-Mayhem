@@ -3,7 +3,6 @@ package MysticMayhem;
 import java.util.Scanner;
 
 import MysticMayhem.Characters.Shooter;
-import MysticMayhem.UIs.CLI;
 import MysticMayhem.Controllers.GameController;
 
 
@@ -32,4 +31,6 @@ public class Main {
 
         // System.out.println(Profile.getRandomProfile().username);
     }
+
+
 }
