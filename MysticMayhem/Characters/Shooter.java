@@ -1,6 +1,10 @@
 package MysticMayhem.Characters;
 
 
+import MysticMayhem.RoundSummery;
+
+import java.util.Vector;
+
 public class Shooter extends Highlander implements  Archer {
     static int price = 80;
 
@@ -13,14 +17,18 @@ public class Shooter extends Highlander implements  Archer {
     }
 
     @Override
-    public boolean attack(Character attacker[], Character defender[]){
-        chooseAndAttack(attacker,defender,attack);
-        if(isBonusRound) {
+    public void attack(Vector<Character> attacker, Vector<Character> defender, RoundSummery roundSummery){
+        Character defendChar = chooseAndAttack(attacker,defender,attack);
+        roundSummery.setDefendChar(defendChar);
+        roundSummery.setDefenderHealth(defendChar.getHealth());
+
+        if(isBonusRound && !defender.isEmpty()) {
+            roundSummery.setBonusRound(true);
             float bonusAttack = (float) (attack * 0.2);
-            chooseAndAttack(attacker,defender,bonusAttack);
+            defendChar = chooseAndAttack(attacker,defender,bonusAttack);
+            roundSummery.setBonusDefendChar(defendChar);
+            roundSummery.setBonusDefenderHealth(defendChar.getHealth());
         }
-        for (Character i : attacker) i.addBonusHealth();
-        for (Character i : defender) i.addBonusHealth();
-        return true;
+        addBonusHealth();
     }
 }
