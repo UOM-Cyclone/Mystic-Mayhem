@@ -6,7 +6,11 @@ import MysticMayhem.RoundSummery;
 import java.util.Vector;
 
 public class Shooter extends Highlander implements  Archer {
-    static int price = 80;
+    public final static int price = 80;
+    public final static float initialHealth = 6;
+    public final static float initialSpeed = 9;
+    public final static float initialAttack = 11;
+    public final static float initialDefence = 4;
 
     {
         health += 6;
