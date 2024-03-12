@@ -55,11 +55,29 @@ public class RoundSummery {
     public void setBonusDefenderHealth(float health){
         this.bonusDefenderHealth = health;
     }
-    public void printSummery(){
-        String summery =
-                """
-                /n
-                """;
+    public void printSummery() {
+        if (isBonusRound) {
+            String summery =
+                    roundNo +  "   Bonus Round " + "\n" +
+                            attackChar + " Attacks " + defendChar + "\n" +
+                            defendChar + " new health : " + defenderHealth + "\n" +
+                            attackChar + "new health : " + attackerHealth + "\n";
+
+            if (defenderHealth == 0) {
+                summery += defendChar + "Died !";
+            }
+        }
+        else{
+            String summery =
+                    roundNo  + "\n" +
+                            attackChar + " Attacks " + defendChar + "\n" +
+                            defendChar + " new health : " + defenderHealth + "\n" +
+                            attackChar + "new health : " + attackerHealth + "\n";
+
+            if (defenderHealth == 0) {
+                summery += defendChar + "Died !";
+            }
+        }
     }
 
 }

@@ -12,7 +12,8 @@ public class Player {
     private static int count = 0;
     private static Map<String,Player> players = new HashMap<>();
     private static ArrayList<String> usernames = new ArrayList<>();
-    private int gc, xp, uID;
+    private int xp, uID;
+    private float gc;
     private String username, pwd, name;
     private Ground hg;
     private Army army;
@@ -65,7 +66,7 @@ public class Player {
         return this.name;
     }
 
-    public int getGC() {
+    public float getGC() {
         return this.gc;
     }
 
@@ -85,7 +86,7 @@ public class Player {
         this.xp += i;
     }
 
-    public void changeGC(int amount){
+    public void changeGC(float amount){
         this.gc += amount;
     }
 

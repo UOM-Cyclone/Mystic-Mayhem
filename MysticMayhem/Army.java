@@ -50,6 +50,47 @@ public class Army {
         return clonedArcher;
     }
 
+    private Knight cloneKnight(Knight knight){
+        Knight clonedKnight = null;
+        if(kinght instanceof Squire){
+            clonedKnight = new Squire();
+            clonedKnight.copy(knight);
+        } else if(knight instanceof Cavalier){
+            clonedKnight = new Cavalier();
+            clonedKnight.copy(knight);
+        }else if(knight instanceof Templar){
+            clonedKnight = new Templer();
+            clonedKnight.copy(knight);
+        }else if(knight instanceof Zoro){
+            clonedKnight = new Zoro();
+            clonedKnight.copy(knight);
+        }else if(knight instanceof Swiftblade){
+            clonedKnight = new Swiftblade();
+            clonedKnight.copy(knight);
+        }
+        return clonedKnight;
+    }
+
+    private Mage cloneMage(Mage mage){ //clone archer to send
+        Mage clonedMage = null;
+        if(mage instanceof Warlock){
+            clonedMage = new Warlock();
+            clonedMage.copy(mage);
+        } else if(mage instanceof Illusionlist){
+            clonedMage = new Illusionlist();
+            clonedMage.copy(mage);
+        }else if(mage instanceof Enchanter){
+            clonedMage = new Enchanter();
+            clonedMage.copy(mage);
+        }else if(mage instanceof Conjurer){
+            clonedMage = new Conjurer();
+            clonedMage.copy(mage);
+        }else if(mage instanceof Eldritch){
+            clonedMage = new Eldritch();
+            clonedMage.copy(mage);
+        }
+        return clonedMage;
+      
     private MythicalCreature cloneCreature(MythicalCreature mythicalCreature){ //clone archer to send
         MythicalCreature clonedCreature = null;
         if(mythicalCreature instanceof Dragon){
