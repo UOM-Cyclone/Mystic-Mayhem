@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+import MysticMayhem.Characters.Archer;
+import MysticMayhem.Equipments.Amulet;
 import MysticMayhem.Grounds.Ground;
 
 public class Player {
@@ -13,7 +15,9 @@ public class Player {
     private int gc, xp, uID;
     private String username, pwd, name;
     private Ground hg;
+    private Army army;
 
+    public Army getArmy(){return army;}
     public static Map<String,Player> getPlayers(){
         return players;
     }
