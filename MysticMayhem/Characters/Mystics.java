@@ -2,9 +2,12 @@ package MysticMayhem.Characters;
 
 import MysticMayhem.Equipments.Armour;
 import MysticMayhem.Equipments.Artefacts;
-import MysticMayhem.Grounds.*;
+import MysticMayhem.Grounds.Arcane;
+import MysticMayhem.Grounds.Ground;
+import MysticMayhem.Grounds.Hillcrest;
+import MysticMayhem.Grounds.Marshland;
 
-public abstract class Marshlanders implements Type{
+public abstract class Mystics implements Type{
     protected float health = 0;
     protected float speed = 0;
     protected float attack = 0;
@@ -144,17 +147,13 @@ public abstract class Marshlanders implements Type{
     @Override
     public boolean addBattleGround(Ground battleGround) {
 
-        if(battleGround instanceof Hillcrest){
+        if(battleGround instanceof Marshland){
             speed -= 1;
-        } else if (battleGround instanceof Marshland){
-            defence += 2;
-        } else if (battleGround instanceof Desert){
-            health -= 1;
-        } else if(battleGround instanceof Arcane) {
-            speed -= 1;
-            defence -= 1;
-        }
 
+        } else if (battleGround instanceof Arcane){
+            attack += 2;
+            isBonusHealth = true;
+        }
 
         this.battleGround = battleGround;
         return false;

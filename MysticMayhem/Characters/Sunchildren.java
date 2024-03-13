@@ -4,7 +4,7 @@ import MysticMayhem.Equipments.Armour;
 import MysticMayhem.Equipments.Artefacts;
 import MysticMayhem.Grounds.*;
 
-public abstract class Marshlanders implements Type{
+public abstract class Sunchildren implements Type {
     protected float health = 0;
     protected float speed = 0;
     protected float attack = 0;
@@ -146,15 +146,12 @@ public abstract class Marshlanders implements Type{
 
         if(battleGround instanceof Hillcrest){
             speed -= 1;
-        } else if (battleGround instanceof Marshland){
-            defence += 2;
-        } else if (battleGround instanceof Desert){
-            health -= 1;
-        } else if(battleGround instanceof Arcane) {
-            speed -= 1;
-            defence -= 1;
-        }
 
+        } else if (battleGround instanceof Marshland){
+            attack -= 1;
+        }else if(battleGround instanceof Desert) {
+            attack += 1;
+        }
 
         this.battleGround = battleGround;
         return false;
