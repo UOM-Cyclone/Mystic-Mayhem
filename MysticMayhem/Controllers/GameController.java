@@ -3,7 +3,9 @@ package MysticMayhem.Controllers;
 import java.util.*;
 
 import MysticMayhem.Player;
+import MysticMayhem.Characters.Character;
 import MysticMayhem.UIs.CLIConsole;
+import javafx.collections.ListChangeListener.Change;
 
 public class GameController {
     static int UI_id_num;
@@ -201,7 +203,7 @@ public class GameController {
             print("Saving data...");
             currentPlayer = null;
             start();
-        }else{
+        } else {
             playerUI();
         }
     }
@@ -276,7 +278,7 @@ public class GameController {
 
     }
 
-    public static void armyUI(){
+    public static void armyUI() {
         print("1. Soldiers");
         print("2. Battle Deck");
         print("3. Equipments");
@@ -284,7 +286,7 @@ public class GameController {
 
         switch (stdin.nextLine()) {
             case "1":
-                selectOpponentUI();
+                soldiersUI();
                 break;
             case "2":
                 viewProfile();
@@ -299,6 +301,118 @@ public class GameController {
                 print("Invalid input. Try it again.");
                 armyUI();
         }
+    }
+
+    public static void soldiersUI() {
+        print("1. View Occupied Soldiers\n2. Buy Characters\n3. Sell Characters\n4. Upgrade Characters\n98. Back");
+        switch (stdin.nextLine()) {
+            case "1":
+                soldiersUI();
+                break;
+            case "2":
+                viewProfile();
+                break;
+            case "3":
+                createAccount();
+                break;
+            case "4":
+                createAccount();
+                break;
+            case "98":
+                armyUI();
+                break;
+            default:
+                print("Invalid input. Try it again.");
+                soldiersUI();
+        }
+    }
+
+    private static String selectCategoryTo(String msg) {
+        print("Select category to " + msg);
+        print("1. Archers\n2. Knights\n3. Mages\n4. Healers\n5. Mythical Creatures\n98. Back");
+        return stdin.nextLine();
+    }
+
+    private static void viewCharacters(ArrayList<Character> list, String title) {
+        print("-----" + title + "-----");
+        for (int i = 0; i < list.size(); i++) {
+            Character character = list.get(i);
+        }
+    }
+
+    private static void barrackUI() {
+        switch (selectCategoryTo("view")) {
+            case "1":
+                viewCharacters(currentPlayer.getArchers(), "Archers");
+                break;
+
+            case "2":
+                viewCharacters(currentPlayer.getKnights(), "Knights");
+                break;
+
+            case "3":
+                viewCharacters(currentPlayer.getMages(), "Mages");
+                break;
+
+            case "4":
+                viewCharacters(currentPlayer.getHealers(), "Healers");
+                break;
+
+            case "5":
+                viewCharacters(currentPlayer.getMythicalCreatures(), "Mythical creatures");
+                break;
+
+            case "98":
+                soldiersUI();
+                break;
+            default:
+                break;
+        }
+    }
+
+    private static void deckUI() {
+        // select the category
+        Character tempCharacter;
+        switch (selectCategoryTo("view")) {
+            case "1":
+            // tempCharacter = currentPlayer.getArmy
+                viewCharacters(currentPlayer.getArchers(), "Archers");
+                break;
+
+            case "2":
+                viewCharacters(currentPlayer.getKnights(), "Knights");
+                break;
+
+            case "3":
+                viewCharacters(currentPlayer.getMages(), "Mages");
+                break;
+
+            case "4":
+                viewCharacters(currentPlayer.getHealers(), "Healers");
+                break;
+
+            case "5":
+                viewCharacters(currentPlayer.getMythicalCreatures(), "Mythical creatures");
+                break;
+
+            case "98":
+                soldiersUI();
+                break;
+            default:
+                break;
+        }
+
+        
+
+        // display options
+        // 1. Add/ Change
+        // 2. Remove
+        // 3. upgrade(Eq)
+        // 98. Back
+    }
+
+    private static void EquipmentsUI(){
+        
     }
 
 }
