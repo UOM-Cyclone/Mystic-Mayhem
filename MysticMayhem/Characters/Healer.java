@@ -4,18 +4,16 @@ import java.util.Vector;
 
 public interface Healer extends Catogery{
     default Character chooseAndAttack(Vector<Character> attacker, Vector<Character> defender, float attack) {
-        Character lowestDefenceHolder = attacker.getFirst();
+        Character lowestHealthHolder = attacker.getFirst();
 
         for (Character i : attacker) {
-            if (lowestDefenceHolder.getDefense() > i.getDefense()) {
-                lowestDefenceHolder = i;
+            if (lowestHealthHolder.getHealth() > i.getHealth()) {
+                lowestHealthHolder = i;
             }
         }
 
-        lowestDefenceHolder.increaseHealth( roundToFirstDecimal((float) (0.1 * attack)));
-        if(lowestDefenceHolder.getHealth()==0){
-            defender.remove(lowestDefenceHolder);
-        }
-        return lowestDefenceHolder;
+        lowestHealthHolder.increaseHealth( roundToFirstDecimal((float) (0.1 * attack)));
+
+        return lowestHealthHolder;
     }
 }

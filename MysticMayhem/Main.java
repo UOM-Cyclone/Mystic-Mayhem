@@ -38,10 +38,10 @@ public class Main {
         army1.addKnight(new Zoro());
         army1.addMage(new Eldritch());
         army1.addHealer(new Medic());
-        army1.addMythicalCreature(new Dragon());
+        army1.addMythicalCreature(new Pegasus());
 
-        army2.addKnight(new Templar());
-        army2.addMage(new Conjurer());
+        army2.addKnight(new Cavalier());
+        army2.addMage(new Warlock());
         army2.addArcher(new Sunfire());
         army2.addHealer(new Lightbringer());
         army2.addMythicalCreature(new Basilisk());
