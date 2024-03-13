@@ -147,9 +147,12 @@ public abstract class Highlander implements Type {
     public boolean addBattleGround(Ground battleGround) {
 
         if(battleGround instanceof Hillcrest){
-
+            attack += 1;
+            defence += 1;
+            isBonusRound = true;
         } else if (battleGround instanceof Arcane){
-
+            speed -= 1;
+            defence -= 1;
         }
 
         this.battleGround = battleGround;

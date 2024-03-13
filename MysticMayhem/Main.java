@@ -34,9 +34,9 @@ public class Main {
         Army army1 = new Army();
         Army army2 = new Army();
 
-        army1.addArcher(new Zing());
+        army1.addArcher(new Shooter());
         army1.addKnight(new Zoro());
-        army1.addMage(new Eldritch());
+        army1.addMage(new Enchanter());
         army1.addHealer(new Medic());
         army1.addMythicalCreature(new Pegasus());
 
@@ -53,7 +53,7 @@ public class Main {
         player2.setArmy(army2);
 
         player1.setHomeGround(new Hillcrest());
-        player2.setHomeGround(new Arcane());
+        player2.setHomeGround(new Hillcrest());
 
         Battle battle1 = new Battle();
 

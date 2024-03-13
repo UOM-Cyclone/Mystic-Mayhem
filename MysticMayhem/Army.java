@@ -28,6 +28,9 @@ public class Army {
         cloneCharacter(battleArmy, mage);
         cloneCharacter(battleArmy, healer);
         cloneCharacter(battleArmy, mythicalCreature);
+
+        for (Character i : battleArmy) i.addBattleGround(ground);
+
         return battleArmy;
     }
 
