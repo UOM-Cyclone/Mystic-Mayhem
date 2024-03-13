@@ -595,24 +595,54 @@ public class GameController {
         print("-------------------");
         switch (stdin.nextLine()) {
             case "1":
-                currentPlayer.addMythicalCreature(new Dragon());
-                print("Successfully added a Dragon to the Barrack");
+                if (currentPlayer.getGC() > Dragon.price) {
+                    currentPlayer.addMythicalCreature(new Dragon());
+                    currentPlayer.changeGC(0 - Dragon.price);
+                    print("Successfully added a Dragon to the Barrack");
+                } else {
+                    print("Your gold coin balance is insufficient to buy this character.\nTry to buy another character.");
+                    viewMythicalCreaturesToBuy();
+                }
                 break;
             case "2":
-                currentPlayer.addMythicalCreature(new Basilisk());
-                print("Successfully added a Basilisk to the Barrack");
+                if (currentPlayer.getGC() > Basilisk.price) {
+                    currentPlayer.addMythicalCreature(new Basilisk());
+                    currentPlayer.changeGC(0 - Basilisk.price);
+                    print("Successfully added a Basilisk to the Barrack");
+                } else {
+                    print("Your gold coin balance is insufficient to buy this character.\nTry to buy another character.");
+                    viewMythicalCreaturesToBuy();
+                }
                 break;
             case "3":
-                currentPlayer.addMythicalCreature(new Hydra());
-                print("Successfully added a Hydra to the Barrack");
+                if (currentPlayer.getGC() > Hydra.price) {
+                    currentPlayer.addMythicalCreature(new Hydra());
+                    currentPlayer.changeGC(0 - Hydra.price);
+                    print("Successfully added a Hydra to the Barrack");
+                } else {
+                    print("Your gold coin balance is insufficient to buy this character.\nTry to buy another character.");
+                    viewMythicalCreaturesToBuy();
+                }
                 break;
             case "4":
-                currentPlayer.addMythicalCreature(new Phoenix());
-                print("Successfully added a Phoenix to the Barrack");
+                if (currentPlayer.getGC() > Phoenix.price) {
+                    currentPlayer.addMythicalCreature(new Phoenix());
+                    currentPlayer.changeGC(0 - Phoenix.price);
+                    print("Successfully added a Phoenix to the Barrack");
+                } else {
+                    print("Your gold coin balance is insufficient to buy this character.\nTry to buy another character.");
+                    viewMythicalCreaturesToBuy();
+                }
                 break;
             case "5":
-                currentPlayer.addMythicalCreature(new Pegasus());
-                print("Successfully added a Pegasus to the Barrack");
+                if (currentPlayer.getGC() > Pegasus.price) {
+                    currentPlayer.addMythicalCreature(new Pegasus());
+                    currentPlayer.changeGC(0 - Pegasus.price);
+                    print("Successfully added a Pegasus to the Barrack");
+                } else {
+                    print("Your gold coin balance is insufficient to buy this character.\nTry to buy another character.");
+                    viewMythicalCreaturesToBuy();
+                }
                 break;
             case "98":
                 charactersShopUI();
@@ -687,6 +717,7 @@ public class GameController {
         }
     }
 
+    // completed
     public static void soldiersUI() {
         print("1. View Occupied Soldiers\n2. Buy Characters\n3. Sell Characters\n4. Upgrade Characters\n98. Back");
         switch (stdin.nextLine()) {
@@ -697,10 +728,10 @@ public class GameController {
                 charactersShopUI();
                 break;
             case "3":
-                createAccount();
+                selectOpponentUI();
                 break;
             case "4":
-                createAccount();
+                upgradeSoldiersUI();
                 break;
             case "98":
                 armyUI();
@@ -721,6 +752,7 @@ public class GameController {
         print("-----" + title + "-----");
         for (int i = 0; i < list.size(); i++) {
             Character character = list.get(i);
+            viewCharacterStats(character);
         }
     }
 
@@ -756,7 +788,7 @@ public class GameController {
 
     private static void deckUI() {
         // select the category
-        Character tempCharacter;
+        // Character tempCharacter;
         switch (selectCategoryTo("view and modify")) {
             case "1":
                 viewCharacterStats(currentPlayer.getArmy().getArcher());
@@ -822,6 +854,66 @@ public class GameController {
                 break;
         }
     }
+
+    private static void upgradeSoldiersUI(){
+        switch (selectCategoryTo("upgrade")) {
+            case "1":
+                viewCharacters(currentPlayer.getArchers(), "Archers");
+                break;
+
+            case "2":
+                viewCharacters(currentPlayer.getKnights(), "Knights");
+                break;
+
+            case "3":
+                viewCharacters(currentPlayer.getMages(), "Mages");
+                break;
+
+            case "4":
+                viewCharacters(currentPlayer.getHealers(), "Healers");
+                break;
+
+            case "5":
+                viewCharacters(currentPlayer.getMythicalCreatures(), "Mythical creatures");
+                break;
+
+            case "98":
+                soldiersUI();
+                break;
+            default:
+                break;
+        }
+    }
+
+    private static void sellSoldiersUI(){
+        switch (selectCategoryTo("sell")) {
+            case "1":
+                viewCharacters(currentPlayer.getArchers(), "Archers");
+                break;
+
+            case "2":
+                viewCharacters(currentPlayer.getKnights(), "Knights");
+                break;
+
+            case "3":
+                viewCharacters(currentPlayer.getMages(), "Mages");
+                break;
+
+            case "4":
+                viewCharacters(currentPlayer.getHealers(), "Healers");
+                break;
+
+            case "5":
+                viewCharacters(currentPlayer.getMythicalCreatures(), "Mythical creatures");
+                break;
+
+            case "98":
+                soldiersUI();
+                break;
+            default:
+                break;
+        }
+    } 
 
     private static void equipmentsUI() {
 

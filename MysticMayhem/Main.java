@@ -15,11 +15,11 @@ import MysticMayhem.Grounds.Hillcrest;
 
 public class Main {
     public static void main(String[] args) {
-    //    Scanner stdin = new Scanner(System.in);
-    //    GameController.setInput(stdin);
-    //    GameController.start();
+       Scanner stdin = new Scanner(System.in);
+       GameController.setInput(stdin);
+       GameController.start();
 
-    System.out.println(String.valueOf(Shooter.class).substring(30));
+    // System.out.println(String.valueOf(Shooter.class).substring(30));
 
 
         // System.out.println("test");
@@ -38,27 +38,7 @@ public class Main {
 
         // System.out.println(Profile.getRandomProfile().username);
 
-        Army army1 = new Army();
-        Army army2 = new Army();
-
-        army1.addArcher(new Shooter());
-        army1.addKnight(new Squire());
-
-        army2.addKnight(new Zoro());
-        army2.addMage(new Enchanter());
-
-        Player player1 = new Player("dev","dev","dev");
-        Player player2 = new Player("shan","shan","shan");
-
-        player1.setArmy(army1);
-        player2.setArmy(army2);
-
-        player1.setHomeGround(new Hillcrest());
-        player2.setHomeGround(new Arcane());
-
-        Battle battle1 = new Battle();
-
-        battle1.start(player1, player2);
+        //
 //        System.out.println(army1.toBattle(new Arcane()));
     }
 
