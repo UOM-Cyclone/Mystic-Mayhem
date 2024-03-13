@@ -6,5 +6,4 @@ public interface Equipment {
     public float getDefence();
     public float getHealth();
     public float getSpeed();
-
 }

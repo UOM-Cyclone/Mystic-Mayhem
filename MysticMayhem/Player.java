@@ -40,6 +40,12 @@ public class Player {
     public ArrayList<Character> getHealers(){return this.healers;}
     public ArrayList<Character> getMythicalCreatures(){return this.mythicalCreatures;}
 
+    public void addArcher(Character archer){archers.add(archer);}
+    public void addKnight(Character knight){knights.add(knight);}
+    public void addMage(Character mage){mages.add(mage);}
+    public void addHealer(Character healer){healers.add(healer);}
+    public void addMythicalCreature(Character archer){mythicalCreatures.add(archer);}
+
     public static ArrayList<String> getUserNames(){
         return usernames;
     }

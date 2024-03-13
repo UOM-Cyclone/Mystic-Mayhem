@@ -2,7 +2,9 @@ package MysticMayhem;
 
 import java.util.Scanner;
 
+import MysticMayhem.Characters.Character;
 import MysticMayhem.Characters.Enchanter;
+import MysticMayhem.Characters.Highlander;
 import MysticMayhem.Characters.Shooter;
 import MysticMayhem.Characters.Squire;
 import MysticMayhem.Characters.Zoro;
@@ -13,9 +15,11 @@ import MysticMayhem.Grounds.Hillcrest;
 
 public class Main {
     public static void main(String[] args) {
-//        Scanner stdin = new Scanner(System.in);
-//        GameController.setInput(stdin);
-//        GameController.start();
+    //    Scanner stdin = new Scanner(System.in);
+    //    GameController.setInput(stdin);
+    //    GameController.start();
+
+    System.out.println(String.valueOf(Shooter.class).substring(30));
 
 
         // System.out.println("test");
