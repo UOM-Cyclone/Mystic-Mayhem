@@ -6,13 +6,17 @@ import MysticMayhem.RoundSummery;
 import java.util.Vector;
 
 public class Phoenix extends Sunchildren implements  MythicalCreature {
-    static int price = 275;
-
+    public final static int price = 275;
+    public final static float initialHealth = 17;
+    public final static float initialSpeed = 19;
+    public final static float initialAttack = 17;
+    public final static float initialDefence = 13;
+    public final static String type = "Sunchildren";
     {
-        attack += 17;
-        defence += 13;
-        health += 17;
-        speed += 19;
+        attack += initialAttack;
+        defence += initialDefence;
+        health += initialHealth;
+        speed += initialSpeed;
         current_value += price;
     }
 

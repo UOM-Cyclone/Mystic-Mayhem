@@ -6,13 +6,18 @@ import MysticMayhem.RoundSummery;
 import java.util.Vector;
 
 public class Eldritch extends Mystics implements  Mage {
-    static int price = 270;
+    public final static int price = 270;
+    public final static float initialHealth = 18;
+    public final static float initialSpeed = 14;
+    public final static float initialAttack = 19;
+    public final static float initialDefence = 17;
+    public final static String type = "Mystic";
 
     {
-        attack += 19;
-        defence += 17;
-        health += 18;
-        speed += 14;
+        attack += initialAttack;
+        defence += initialDefence;
+        health += initialHealth;
+        speed += initialSpeed;
         current_value += price;
     }
 

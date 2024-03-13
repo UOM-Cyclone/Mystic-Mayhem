@@ -6,13 +6,19 @@ import MysticMayhem.RoundSummery;
 import java.util.Vector;
 
 public class Zing extends Sunchildren implements  Archer {
-    static int price = 200;
+
+    public final static int price = 200;
+    public final static float initialHealth = 11;
+    public final static float initialSpeed = 14;
+    public final static float initialAttack = 16;
+    public final static float initialDefence = 9;
+    public final static String type = "Sunchildren";
 
     {
-        health += 11;
-        speed += 14;
-        attack += 16;
-        defence += 9;
+        health += initialHealth;
+        speed += initialSpeed;
+        attack += initialAttack;
+        defence += initialDefence;
         current_value += price;
     }
 

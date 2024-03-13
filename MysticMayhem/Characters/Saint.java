@@ -6,7 +6,13 @@ import MysticMayhem.RoundSummery;
 import java.util.Vector;
 
 public class Saint extends Mystics implements  Healer {
-    static int price = 200;
+
+    public final static int price = 200;
+    public final static float initialHealth = 17;
+    public final static float initialSpeed = 9;
+    public final static float initialAttack = 16;
+    public final static float initialDefence = 14;
+    public final static String type = "Mystic";
 
     {
         attack += 16;

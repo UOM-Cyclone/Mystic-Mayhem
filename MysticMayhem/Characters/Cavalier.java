@@ -6,13 +6,18 @@ import MysticMayhem.RoundSummery;
 import java.util.Vector;
 
 public class Cavalier extends Highlander implements  Knight {
-    static int price = 110;
+    public final static int price = 110;
+    public final static float initialHealth = 7;
+    public final static float initialSpeed = 10;
+    public final static float initialAttack = 10;
+    public final static float initialDefence = 12;
+    public final static String type = "Highlander";
 
     {
-        attack += 10;
-        defence += 12;
-        health += 7;
-        speed += 10;
+        attack += initialAttack;
+        defence += initialDefence;
+        health += initialHealth;
+        speed += initialSpeed;
         current_value += price;
     }
 

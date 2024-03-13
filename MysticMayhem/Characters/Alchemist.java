@@ -6,13 +6,18 @@ import MysticMayhem.RoundSummery;
 import java.util.Vector;
 
 public class Alchemist extends Marshlanders implements  Healer {
-    static int price = 150;
+    public final static int price = 150;
+    public final static float initialHealth = 13;
+    public final static float initialSpeed = 13;
+    public final static float initialAttack = 13;
+    public final static float initialDefence = 13;
+    public final static String type = "Marshlander";
 
     {
-        attack += 13;
-        defence += 13;
-        health += 13;
-        speed += 13;
+        attack += initialAttack;
+        defence += initialDefence;
+        health += initialHealth;
+        speed += initialSpeed;
         current_value += price;
     }
 

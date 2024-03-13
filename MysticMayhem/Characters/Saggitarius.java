@@ -6,13 +6,18 @@ import MysticMayhem.RoundSummery;
 import java.util.Vector;
 
 public class Saggitarius extends Mystics implements  Archer {
-    static int price = 230;
+    public final static int price = 230;
+    public final static float initialHealth = 12;
+    public final static float initialSpeed = 17;
+    public final static float initialAttack = 18;
+    public final static float initialDefence = 7;
+    public final static String type = "Mystic";
 
     {
-        health += 12;
-        speed += 17;
-        attack += 18;
-        defence += 7;
+        health += initialHealth;
+        speed += initialSpeed;
+        attack += initialAttack;
+        defence += initialDefence;
         current_value += price;
     }
 

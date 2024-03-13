@@ -11,6 +11,7 @@ public class Shooter extends Highlander implements  Archer {
     public final static float initialSpeed = 9;
     public final static float initialAttack = 11;
     public final static float initialDefence = 4;
+    public final static String type = "Highlander";
 
     {
         health += 6;

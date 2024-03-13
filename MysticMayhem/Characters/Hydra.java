@@ -6,13 +6,18 @@ import MysticMayhem.RoundSummery;
 import java.util.Vector;
 
 public class Hydra extends Marshlanders implements  MythicalCreature {
-    static int price = 205;
+    public final static int price = 205;
+    public final static float initialHealth = 15;
+    public final static float initialSpeed = 11;
+    public final static float initialAttack = 12;
+    public final static float initialDefence = 16;
+    public final static String type = "Marshlander";
 
     {
-        attack += 12;
-        defence += 16;
-        health += 15;
-        speed += 11;
+        attack += initialAttack;
+        defence += initialDefence;
+        health += initialHealth;
+        speed += initialSpeed;
         current_value += price;
     }
 
