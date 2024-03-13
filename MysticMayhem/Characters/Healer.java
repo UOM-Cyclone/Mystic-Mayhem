@@ -12,7 +12,7 @@ public interface Healer extends Catogery{
             }
         }
 
-        lowestDefenceHolder.increaseHealth((float) 0.1 * attack);
+        lowestDefenceHolder.increaseHealth( roundToFirstDecimal((float) (0.1 * attack)));
         if(lowestDefenceHolder.getHealth()==0){
             defender.remove(lowestDefenceHolder);
         }

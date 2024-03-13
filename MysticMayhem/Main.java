@@ -2,10 +2,7 @@ package MysticMayhem;
 
 import java.util.Scanner;
 
-import MysticMayhem.Characters.Enchanter;
-import MysticMayhem.Characters.Shooter;
-import MysticMayhem.Characters.Squire;
-import MysticMayhem.Characters.Zoro;
+import MysticMayhem.Characters.*;
 import MysticMayhem.Controllers.GameController;
 import MysticMayhem.Grounds.Arcane;
 import MysticMayhem.Grounds.Hillcrest;
@@ -37,11 +34,17 @@ public class Main {
         Army army1 = new Army();
         Army army2 = new Army();
 
-        army1.addArcher(new Shooter());
-        army1.addKnight(new Squire());
+        army1.addArcher(new Zing());
+        army1.addKnight(new Zoro());
+        army1.addMage(new Eldritch());
+        army1.addHealer(new Medic());
+        army1.addMythicalCreature(new Dragon());
 
-        army2.addKnight(new Zoro());
-        army2.addMage(new Enchanter());
+        army2.addKnight(new Templar());
+        army2.addMage(new Conjurer());
+        army2.addArcher(new Sunfire());
+        army2.addHealer(new Lightbringer());
+        army2.addMythicalCreature(new Basilisk());
 
         Player player1 = new Player("dev","dev","dev");
         Player player2 = new Player("shan","shan","shan");
@@ -55,7 +58,7 @@ public class Main {
         Battle battle1 = new Battle();
 
         battle1.start(player1, player2);
-//        System.out.println(army1.toBattle(new Arcane()));
+//        System.out.println((new Lightbringer()) instanceof Healer);
     }
 
 
