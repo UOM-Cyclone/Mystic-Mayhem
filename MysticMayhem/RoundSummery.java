@@ -25,10 +25,10 @@ public class RoundSummery {
     }
 
     public void setAttackChar(Character attacker){
-        this.attackChar = String.valueOf(attacker.getClass());
+        this.attackChar = String.valueOf(attacker.getClass()).substring(30);
     }
     public void setDefendChar(Character defender){
-        this.defendChar = String.valueOf(defender.getClass());
+        this.defendChar = String.valueOf(defender.getClass()).substring(30);
     }
 
     public void setAttackerHealth(float health){
@@ -59,8 +59,8 @@ public class RoundSummery {
         String summery = String.format("""
                 Turn %d : %s
                 %s attacks %s
-                %s's health : %f
-                %s's health : %f
+                %s's health : %.1f
+                %s's health : %.1f
                 """,
                 roundNo, attackPlayer,
                 attackChar, defendChar,
@@ -68,6 +68,22 @@ public class RoundSummery {
                 attackChar, attackerHealth);
         if(defenderHealth == 0 ){
             summery += String.format("\n%s Died !\n\n",defendChar);
+        }
+
+        if(isBonusRound){
+            summery = String.format("""
+                Turn %d : %s
+                %s attacks %s
+                %s's health : %.1f
+                %s's health : %.1f
+                """,
+                    roundNo, attackPlayer,
+                    attackChar, bonusDefendChar,
+                    bonusDefendChar, bonusDefenderHealth,
+                    attackChar, bonusAttackerHealth);
+            if(bonusDefenderHealth == 0 ){
+                summery += String.format("\n%s Died !\n\n",defendChar);
+            }
         }
         System.out.print(summery);
     }

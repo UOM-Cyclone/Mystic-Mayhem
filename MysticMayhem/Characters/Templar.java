@@ -6,13 +6,19 @@ import MysticMayhem.RoundSummery;
 import java.util.Vector;
 
 public class Templar extends Sunchildren implements  Knight {
-    static int price = 155;
+
+    public final static int price = 155;
+    public final static float initialHealth = 12;
+    public final static float initialSpeed = 12;
+    public final static float initialAttack = 14;
+    public final static float initialDefence = 16;
+    public final static String type = "Sunchildren";
 
     {
-        attack += 14;
-        defence += 16;
-        health += 12;
-        speed += 12;
+        attack += initialAttack;
+        defence += initialDefence;
+        health += initialHealth;
+        speed += initialSpeed;
         current_value += price;
     }
 

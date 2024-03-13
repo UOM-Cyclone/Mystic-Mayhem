@@ -6,13 +6,19 @@ import MysticMayhem.RoundSummery;
 import java.util.Vector;
 
 public class Squire extends Marshlanders implements  Knight {
-    static int price = 85;
+
+    public final static int price = 85;
+    public final static float initialHealth = 7;
+    public final static float initialSpeed = 8;
+    public final static float initialAttack = 8;
+    public final static float initialDefence = 9;
+    public final static String type = "Marshlander";
 
     {
-        health += 7;
-        speed += 8;
-        attack += 8;
-        defence += 9;
+        health += initialHealth;
+        speed += initialSpeed;
+        attack += initialAttack;
+        defence += initialDefence;
         current_value += price;
     }
 

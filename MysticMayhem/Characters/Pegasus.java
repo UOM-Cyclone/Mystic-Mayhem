@@ -6,13 +6,18 @@ import MysticMayhem.RoundSummery;
 import java.util.Vector;
 
 public class Pegasus extends Mystics implements  MythicalCreature {
-    static int price = 340;
+    public final static int price = 340;
+    public final static float initialHealth = 20;
+    public final static float initialSpeed = 2;
+    public final static float initialAttack = 14;
+    public final static float initialDefence = 18;
+    public final static String type = "Mystic";
 
     {
-        attack += 14;
-        defence += 18;
-        health += 20;
-        speed += 2;
+        attack += initialAttack;
+        defence += initialDefence;
+        health += initialHealth;
+        speed += initialSpeed;
         current_value += price;
     }
 

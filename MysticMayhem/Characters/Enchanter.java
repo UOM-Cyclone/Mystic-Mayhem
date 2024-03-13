@@ -6,13 +6,18 @@ import MysticMayhem.RoundSummery;
 import java.util.Vector;
 
 public class Enchanter extends Highlander implements  Mage {
-    static int price = 160;
+    public final static int price = 160;
+    public final static float initialHealth = 13;
+    public final static float initialSpeed = 16;
+    public final static float initialAttack = 16;
+    public final static float initialDefence = 10;
+    public final static String type = "Highlander";
 
     {
-        attack += 16;
-        defence += 10;
-        health += 13;
-        speed += 16;
+        attack += initialAttack;
+        defence += initialDefence;
+        health += initialHealth;
+        speed += initialSpeed;
         current_value += price;
     }
 

@@ -6,13 +6,18 @@ import MysticMayhem.RoundSummery;
 import java.util.Vector;
 
 public class Lightbringer extends Sunchildren implements  Healer {
-    static int price = 260;
 
+    public final static int price = 260;
+    public final static float initialHealth = 19;
+    public final static float initialSpeed = 12;
+    public final static float initialAttack = 17;
+    public final static float initialDefence = 15;
+    public final static String type = "Sunchildren";
     {
-        attack += 17;
-        defence += 15;
-        health += 19;
-        speed += 12;
+        attack += initialAttack;
+        defence += initialDefence;
+        health += initialHealth;
+        speed += initialSpeed;
         current_value += price;
     }
 

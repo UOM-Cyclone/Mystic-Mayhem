@@ -6,13 +6,19 @@ import MysticMayhem.RoundSummery;
 import java.util.Vector;
 
 public class Zoro extends Highlander implements  Knight {
-    static int price = 180;
+
+    public final static int price = 180;
+    public final static float initialHealth = 13;
+    public final static float initialSpeed = 14;
+    public final static float initialAttack = 17;
+    public final static float initialDefence = 16;
+    public final static String type = "Highlander";
 
     {
-        attack += 17;
-        defence += 16;
-        health += 13;
-        speed += 14;
+        attack += initialAttack;
+        defence += initialDefence;
+        health += initialHealth;
+        speed += initialSpeed;
         current_value += price;
     }
 

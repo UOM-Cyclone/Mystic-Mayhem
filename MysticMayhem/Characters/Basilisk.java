@@ -6,13 +6,18 @@ import MysticMayhem.RoundSummery;
 import java.util.Vector;
 
 public class Basilisk extends Marshlanders implements  MythicalCreature {
-    static int price = 165;
+    public final static int price = 165;
+    public final static float initialHealth = 10;
+    public final static float initialSpeed = 12;
+    public final static float initialAttack = 15;
+    public final static float initialDefence = 11;
+    public final static String type = "Marshlander";
 
     {
-        attack += 15;
-        defence += 11;
-        health += 10;
-        speed += 12;
+        attack += initialAttack;
+        defence += initialDefence;
+        health += initialHealth;
+        speed += initialSpeed;
         current_value += price;
     }
 

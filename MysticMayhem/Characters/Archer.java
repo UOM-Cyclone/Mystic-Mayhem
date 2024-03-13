@@ -15,6 +15,9 @@ public  interface Archer extends Catogery{
         }
 
         lowestDefence.defence(attack);
+        if(lowestDefence.getHealth()==0){
+            defender.remove(lowestDefence);
+        }
         return lowestDefence;
     }
 }

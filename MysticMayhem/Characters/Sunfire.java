@@ -6,13 +6,18 @@ import MysticMayhem.RoundSummery;
 import java.util.Vector;
 
 public class Sunfire extends Sunchildren implements  Archer {
-    static int price = 160;
 
+    public final static int price = 160;
+    public final static float initialHealth = 7;
+    public final static float initialSpeed = 14;
+    public final static float initialAttack = 15;
+    public final static float initialDefence = 5;
+    public final static String type = "Sunchildren";
     {
-        health += 7;
-        speed += 14;
-        attack += 15;
-        defence += 5;
+        health += initialHealth;
+        speed += initialSpeed;
+        attack += initialAttack;
+        defence += initialDefence;
         current_value += price;
     }
 
