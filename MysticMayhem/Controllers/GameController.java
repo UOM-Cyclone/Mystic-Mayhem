@@ -3,6 +3,7 @@ package MysticMayhem.Controllers;
 import java.util.*;
 
 import MysticMayhem.Army;
+import MysticMayhem.Battle;
 import MysticMayhem.Player;
 import MysticMayhem.Characters.Character;
 import MysticMayhem.Equipments.Amulet;
@@ -115,7 +116,7 @@ public class GameController {
 
     public static void LogIn() {
         while (true) {
-            print("Enter your User Name");
+            print("Enter your username");
             inputStr = stdin.nextLine();
             if (isTakenUserName(inputStr)) {
                 tempPlayer = Player.getPlayers().get(inputStr);
@@ -198,6 +199,7 @@ public class GameController {
             print("You should login first.");
             return;
         }
+
 
         print("\n" + currentPlayer.getName() + " @" + currentPlayer.getUserName());
 
@@ -322,24 +324,59 @@ public class GameController {
         print("-------------------");
         switch (stdin.nextLine()) {
             case "1":
-                currentPlayer.addArcher(new Shooter());
-                print("Successfully added a Shooter to the Barrack");
+                if (currentPlayer.getGC() > Shooter.price) {
+                    currentPlayer.addArcher(new Shooter());
+                    currentPlayer.changeGC(-1 * Shooter.price);
+                    print("Successfully added a Shooter to the Barrack\nAvailable balance:" + currentPlayer.getGC()
+                            + " gc");
+                } else {
+                    print("Your gold coin balance is insufficient to buy this character.\nTry to buy another character.");
+                    viewArchersToBuy();
+                }
                 break;
             case "2":
-                currentPlayer.addArcher(new Ranger());
-                print("Successfully added a Ranger to the Barrack");
+                if (currentPlayer.getGC() > Ranger.price) {
+                    currentPlayer.addArcher(new Ranger());
+                    currentPlayer.changeGC(-1 * Ranger.price);
+                    print("Successfully added a Ranger to the Barrack\nAvailable balance:" + currentPlayer.getGC()
+                            + " gc");
+                } else {
+                    print("Your gold coin balance is insufficient to buy this character.\nTry to buy another character.");
+                    viewArchersToBuy();
+                }
                 break;
             case "3":
-                currentPlayer.addArcher(new Sunfire());
-                print("Successfully added a Sunfire to the Barrack");
+                if (currentPlayer.getGC() > Sunfire.price) {
+                    currentPlayer.addArcher(new Sunfire());
+                    currentPlayer.changeGC(-1 * Sunfire.price);
+                    print("Successfully added a Sunfire to the Barrack\nAvailable balance:" + currentPlayer.getGC()
+                            + " gc");
+                } else {
+                    print("Your gold coin balance is insufficient to buy this character.\nTry to buy another character.");
+                    viewArchersToBuy();
+                }
                 break;
             case "4":
-                currentPlayer.addArcher(new Zing());
-                print("Successfully added a Zing to the Barrack");
+                if (currentPlayer.getGC() > Zing.price) {
+                    currentPlayer.addArcher(new Zing());
+                    currentPlayer.changeGC(-1 * Zing.price);
+                    print("Successfully added a Zing to the Barrack\nAvailable balance:" + currentPlayer.getGC()
+                            + " gc");
+                } else {
+                    print("Your gold coin balance is insufficient to buy this character.\nTry to buy another character.");
+                    viewArchersToBuy();
+                }
                 break;
             case "5":
-                currentPlayer.addArcher(new Saggitarius());
-                print("Successfully added a Saggitarius to the Barrack");
+                if (currentPlayer.getGC() > Saggitarius.price) {
+                    currentPlayer.addArcher(new Saggitarius());
+                    currentPlayer.changeGC(-1 * Saggitarius.price);
+                    print("Successfully added a Saggitarius to the Barrack\nAvailable balance:" + currentPlayer.getGC()
+                            + " gc");
+                } else {
+                    print("Your gold coin balance is insufficient to buy this character.\nTry to buy another character.");
+                    viewArchersToBuy();
+                }
                 break;
             case "98":
                 charactersShopUI();
@@ -396,24 +433,59 @@ public class GameController {
         print("-------------------");
         switch (stdin.nextLine()) {
             case "1":
-                currentPlayer.addKnight(new Squire());
-                print("Successfully added a Squire to the Barrack");
+                if (currentPlayer.getGC() > Squire.price) {
+                    currentPlayer.addKnight(new Squire());
+                    currentPlayer.changeGC(-1 * Squire.price);
+                    print("Successfully added a Squire to the Barrack\nAvailable balance:" + currentPlayer.getGC()
+                            + " gc");
+                } else {
+                    print("Your gold coin balance is insufficient to buy this character.\nTry to buy another character.");
+                    viewKnightsToBuy();
+                }
                 break;
             case "2":
-                currentPlayer.addKnight(new Cavalier());
-                print("Successfully added a Cavalier to the Barrack");
+                if (currentPlayer.getGC() > Cavalier.price) {
+                    currentPlayer.addKnight(new Cavalier());
+                    currentPlayer.changeGC(-1 * Cavalier.price);
+                    print("Successfully added a Cavalier to the Barrack\nAvailable balance:" + currentPlayer.getGC()
+                            + " gc");
+                } else {
+                    print("Your gold coin balance is insufficient to buy this character.\nTry to buy another character.");
+                    viewKnightsToBuy();
+                }
                 break;
             case "3":
-                currentPlayer.addKnight(new Templar());
-                print("Successfully added a Templar to the Barrack");
+                if (currentPlayer.getGC() > Templar.price) {
+                    currentPlayer.addKnight(new Templar());
+                    currentPlayer.changeGC(-1 * Templar.price);
+                    print("Successfully added a Temlpar to the Barrack\nAvailable balance:" + currentPlayer.getGC()
+                            + " gc");
+                } else {
+                    print("Your gold coin balance is insufficient to buy this character.\nTry to buy another character.");
+                    viewKnightsToBuy();
+                }
                 break;
             case "4":
-                currentPlayer.addKnight(new Zoro());
-                print("Successfully added a Zoro to the Barrack");
+                if (currentPlayer.getGC() > Zoro.price) {
+                    currentPlayer.addKnight(new Zoro());
+                    currentPlayer.changeGC(-1 * Zoro.price);
+                    print("Successfully added a Zoro to the Barrack\nAvailable balance:" + currentPlayer.getGC()
+                            + " gc");
+                } else {
+                    print("Your gold coin balance is insufficient to buy this character.\nTry to buy another character.");
+                    viewKnightsToBuy();
+                }
                 break;
             case "5":
-                currentPlayer.addKnight(new Swiftblade());
-                print("Successfully added a Swiftblade to the Barrack");
+                if (currentPlayer.getGC() > Swiftblade.price) {
+                    currentPlayer.addKnight(new Swiftblade());
+                    currentPlayer.changeGC(-1 * Swiftblade.price);
+                    print("Successfully added a Swiftblade to the Barrack\nAvailable balance:" + currentPlayer.getGC()
+                            + " gc");
+                } else {
+                    print("Your gold coin balance is insufficient to buy this character.\nTry to buy another character.");
+                    viewKnightsToBuy();
+                }
                 break;
             case "98":
                 charactersShopUI();
@@ -470,24 +542,59 @@ public class GameController {
         print("-------------------");
         switch (stdin.nextLine()) {
             case "1":
-                currentPlayer.addMage(new Warlock());
-                print("Successfully added a Warlock to the Barrack");
+                if (currentPlayer.getGC() > Warlock.price) {
+                    currentPlayer.addMage(new Warlock());
+                    currentPlayer.changeGC(-1 * Warlock.price);
+                    print("Successfully added a Warlock to the Barrack\nAvailable balance:" + currentPlayer.getGC()
+                            + " gc");
+                } else {
+                    print("Your gold coin balance is insufficient to buy this character.\nTry to buy another character.");
+                    viewMagesToBuy();
+                }
                 break;
             case "2":
-                currentPlayer.addMage(new Illusionist());
-                print("Successfully added a Illusionist to the Barrack");
+                if (currentPlayer.getGC() > Illusionist.price) {
+                    currentPlayer.addMage(new Illusionist());
+                    currentPlayer.changeGC(-1 * Illusionist.price);
+                    print("Successfully added a Illutionist to the Barrack\nAvailable balance:" + currentPlayer.getGC()
+                            + " gc");
+                } else {
+                    print("Your gold coin balance is insufficient to buy this character.\nTry to buy another character.");
+                    viewMagesToBuy();
+                }
                 break;
             case "3":
-                currentPlayer.addMage(new Enchanter());
-                print("Successfully added a Enchanter to the Barrack");
+                if (currentPlayer.getGC() > Enchanter.price) {
+                    currentPlayer.addMage(new Enchanter());
+                    currentPlayer.changeGC(-1 * Enchanter.price);
+                    print("Successfully added a Enchanter to the Barrack\nAvailable balance:" + currentPlayer.getGC()
+                            + " gc");
+                } else {
+                    print("Your gold coin balance is insufficient to buy this character.\nTry to buy another character.");
+                    viewMagesToBuy();
+                }
                 break;
             case "4":
-                currentPlayer.addMage(new Conjurer());
-                print("Successfully added a Conjurer to the Barrack");
+                if (currentPlayer.getGC() > Conjurer.price) {
+                    currentPlayer.addMage(new Conjurer());
+                    currentPlayer.changeGC(-1 * Conjurer.price);
+                    print("Successfully added a Conjurer to the Barrack\nAvailable balance:" + currentPlayer.getGC()
+                            + " gc");
+                } else {
+                    print("Your gold coin balance is insufficient to buy this character.\nTry to buy another character.");
+                    viewMagesToBuy();
+                }
                 break;
             case "5":
-                currentPlayer.addMage(new Eldritch());
-                print("Successfully added a Eldritch to the Barrack");
+                if (currentPlayer.getGC() > Eldritch.price) {
+                    currentPlayer.addMage(new Eldritch());
+                    currentPlayer.changeGC(-1 * Eldritch.price);
+                    print("Successfully added a Eldritch to the Barrack\nAvailable balance:" + currentPlayer.getGC()
+                            + " gc");
+                } else {
+                    print("Your gold coin balance is insufficient to buy this character.\nTry to buy another character.");
+                    viewMagesToBuy();
+                }
                 break;
             case "98":
                 charactersShopUI();
@@ -544,24 +651,59 @@ public class GameController {
         print("-------------------");
         switch (stdin.nextLine()) {
             case "1":
-                currentPlayer.addHealer(new Soother());
-                print("Successfully added a Soother to the Barrack");
+                if (currentPlayer.getGC() > Soother.price) {
+                    currentPlayer.addHealer(new Soother());
+                    currentPlayer.changeGC(-1 * Soother.price);
+                    print("Successfully added a Soother to the Barrack\nAvailable balance:" + currentPlayer.getGC()
+                            + " gc");
+                } else {
+                    print("Your gold coin balance is insufficient to buy this character.\nTry to buy another character.");
+                    viewHealersToBuy();
+                }
                 break;
             case "2":
-                currentPlayer.addHealer(new Medic());
-                print("Successfully added a Medic to the Barrack");
+                if (currentPlayer.getGC() > Medic.price) {
+                    currentPlayer.addHealer(new Medic());
+                    currentPlayer.changeGC(-1 * Medic.price);
+                    print("Successfully added a Medic to the Barrack\nAvailable balance:" + currentPlayer.getGC()
+                            + " gc");
+                } else {
+                    print("Your gold coin balance is insufficient to buy this character.\nTry to buy another character.");
+                    viewHealersToBuy();
+                }
                 break;
             case "3":
-                currentPlayer.addHealer(new Alchemist());
-                print("Successfully added a Alchemist to the Barrack");
+                if (currentPlayer.getGC() > Alchemist.price) {
+                    currentPlayer.addHealer(new Alchemist());
+                    currentPlayer.changeGC(-1 * Alchemist.price);
+                    print("Successfully added a Alchemist to the Barrack\nAvailable balance:" + currentPlayer.getGC()
+                            + " gc");
+                } else {
+                    print("Your gold coin balance is insufficient to buy this character.\nTry to buy another character.");
+                    viewHealersToBuy();
+                }
                 break;
             case "4":
-                currentPlayer.addHealer(new Saint());
-                print("Successfully added a Saint to the Barrack");
+                if (currentPlayer.getGC() > Saint.price) {
+                    currentPlayer.addHealer(new Saint());
+                    currentPlayer.changeGC(-1 * Saint.price);
+                    print("Successfully added a Saint to the Barrack\nAvailable balance:" + currentPlayer.getGC()
+                            + " gc");
+                } else {
+                    print("Your gold coin balance is insufficient to buy this character.\nTry to buy another character.");
+                    viewHealersToBuy();
+                }
                 break;
             case "5":
-                currentPlayer.addHealer(new Lightbringer());
-                print("Successfully added a Lightbringer to the Barrack");
+                if (currentPlayer.getGC() > Lightbringer.price) {
+                    currentPlayer.addHealer(new Lightbringer());
+                    currentPlayer.changeGC(-1 * Lightbringer.price);
+                    print("Successfully added a Lightbringer to the Barrack\nAvailable balance:" + currentPlayer.getGC()
+                            + " gc");
+                } else {
+                    print("Your gold coin balance is insufficient to buy this character.\nTry to buy another character.");
+                    viewHealersToBuy();
+                }
                 break;
             case "98":
                 charactersShopUI();
@@ -621,7 +763,7 @@ public class GameController {
             case "1":
                 if (currentPlayer.getGC() > Dragon.price) {
                     currentPlayer.addMythicalCreature(new Dragon());
-                    currentPlayer.changeGC(0 - Dragon.price);
+                    currentPlayer.changeGC( -1 * Dragon.price);
                     print("Successfully added a Dragon to the Barrack. \nAvailable balance:" + currentPlayer.getGC()
                             + " gc");
                 } else {
@@ -632,7 +774,7 @@ public class GameController {
             case "2":
                 if (currentPlayer.getGC() > Basilisk.price) {
                     currentPlayer.addMythicalCreature(new Basilisk());
-                    currentPlayer.changeGC(0 - Basilisk.price);
+                    currentPlayer.changeGC(-1 * Basilisk.price);
                     print("Successfully added a Basilisk to the Barrack\nAvailable balance:" + currentPlayer.getGC()
                             + " gc");
                 } else {
@@ -643,7 +785,7 @@ public class GameController {
             case "3":
                 if (currentPlayer.getGC() > Hydra.price) {
                     currentPlayer.addMythicalCreature(new Hydra());
-                    currentPlayer.changeGC(0 - Hydra.price);
+                    currentPlayer.changeGC(-1 * Hydra.price);
                     print("Successfully added a Hydra to the Barrack\nAvailable balance:" + currentPlayer.getGC()
                             + " gc");
                 } else {
@@ -654,7 +796,7 @@ public class GameController {
             case "4":
                 if (currentPlayer.getGC() > Phoenix.price) {
                     currentPlayer.addMythicalCreature(new Phoenix());
-                    currentPlayer.changeGC(0 - Phoenix.price);
+                    currentPlayer.changeGC(-1 * Phoenix.price);
                     print("Successfully added a Phoenix to the Barrack\nAvailable balance:" + currentPlayer.getGC()
                             + " gc");
                 } else {
@@ -665,7 +807,7 @@ public class GameController {
             case "5":
                 if (currentPlayer.getGC() > Pegasus.price) {
                     currentPlayer.addMythicalCreature(new Pegasus());
-                    currentPlayer.changeGC(0 - Pegasus.price);
+                    currentPlayer.changeGC(-1 * Pegasus.price);
                     print("Successfully added a Pegasus to the Barrack\nAvailable balance:" + currentPlayer.getGC()
                             + " gc");
                 } else {
@@ -726,8 +868,11 @@ public class GameController {
         switch (inputStr) {
             case "1":
                 opponentPlayer = tempPlayer;
-                // combat();
+
+                Battle battle1 = new Battle();
+                battle1.start(currentPlayer,opponentPlayer);
                 playerUI();
+
                 break;
             case "98":
                 playerUI();
