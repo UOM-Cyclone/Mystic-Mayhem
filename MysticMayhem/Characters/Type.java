@@ -4,4 +4,5 @@ import MysticMayhem.Grounds.Ground;
 
 public interface Type extends Character{
 
+
 }

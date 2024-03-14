@@ -71,9 +71,14 @@ public class Player {
     }
 
     public static Player getRandomPlayer(){
-        Random rand = new Random();
-        int randomnum = rand.nextInt(usernames.size());
-        return players.get(usernames.get(randomnum));
+        Player randomPlayer;
+        do {
+            Random rand = new Random();
+            int randomnum = rand.nextInt(usernames.size());
+            randomPlayer = players.get(usernames.get(randomnum));
+        } while (randomPlayer.getArmy().isReadyToBattle());
+
+        return randomPlayer;
     }
 
     public void setArmy(Army army){this.army = army;}
