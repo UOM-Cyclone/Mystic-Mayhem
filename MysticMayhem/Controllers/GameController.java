@@ -40,9 +40,9 @@ public class GameController {
 
     public static void setPlayers() {
         new Player("Thumul Dasun", "thumul", new Arcane());
-        new Player("Devinda Dilshan", "devinda",new Desert());
+        new Player("Devinda Dilshan", "devinda", new Desert());
         new Player("Shanil Praveen", "shanil", new Hillcrest());
-        new Player("Dinara de. Silva", "dinara",new Desert());
+        new Player("Dinara de. Silva", "dinara", new Desert());
     }
 
     // to check and get the index of user
@@ -178,12 +178,16 @@ public class GameController {
 
         print("SElect a Homeground");
         print("1. Marshland\n2. Hillcrest\n3. Desert\n4. Arcane");
-        Ground hg=new Arcane();
+        Ground hg = new Arcane();
         inputStr = stdin.nextLine();
-        if(inputStr == "1") hg=new Marshland();
-        if(inputStr == "2") hg=new Hillcrest();
-        if(inputStr == "3") hg=new Desert();
-        if(inputStr == "4") hg=new Arcane();
+        if (inputStr == "1")
+            hg = new Marshland();
+        if (inputStr == "2")
+            hg = new Hillcrest();
+        if (inputStr == "3")
+            hg = new Desert();
+        if (inputStr == "4")
+            hg = new Arcane();
         new Player(name, uName, hg);
         print("Successfully created a new account..");
         start();
@@ -210,7 +214,13 @@ public class GameController {
 
         switch (inputStr) {
             case "1":
-                selectOpponentUI();
+                if (currentPlayer.getArmy() == null || !currentPlayer.getArmy().isReadyToBattle()) {
+                    print("First, you should create a deck to combat.");
+                    playerUI();
+                } else {
+                    selectOpponentUI();
+                }
+
                 break;
             case "2":
                 viewProfile();
@@ -244,7 +254,8 @@ public class GameController {
         System.out.print("\n\tUsername : " + currentPlayer.getUserName());
         System.out.print("\n\tXP : " + currentPlayer.getXP());
         System.out.print("\n\tGold coins : " + currentPlayer.getGC());
-        System.out.print("\n\tHomeground : " + String.valueOf(currentPlayer.getHomeGround().getClass()).substring(27) + "\n");
+        System.out.print(
+                "\n\tHomeground : " + String.valueOf(currentPlayer.getHomeGround().getClass()).substring(27) + "\n");
         print("1. Change Name");
         print("98. Back to Menu");
         print("--------------------");
@@ -841,19 +852,19 @@ public class GameController {
         return type;
     }
 
-    private static void viewCharacterStats(Character chrtr) {
+    private static void viewCharacterStats(Character chrtr, String num) {
         String armour = chrtr.getArmour() != null ? String.valueOf(chrtr.getArmour().getClass()).substring(30) : "none";
         String artefact = chrtr.getArtefact() != null ? String.valueOf(chrtr.getArtefact().getClass()).substring(30)
                 : "none";
-        print("**" + String.valueOf(chrtr.getClass()).substring(30) + "**");
-        print("\tType : " + getType(chrtr));
-        print("\tAttack : " + chrtr.getAttack());
-        print("\tDefence : " + chrtr.getDefense());
-        print("\tHealth : " + chrtr.getHealth());
-        print("\tSpeed : " + chrtr.getSpeed());
-        print("\tCurrent Value : " + chrtr.getCurrentValue());
-        print("\tArmor : " + armour);
-        print("\tArtifact : " + artefact + "\n");
+        print(num + String.valueOf(chrtr.getClass()).substring(30));
+        print("   Type : " + getType(chrtr));
+        print("   Attack : " + chrtr.getAttack());
+        print("   Defence : " + chrtr.getDefense());
+        print("   ealth : " + chrtr.getHealth());
+        print("   Speed : " + chrtr.getSpeed());
+        print("   Current Value : " + chrtr.getCurrentValue());
+        print("   Armor : " + armour);
+        print("   Artifact : " + artefact + "\n");
     }
 
     public static void selectOpponentUI() {
@@ -945,9 +956,11 @@ public class GameController {
 
     private static void viewCharacters(ArrayList<Character> list, String title) {
         print("-----" + title + "-----");
+        if (list.isEmpty())
+            print("No characters\n");
         for (int i = 0; i < list.size(); i++) {
             Character character = list.get(i);
-            viewCharacterStats(character);
+            viewCharacterStats(character, (i + 1) + ". ");
         }
     }
 
@@ -1024,7 +1037,7 @@ public class GameController {
             print("There is no any archers in the barrack.\n");
         } else {
             viewCharacters(tempCharacters, "Archers");
-        } 
+        }
 
         tempCharacters = currentPlayer.getKnights();
         if (tempCharacters.isEmpty()) {
@@ -1084,7 +1097,7 @@ public class GameController {
         String tempStr = "";
         Army tempArmy;
         Character tempCharacter = null;
-        inputStr = tempStr =  selectCategoryTo("view and modify");
+        inputStr = tempStr = selectCategoryTo("view and modify");
         tempArmy = currentPlayer.getArmy();
         switch (inputStr) {
             case "1":
@@ -1092,7 +1105,7 @@ public class GameController {
                     print("No one is assigned as the Archer");
                 } else {
                     tempCharacter = tempArmy.getArcher();
-                    viewCharacterStats(tempCharacter);
+                    viewCharacterStats(tempCharacter, "");
                 }
                 break;
 
@@ -1101,7 +1114,7 @@ public class GameController {
                     print("No one is assigned as the Knight");
                 } else {
                     tempCharacter = tempArmy.getKnight();
-                    viewCharacterStats(tempCharacter);
+                    viewCharacterStats(tempCharacter, "");
                 }
                 break;
 
@@ -1110,7 +1123,7 @@ public class GameController {
                     print("No one is assigned as the Mage");
                 } else {
                     tempCharacter = tempArmy.getMage();
-                    viewCharacterStats(tempCharacter);
+                    viewCharacterStats(tempCharacter, "");
                 }
                 break;
 
@@ -1119,7 +1132,7 @@ public class GameController {
                     print("No one is assigned as the Healer");
                 } else {
                     tempCharacter = tempArmy.getHealer();
-                    viewCharacterStats(tempCharacter);
+                    viewCharacterStats(tempCharacter, "");
                 }
                 break;
 
@@ -1128,7 +1141,7 @@ public class GameController {
                     print("No one is assigned as the Mythical Creature");
                 } else {
                     tempCharacter = tempArmy.getMythicalCreature();
-                    viewCharacterStats(tempCharacter);
+                    viewCharacterStats(tempCharacter, "");
                 }
                 break;
 
@@ -1139,21 +1152,76 @@ public class GameController {
                 print("Invalid input. Try it again.");
                 break;
         }
-        if (inputStr != "98") {
-            if ((tempCharacter == null)) {
+        if (tempStr != "98") {
+            if (tempCharacter == null) {
                 print("1. Add Character\n98. Back");
-                if(stdin.nextLine().equals("1")){
+
+                if (stdin.nextLine().equals("1")) {
+
                     addDeckFromBarrack(tempStr);
                     deckUI();
-                }else{
+                } else {
                     deckUI();
                 }
             } else {
-                print("1. Change Character\n2. Remove Character\n3. Upgrade Equipments\n98. Back");
+                print("1. Remove Character from deck\n98. Back");
+                if (stdin.nextLine().equals("1")) {
+                    removeCharacterFromDeck(tempStr);
+                }
+                deckUI();
             }
         }
 
         // have to complete
+    }
+
+    private static void removeCharacterFromDeck(String id) {
+        Character tempCharacter;
+        String name = "";
+        Army tempArmy = currentPlayer.getArmy() == null ? new Army() : currentPlayer.getArmy();
+        switch (id) {
+            case "1":
+                tempCharacter = tempArmy.getArcher();
+                currentPlayer.addArcher(tempCharacter);
+                name = String.valueOf(tempCharacter.getClass()).substring(30);
+                tempArmy.addArcher(null);
+                print("Successfully removed " + name + " from the deck\n");
+                break;
+
+            case "2":
+                tempCharacter = tempArmy.getKnight();
+                currentPlayer.addKnight(tempCharacter);
+                name = String.valueOf(tempCharacter.getClass()).substring(30);
+                tempArmy.addKnight(null);
+                print("Successfully removed " + name + " from the deck\n");
+                break;
+
+            case "3":
+                tempCharacter = tempArmy.getMage();
+                currentPlayer.addMage(tempCharacter);
+                name = String.valueOf(tempCharacter.getClass()).substring(30);
+                tempArmy.addMage(null);
+                print("Successfully removed " + name + " from the deck\n");
+                break;
+
+            case "4":
+                tempCharacter = tempArmy.getHealer();
+                currentPlayer.addHealer(tempCharacter);
+                name = String.valueOf(tempCharacter.getClass()).substring(30);
+                tempArmy.addHealer(null);
+                print("Successfully removed " + name + " from the deck\n");
+                break;
+
+            case "5":
+                tempCharacter = tempArmy.getMythicalCreature();
+                currentPlayer.addMythicalCreature(tempCharacter);
+                name = String.valueOf(tempCharacter.getClass()).substring(30);
+                tempArmy.addMythicalCreature(null);
+                print("Successfully removed " + name + " from the deck\n");
+                break;
+            default:
+                break;
+        }
     }
 
     private static void addDeckFromBarrack(String id) {
@@ -1163,128 +1231,109 @@ public class GameController {
         switch (id) {
             case "1":
                 print("Select Archer");
-                viewCharacters(currentPlayer.getArchers(), "Archors");
+                viewCharacters(currentPlayer.getArchers(), "Archers");
                 int out;
-                while (true) {
-                    inputStr = stdin.nextLine();
-                    out = 0;
-                    try {
-                        out = Integer.valueOf(inputStr);
-                    } catch (NumberFormatException e) {
-                        print("Invalid input. Try again.");
-                        continue;
-                    }
-                    if (out == 98) {
-                        continue;
-                    } else if (out >= 0 && out <= currentPlayer.getArchers().size()) {
-                        break;
-                    }
+                inputStr = stdin.nextLine();
+                out = 0;
+                try {
+                    out = Integer.valueOf(inputStr);
+                } catch (NumberFormatException e) {
+                    print("Invalid input. Try again.");
+                    return;
                 }
-                tempCharacter = currentPlayer.getArchers().get(out - 1);
-                name = String.valueOf(tempCharacter.getClass()).substring(30);
-                tempArmy.addArcher((Archer) tempCharacter);
-                currentPlayer.setArmy(tempArmy);
-                print("Successfully added " + name + " to the deck");
+                if (out >= 0 && out <= currentPlayer.getArchers().size()) {
+                    tempCharacter = currentPlayer.getArchers().get(out - 1);
+                    name = String.valueOf(tempCharacter.getClass()).substring(30);
+                    tempArmy.addArcher((Archer) tempCharacter);
+                    currentPlayer.setArmy(tempArmy);
+                    print("Successfully added " + name + " to the deck");
+                }
                 break;
             case "2":
                 print("Select Knight");
-                viewCharacters(currentPlayer.getArchers(), "Knights");
-                while (true) {
-                    inputStr = stdin.nextLine();
-                    out = 0;
-                    try {
-                        out = Integer.valueOf(inputStr);
-                    } catch (NumberFormatException e) {
-                        print("Invalid input. Try again.");
-                        continue;
-                    }
-                    if (out == 98) {
-                        continue;
-                    } else if (out >= 0 && out <= currentPlayer.getKnights().size()) {
-                        break;
-                    }
+                viewCharacters(currentPlayer.getKnights(), "Knights");
+                inputStr = stdin.nextLine();
+                out = 0;
+                try {
+                    out = Integer.valueOf(inputStr);
+                } catch (NumberFormatException e) {
+                    print("Invalid input. Try again.");
+                    return;
                 }
-                tempCharacter = currentPlayer.getKnights().get(out - 1);
-                name = String.valueOf(tempCharacter.getClass()).substring(30);
-                tempArmy.addKnight((Knight) tempCharacter);
-                currentPlayer.setArmy(tempArmy);
-                print("Successfully added " + name + " to the deck");
+                if (out >= 0 && out <= currentPlayer.getKnights().size()) {
+                    tempCharacter = currentPlayer.getKnights().get(out - 1);
+                    name = String.valueOf(tempCharacter.getClass()).substring(30);
+                    tempArmy.addKnight((Knight) tempCharacter);
+                    currentPlayer.setArmy(tempArmy);
+                    print("Successfully added " + name + " to the deck");
+                }
                 break;
+
             case "3":
                 print("Select Mage");
-                viewCharacters(currentPlayer.getArchers(), "Mages");
-                while (true) {
-                    inputStr = stdin.nextLine();
-                    out = 0;
-                    try {
-                        out = Integer.valueOf(inputStr);
-                    } catch (NumberFormatException e) {
-                        print("Invalid input. Try again.");
-                        continue;
-                    }
-                    if (out == 98) {
-                        continue;
-                    } else if (out >= 0 && out <= currentPlayer.getMages().size()) {
-                        break;
-                    }
+                viewCharacters(currentPlayer.getMages(), "Mages");
+                inputStr = stdin.nextLine();
+                out = 0;
+                try {
+                    out = Integer.valueOf(inputStr);
+                } catch (NumberFormatException e) {
+                    print("Invalid input. Try again.");
+                    return;
                 }
-                tempCharacter = currentPlayer.getMages().get(out - 1);
-                name = String.valueOf(tempCharacter.getClass()).substring(30);
-                tempArmy.addMage((Mage) tempCharacter);
-                currentPlayer.setArmy(tempArmy);
-                print("Successfully added " + name + " to the deck");
+                if (out >= 0 && out <= currentPlayer.getMages().size()) {
+                    tempCharacter = currentPlayer.getMages().get(out - 1);
+                    name = String.valueOf(tempCharacter.getClass()).substring(30);
+                    tempArmy.addMage((Mage) tempCharacter);
+                    currentPlayer.setArmy(tempArmy);
+                    print("Successfully added " + name + " to the deck");
+                }
                 break;
+
             case "4":
                 print("Select Healer");
-                viewCharacters(currentPlayer.getArchers(), "Healers");
-                while (true) {
-                    inputStr = stdin.nextLine();
-                    out = 0;
-                    try {
-                        out = Integer.valueOf(inputStr);
-                    } catch (NumberFormatException e) {
-                        print("Invalid input. Try again.");
-                        continue;
-                    }
-                    if (out == 98) {
-                        continue;
-                    } else if (out >= 0 && out <= currentPlayer.getHealers().size()) {
-                        break;
-                    }
+                viewCharacters(currentPlayer.getHealers(), "Healers");
+                inputStr = stdin.nextLine();
+                out = 0;
+                try {
+                    out = Integer.valueOf(inputStr);
+                } catch (NumberFormatException e) {
+                    print("Invalid input. Try again.");
+                    return;
                 }
-                tempCharacter = currentPlayer.getHealers().get(out - 1);
-                name = String.valueOf(tempCharacter.getClass()).substring(30);
-                tempArmy.addHealer((Healer) tempCharacter);
-                currentPlayer.setArmy(tempArmy);
-                print("Successfully added " + name + " to the deck");
+                if (out >= 0 && out <= currentPlayer.getHealers().size()) {
+                    tempCharacter = currentPlayer.getHealers().get(out - 1);
+                    name = String.valueOf(tempCharacter.getClass()).substring(30);
+                    tempArmy.addHealer((Healer) tempCharacter);
+                    currentPlayer.setArmy(tempArmy);
+                    print("Successfully added " + name + " to the deck");
+                }
                 break;
+
             case "5":
                 print("Select Mythical Creature");
-                viewCharacters(currentPlayer.getArchers(), "Mythical Creature");
-                while (true) {
-                    inputStr = stdin.nextLine();
-                    out = 0;
-                    try {
-                        out = Integer.valueOf(inputStr);
-                    } catch (NumberFormatException e) {
-                        print("Invalid input. Try again.");
-                        continue;
-                    }
-                    if (out == 98) {
-                        continue;
-                    } else if (out >= 0 && out <= currentPlayer.getMythicalCreatures().size()) {
-                        break;
-                    }
+                viewCharacters(currentPlayer.getMythicalCreatures(), "Mythical Creature");
+
+                inputStr = stdin.nextLine();
+                out = 0;
+                try {
+                    out = Integer.valueOf(inputStr);
+                } catch (NumberFormatException e) {
+                    print("Invalid input. Try again.");
+                    return;
                 }
-                tempCharacter = currentPlayer.getMythicalCreatures().get(out - 1);
-                name = String.valueOf(tempCharacter.getClass()).substring(30);
-                tempArmy.addMythicalCreature((MythicalCreature) tempCharacter);
-                currentPlayer.setArmy(tempArmy);
-                print("Successfully added " + name + " to the deck");
+                if (out >= 0 && out <= currentPlayer.getMythicalCreatures().size()) {
+                    tempCharacter = currentPlayer.getMythicalCreatures().get(out - 1);
+                    name = String.valueOf(tempCharacter.getClass()).substring(30);
+                    tempArmy.addMythicalCreature((MythicalCreature) tempCharacter);
+                    currentPlayer.setArmy(tempArmy);
+                    print("Successfully added " + name + " to the deck");
+                }
+
                 break;
             default:
                 break;
         }
+
     }
 
     private static void charactersShopUI() {
@@ -1445,7 +1494,6 @@ public class GameController {
         sellSoldiersUI();
     }
 
-    // completed
     private static void equipmentsUI() {
         print("1. View Available Equipments\n2. Buy Equipments\n98. Back");
         switch (stdin.nextLine()) {
@@ -1498,7 +1546,7 @@ public class GameController {
                 break;
         }
         if (inputStr != "98")
-        equipmentsUI();
+            equipmentsUI();
     }
 
     private static void viewArmorsToBuy() {
@@ -1569,11 +1617,11 @@ public class GameController {
                 print("Invalid input. Try it again.");
         }
         if (inputStr != "98")
-        equipmentsUI();
+            equipmentsUI();
     }
 
     private static void viewArtefactsToBuy() {
-        print("Select armour to buy");
+        print("Select artefact to buy");
         print("--------------------\n");
 
         print("1. Excalibur");
@@ -1640,7 +1688,7 @@ public class GameController {
         }
 
         if (inputStr != "98")
-            viewArtefactsToBuy();
+            equipmentsUI();
     }
 
     private static void equipmentsShopUI() {
@@ -1661,8 +1709,6 @@ public class GameController {
                 print("Invalid input. Try it again.");
                 break;
         }
-        if (inputStr != "98")
-            equipmentsShopUI();
     }
 
 }
