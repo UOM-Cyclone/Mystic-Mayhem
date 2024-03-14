@@ -2,12 +2,7 @@ package MysticMayhem;
 
 import java.util.Scanner;
 
-import MysticMayhem.Characters.Character;
-import MysticMayhem.Characters.Enchanter;
-import MysticMayhem.Characters.Highlander;
-import MysticMayhem.Characters.Shooter;
-import MysticMayhem.Characters.Squire;
-import MysticMayhem.Characters.Zoro;
+import MysticMayhem.Characters.*;
 import MysticMayhem.Controllers.GameController;
 import MysticMayhem.Grounds.Arcane;
 import MysticMayhem.Grounds.Hillcrest;
@@ -15,11 +10,9 @@ import MysticMayhem.Grounds.Hillcrest;
 
 public class Main {
     public static void main(String[] args) {
-    //    Scanner stdin = new Scanner(System.in);
-    //    GameController.setInput(stdin);
-    //    GameController.start();
-
-    System.out.println(String.valueOf(Shooter.class).substring(30));
+//        Scanner stdin = new Scanner(System.in);
+//        GameController.setInput(stdin);
+//        GameController.start();
 
 
         // System.out.println("test");
@@ -42,10 +35,16 @@ public class Main {
         Army army2 = new Army();
 
         army1.addArcher(new Shooter());
-        army1.addKnight(new Squire());
+        army1.addKnight(new Zoro());
+        army1.addMage(new Enchanter());
+        army1.addHealer(new Medic());
+        army1.addMythicalCreature(new Pegasus());
 
-        army2.addKnight(new Zoro());
-        army2.addMage(new Enchanter());
+        army2.addKnight(new Cavalier());
+        army2.addMage(new Warlock());
+        army2.addArcher(new Sunfire());
+        army2.addHealer(new Lightbringer());
+        army2.addMythicalCreature(new Basilisk());
 
         Player player1 = new Player("dev","dev","dev");
         Player player2 = new Player("shan","shan","shan");
@@ -54,12 +53,12 @@ public class Main {
         player2.setArmy(army2);
 
         player1.setHomeGround(new Hillcrest());
-        player2.setHomeGround(new Arcane());
+        player2.setHomeGround(new Hillcrest());
 
         Battle battle1 = new Battle();
 
         battle1.start(player1, player2);
-//        System.out.println(army1.toBattle(new Arcane()));
+//        System.out.println((new Lightbringer()) instanceof Healer);
     }
 
 

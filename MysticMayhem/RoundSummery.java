@@ -57,10 +57,10 @@ public class RoundSummery {
     }
     public void printSummery(){
         String summery = String.format("""
-                Turn %d : %s
+                Turn %d : %s 
                 %s attacks %s
                 %s's health : %.1f
-                %s's health : %.1f
+                %s's health : %.1f              
                 """,
                 roundNo, attackPlayer,
                 attackChar, defendChar,
@@ -74,7 +74,7 @@ public class RoundSummery {
 
         if(isBonusRound){
             summery += String.format("""
-                Turn %d (bonus round) : %s
+                Turn %d (bonus round) : %s 
                 %s attacks %s
                 %s's health : %.1f
                 %s's health : %.1f
