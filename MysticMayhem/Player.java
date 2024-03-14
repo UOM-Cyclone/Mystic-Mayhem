@@ -10,7 +10,7 @@ import MysticMayhem.Characters.Knight;
 import MysticMayhem.Characters.Mage;
 import MysticMayhem.Characters.Character;
 import MysticMayhem.Characters.MythicalCreature;
-import MysticMayhem.Equipments.Amulet;
+import MysticMayhem.Equipments.*;
 import MysticMayhem.Grounds.Ground;
 
 public class Player {
@@ -22,7 +22,10 @@ public class Player {
     private ArrayList<Character> knights = new ArrayList();
     private ArrayList<Character> mages = new ArrayList();
     private ArrayList<Character> healers = new ArrayList();
-    private static ArrayList<Character> mythicalCreatures = new ArrayList();
+    private ArrayList<Character> mythicalCreatures = new ArrayList();
+    
+    private ArrayList<Armour> armors = new ArrayList();
+    private ArrayList<Artefacts> artefacts = new ArrayList();
   
     private int gc, xp, uID;
     private String username, pwd, name;
@@ -39,12 +42,25 @@ public class Player {
     public ArrayList<Character> getMages(){return this.mages;}
     public ArrayList<Character> getHealers(){return this.healers;}
     public ArrayList<Character> getMythicalCreatures(){return this.mythicalCreatures;}
+    
+    public ArrayList<Armour> getArmors(){return this.armors;}
+    public ArrayList<Artefacts> getArtefacts(){return this.artefacts;}
 
     public void addArcher(Character archer){archers.add(archer);}
     public void addKnight(Character knight){knights.add(knight);}
     public void addMage(Character mage){mages.add(mage);}
     public void addHealer(Character healer){healers.add(healer);}
     public void addMythicalCreature(Character archer){mythicalCreatures.add(archer);}
+    public void addArmor(Armour eq){armors.add(eq);}
+    public void addArtefact(Artefacts eq){artefacts.add(eq);}
+
+    public void removeArcher(Character archer){archers.remove(archer);}
+    public void removeKnight(Character knight){knights.remove(knight);}
+    public void removeMage(Character mage){mages.remove(mage);}
+    public void removeHealer(Character healer){healers.remove(healer);}
+    public void removeMythicalCreature(Character mythicalCreature){mythicalCreatures.remove(mythicalCreature);}
+    public void removeArmor(Armour eq){armors.remove(eq);}
+    public void removeArtefact(Artefacts eq){artefacts.remove(eq);}
 
     public static ArrayList<String> getUserNames(){
         return usernames;

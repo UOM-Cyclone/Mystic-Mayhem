@@ -27,7 +27,7 @@ public class Main {
         // Shooter obj= new Shooter();
 
         // System.out.println(obj.defence(3));
-//        stdin.close();
+       stdin.close();
         // System.out.println(obj.defence(3));
 
 
