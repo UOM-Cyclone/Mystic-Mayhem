@@ -1,14 +1,29 @@
 package MysticMayhem;
-import java.io.Serializable;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+
+import MysticMayhem.Characters.Archer;
+import MysticMayhem.Characters.Healer;
+import MysticMayhem.Characters.Knight;
+import MysticMayhem.Characters.Mage;
+import MysticMayhem.Characters.Medic;
+import MysticMayhem.Characters.Character;
+import MysticMayhem.Characters.Dragon;
+import MysticMayhem.Characters.MythicalCreature;
+import MysticMayhem.Characters.Ranger;
+import MysticMayhem.Characters.Squire;
+import MysticMayhem.Characters.Warlock;
+
 import MysticMayhem.Characters.*;
 import MysticMayhem.Characters.Character;
+
 import MysticMayhem.Equipments.*;
 import MysticMayhem.Grounds.Ground;
+import MysticMayhem.Grounds.Marshland;
 
 public class Player implements Serializable {
     private static int count = 0;
@@ -67,6 +82,66 @@ public class Player implements Serializable {
         return count;
     }
 
+    public static void saveGameData(){
+        try {
+            FileOutputStream file = new FileOutputStream("players.cyc");
+            ObjectOutputStream out = new ObjectOutputStream(file);
+            System.out.println(players);
+            out.writeObject(players);
+            out.close();
+            file.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("kela una");
+        } catch (IOException e) {
+            System.out.println("aiyoooo");
+        }
+
+        try {
+            FileOutputStream file = new FileOutputStream("usernames.cyc");
+            ObjectOutputStream out = new ObjectOutputStream(file);
+            System.out.println(usernames);
+            out.writeObject(usernames);
+            out.close();
+            file.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("kela una");
+        } catch (IOException e) {
+            System.out.println("aiyoooo");
+        }
+    }
+
+    public static void loadGameData(){
+        try {
+            FileInputStream file = new FileInputStream("players.cyc");
+            ObjectInputStream in = new ObjectInputStream(file);
+            players = (Map<String, Player>) in.readObject();
+            System.out.println(players);
+            in.close();
+            file.close();
+        } catch (FileNotFoundException e) {
+            Player player1 = new Player("GeraltofRivia","whitewolf",new Marshland(),32,215);
+            players.put("whitewolf", player1);
+        } catch (IOException e) {
+            System.out.println("");
+        } catch (ClassNotFoundException e) {
+            System.out.println("");
+        }
+        try {
+            FileInputStream file = new FileInputStream("usernames.cyc");
+            ObjectInputStream in = new ObjectInputStream(file);
+            usernames = (ArrayList<String>) in.readObject();
+            System.out.println(usernames);
+            in.close();
+            file.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("");
+        } catch (IOException e) {
+            System.out.println("");
+        } catch (ClassNotFoundException e) {
+            System.out.println("");
+        }
+    }
+
     public static Player getRandomPlayer(){
         Player randomPlayer;
         do {
@@ -91,6 +166,29 @@ public class Player implements Serializable {
         usernames.add(uName);
 
         players.put(uName, this);
+    }
+
+    Player(String name, String uName, Ground hg, int xp, int gc){
+        this.name = name;
+        this.username = uName;
+        this.hg = hg;
+        this.gc = gc;
+        this.xp = xp;
+        
+        Army tempArmy = new Army();
+        Archer tempArcher = new Ranger();
+        tempArcher.addArmour(new Chainmail());
+        Healer tempHealer = new Medic();
+        tempHealer.addArtefacts(new Amulet());
+
+        tempArmy.addArcher(tempArcher);
+        tempArmy.addKnight(new Squire());
+        tempArmy.addMage(new Warlock());
+        tempArmy.addHealer(tempHealer);
+        tempArmy.addMythicalCreature(new Dragon());
+
+        this.setArmy(tempArmy);
+
     }
 
     public void updateHashMap(){
