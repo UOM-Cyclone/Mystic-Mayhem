@@ -86,7 +86,6 @@ public class Player implements Serializable {
         try {
             FileOutputStream file = new FileOutputStream("players.cyc");
             ObjectOutputStream out = new ObjectOutputStream(file);
-            System.out.println(players);
             out.writeObject(players);
             out.close();
             file.close();
@@ -99,7 +98,6 @@ public class Player implements Serializable {
         try {
             FileOutputStream file = new FileOutputStream("usernames.cyc");
             ObjectOutputStream out = new ObjectOutputStream(file);
-            System.out.println(usernames);
             out.writeObject(usernames);
             out.close();
             file.close();
@@ -148,7 +146,7 @@ public class Player implements Serializable {
             Random rand = new Random();
             int randomnum = rand.nextInt(usernames.size());
             randomPlayer = players.get(usernames.get(randomnum));
-        } while (randomPlayer.getArmy().isReadyToBattle());
+        } while (randomPlayer.getArmy() != null && randomPlayer.getArmy().isReadyToBattle());
 
         return randomPlayer;
     }

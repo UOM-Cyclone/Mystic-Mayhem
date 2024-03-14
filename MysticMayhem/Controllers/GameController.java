@@ -37,12 +37,7 @@ public class GameController {
         stdin = scnr;
     }
 
-    public static void setPlayers() {
-        new Player("Thumul Dasun", "thumul", new Arcane());
-        new Player("Devinda Dilshan", "devinda", new Desert());
-        new Player("Shanil Praveen", "shanil", new Hillcrest());
-        new Player("Dinara de. Silva", "dinara", new Desert());
-    }
+
 
     // to check and get the index of user
     private static boolean isTakenUserName(String plyrName) {
@@ -67,7 +62,6 @@ public class GameController {
     // start the console
     public static void start() {
         Player.loadGameData();
-        setPlayers();
         print("""
                 -----Mystic Mayhem-----
                                 
@@ -1147,6 +1141,7 @@ public class GameController {
         }
         if (tempStr != "98") {
             if (tempCharacter == null) {
+                print("triggered");
                 print("1. Add Character\n98. Back");
 
                 if (stdin.nextLine().equals("1")) {
