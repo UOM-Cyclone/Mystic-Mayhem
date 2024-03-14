@@ -113,7 +113,7 @@ public class Battle {
     }
 
     public void start(Player attacker, Player defender){
-        System.out.println(ColoredText.GREEN + "||  " + attacker.getName() + " VS " + defender.getName() + "  ||" + ColoredText.RESET + "\n" + "BattleGround : " + (String.valueOf(defender.getHomeGround().getClass()).substring(27))+"\n");
+        System.out.println(ColoredText.PURPLE + "||  " + attacker.getName() + " VS " + defender.getName() + "  ||"  + "\n" + "BattleGround : " + (String.valueOf(defender.getHomeGround().getClass()).substring(27))+"\n" + ColoredText.RESET);
 
         RoundSummery roundSummery;
         Character attackingChar;
@@ -122,6 +122,7 @@ public class Battle {
         defenderAlive = defender.getArmy().toBattle(battleGround);
         attackerAlive = generateAttackerQue(attackerAlive);
         defenderAlive = generateAttackerQue(defenderAlive);
+
 
         for (int i = 0; i < ROUNDS; i++){
             //(i+1) th round attacker attacking to defender
@@ -153,7 +154,7 @@ public class Battle {
                 setWinner(defender);
                 break;
             }
-            System.out.println("====================================="+"\n");
+            System.out.println("======================================================"+"\n");
         }
 
         if (winner != null){
@@ -161,21 +162,28 @@ public class Battle {
                 attacker.increaseXP(+1);
                 attacker.changeGC((int) (0.1*defender.getGC()));
                 defender.changeGC((int) (-0.1*defender.getGC()));
-                System.out.println(ColoredText.PURPLE + "Congratulations "+ attacker.getName() + " !!\n" + "You Won The Battle " +"\n"+ "XP : " +attacker.getXP() +"\n"+ "Gold Coins : "+attacker.getGC() + ColoredText.RESET);
+                System.out.println(ColoredText.PURPLE + "Congratulations "+ attacker.getName() + " !!\n" +
+                        "You Won The Battle " +"\n\n"+ attacker.getName()+"'s XP : "+ attacker.getXP()
+                        +"\n"+ attacker.getName()+ "'s Gold Coins : "+attacker.getGC() +
+                        "\n\n" + defender.getName() + "'s XP : "+defender.getXP()
+                        +"\n"+defender.getName() + "'s Gold Coins : "+defender.getGC() + ColoredText.RESET);
             } else {//do battle final things if defender win
                 defender.increaseXP(+1);
                 defender.changeGC((int) (0.1*attacker.getGC()));
                 attacker.changeGC((int) (-0.1*attacker.getGC()));
-                System.out.println(ColoredText.PURPLE + "Congratulations "+ defender.getName() + " !!\n" + "You Won The Battle " + "\n"+ "XP : " +defender.getXP() + "\n"+ "Gold Coins : "+defender.getGC() + ColoredText.RESET);
+                System.out.println(ColoredText.PURPLE + "Congratulations "+ defender.getName() + " !!\n" +
+                        "You Won The Battle " +"\n\n"+ defender.getName()+"'s XP : "+ defender.getXP()
+                        +"\n"+ defender.getName()+ "'s Gold Coins : "+defender.getGC() +
+                        "\n\n" + attacker.getName() + "'s XP : "+attacker.getXP()
+                        +"\n"+attacker.getName() + "'s Gold Coins : "+attacker.getGC() + ColoredText.RESET);
             }
         } else {//do battle final things if battle draw
             System.out.println(ColoredText.YELLOW + "Draw !!" +"\n"+"Great Battle " + ColoredText.RESET);
-            for(Character f : attackerAlive){
-                System.out.println(f);
-            }
-            for(Character f : defenderAlive){
-                System.out.println(f);
-            }
+            System.out.println(ColoredText.PURPLE + attacker.getName()+"'s XP : "+ attacker.getXP()
+                    +"\n"+ attacker.getName()+ "'s Gold Coins : "+attacker.getGC() +
+                    "\n\n" + defender.getName() + "'s XP : "+defender.getXP()
+                    +"\n"+defender.getName() + "'s Gold Coins : "+defender.getGC() + ColoredText.RESET);
+
         }
 
     }
