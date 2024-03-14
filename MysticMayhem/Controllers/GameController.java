@@ -14,6 +14,11 @@ import MysticMayhem.Equipments.Equipment;
 import MysticMayhem.Equipments.Excalibur;
 import MysticMayhem.Equipments.Fleece;
 import MysticMayhem.Equipments.Regalia;
+import MysticMayhem.Grounds.Arcane;
+import MysticMayhem.Grounds.Desert;
+import MysticMayhem.Grounds.Ground;
+import MysticMayhem.Grounds.Hillcrest;
+import MysticMayhem.Grounds.Marshland;
 import MysticMayhem.Characters.*;
 import MysticMayhem.UIs.CLIConsole;
 
@@ -55,10 +60,10 @@ public class GameController {
         plyrs.add("player-2");
         pwds.add("player-1");
         pwds.add("player-2");
-        new Player("Thumul Dasun", "thumul", "1111");
-        new Player("Devinda Dilshan", "devinda", "2111");
-        new Player("Shanil Praveen", "shanil", "3111");
-        new Player("Dinara de. Silva", "dinara", "4111");
+        new Player("Thumul Dasun", "thumul", new Arcane());
+        new Player("Devinda Dilshan", "devinda",new Desert());
+        new Player("Shanil Praveen", "shanil", new Hillcrest());
+        new Player("Dinara de. Silva", "dinara",new Desert());
     }
 
     // to check and get the index of user
@@ -114,6 +119,7 @@ public class GameController {
             inputStr = stdin.nextLine();
             if (isTakenUserName(inputStr)) {
                 tempPlayer = Player.getPlayers().get(inputStr);
+                currentPlayer = tempPlayer;
                 break;
             } else {
                 print("Invalid User Name. Try it again.\n");
@@ -174,9 +180,15 @@ public class GameController {
             }
         }
 
-        print("Enter a password for your account:");
-        pwd = stdin.nextLine();
-        new Player(name, uName, pwd);
+        print("SElect a Homeground");
+        print("1. Marshland\n2. Hillcrest\n3. Desert\n4. Arcane");
+        Ground hg=new Arcane();
+        inputStr = stdin.nextLine();
+        if(inputStr == "1") hg=new Marshland();
+        if(inputStr == "2") hg=new Hillcrest();
+        if(inputStr == "3") hg=new Desert();
+        if(inputStr == "4") hg=new Arcane();
+        new Player(name, uName, hg);
         print("Successfully created a new account..");
         start();
     }
@@ -188,6 +200,7 @@ public class GameController {
         }
 
         print("\n" + currentPlayer.getName() + " @" + currentPlayer.getUserName());
+
         inputStr = CLIConsole.display(stdin, "UI10");
 
         switch (inputStr) {
@@ -226,9 +239,8 @@ public class GameController {
         System.out.print("\n\tUsername : " + currentPlayer.getUserName());
         System.out.print("\n\tXP : " + currentPlayer.getXP());
         System.out.print("\n\tGold coins : " + currentPlayer.getGC());
-        System.out.print("\n\tHomeground : " + currentPlayer.getHomeGround() + "\n");
+        System.out.print("\n\tHomeground : " + String.valueOf(currentPlayer.getHomeGround().getClass()).substring(27) + "\n");
         print("1. Change Name");
-        print("2. Change Password");
         print("98. Back to Menu");
         print("--------------------");
 
@@ -249,7 +261,7 @@ public class GameController {
         print("-----Change Name-----");
         print("Enter new name.\n(Enter 98 to go back)\n");
         String tempName = stdin.nextLine();
-        switch (inputStr) {
+        switch (tempName) {
             case "98":
                 viewProfile();
                 break;
@@ -335,7 +347,7 @@ public class GameController {
             default:
                 print("Invalid input. Try it again.");
         }
-        viewArchersToBuy();
+        charactersShopUI();
     }
 
     private static void viewKnightsToBuy() {
@@ -409,7 +421,7 @@ public class GameController {
             default:
                 print("Invalid input. Try it again.");
         }
-        viewKnightsToBuy();
+        charactersShopUI();
     }
 
     private static void viewMagesToBuy() {
@@ -483,7 +495,7 @@ public class GameController {
             default:
                 print("Invalid input. Try it again.");
         }
-        viewMagesToBuy();
+        charactersShopUI();
     }
 
     private static void viewHealersToBuy() {
@@ -558,7 +570,7 @@ public class GameController {
                 print("Invalid input. Try it again.");
 
         }
-        viewHealersToBuy();
+        charactersShopUI();
     }
 
     private static void viewMythicalCreaturesToBuy() {
@@ -668,6 +680,7 @@ public class GameController {
                 print("Invalid input. Try it again.");
                 viewMythicalCreaturesToBuy();
         }
+        charactersShopUI();
     }
 
     private static String getType(Character chrtr) {
@@ -714,6 +727,7 @@ public class GameController {
             case "1":
                 opponentPlayer = tempPlayer;
                 // combat();
+                playerUI();
                 break;
             case "98":
                 playerUI();
@@ -722,7 +736,6 @@ public class GameController {
                 print("Invalid input. Try it again.");
                 playerUI();
         }
-
     }
 
     public static void armyUI() {
@@ -856,7 +869,44 @@ public class GameController {
     }
 
     private static void barrackUI() {
-        viewBarrack("view");
+        ArrayList<Character> tempCharacters = null;
+
+        tempCharacters = currentPlayer.getArchers();
+        if (tempCharacters.isEmpty()) {
+            print("There is no any archers in the barrack.\n");
+        } else {
+            viewCharacters(tempCharacters, "Archers");
+        } 
+
+        tempCharacters = currentPlayer.getKnights();
+        if (tempCharacters.isEmpty()) {
+            print("There is no any knights in the barrack.\n");
+        } else {
+            viewCharacters(tempCharacters, "Knights");
+        }
+
+        tempCharacters = currentPlayer.getMages();
+        if (tempCharacters.isEmpty()) {
+            print("There is no any mages in the barrack.\n");
+        } else {
+            viewCharacters(tempCharacters, "Mages");
+        }
+
+        tempCharacters = currentPlayer.getHealers();
+        if (tempCharacters.isEmpty()) {
+            print("There is no any healers in the barrack.\n");
+        } else {
+            viewCharacters(tempCharacters, "Healers");
+        }
+
+        tempCharacters = currentPlayer.getMythicalCreatures();
+        if (tempCharacters.isEmpty()) {
+            print("There is no any mythical cretauress in the barrack.\n");
+        } else {
+            viewCharacters(tempCharacters, "Mythical Creatures");
+        }
+
+        soldiersUI();
     }
 
     private static Character getSoldierFromBarrack(String msg) {
@@ -883,14 +933,15 @@ public class GameController {
 
     private static void deckUI() {
         // select the category
+        String tempStr = "";
         Army tempArmy;
         Character tempCharacter = null;
-        inputStr = selectCategoryTo("view and modify");
+        inputStr = tempStr =  selectCategoryTo("view and modify");
         tempArmy = currentPlayer.getArmy();
         switch (inputStr) {
             case "1":
                 if (tempArmy == null || tempArmy.getArcher() == null) {
-                    print("Noone is assigned as the Archer");
+                    print("No one is assigned as the Archer");
                 } else {
                     tempCharacter = tempArmy.getArcher();
                     viewCharacterStats(tempCharacter);
@@ -899,7 +950,7 @@ public class GameController {
 
             case "2":
                 if (tempArmy == null || tempArmy.getKnight() == null) {
-                    print("Noone is assigned as the Knight");
+                    print("No one is assigned as the Knight");
                 } else {
                     tempCharacter = tempArmy.getKnight();
                     viewCharacterStats(tempCharacter);
@@ -908,7 +959,7 @@ public class GameController {
 
             case "3":
                 if (tempArmy == null || tempArmy.getMage() == null) {
-                    print("Noone is assigned as the Mage");
+                    print("No one is assigned as the Mage");
                 } else {
                     tempCharacter = tempArmy.getMage();
                     viewCharacterStats(tempCharacter);
@@ -917,7 +968,7 @@ public class GameController {
 
             case "4":
                 if (tempArmy == null || tempArmy.getHealer() == null) {
-                    print("Noone is assigned as the Healer");
+                    print("No one is assigned as the Healer");
                 } else {
                     tempCharacter = tempArmy.getHealer();
                     viewCharacterStats(tempCharacter);
@@ -926,7 +977,7 @@ public class GameController {
 
             case "5":
                 if (tempArmy == null || tempArmy.getMythicalCreature() == null) {
-                    print("Noone is assigned as the Mythical Creature");
+                    print("No one is assigned as the Mythical Creature");
                 } else {
                     tempCharacter = tempArmy.getMythicalCreature();
                     viewCharacterStats(tempCharacter);
@@ -944,7 +995,7 @@ public class GameController {
             if ((tempCharacter == null)) {
                 print("1. Add Character\n98. Back");
                 if(stdin.nextLine() == "1"){
-                    addDeckFromBarrack(inputStr);
+                    addDeckFromBarrack(tempStr);
                     deckUI();
                 }else{
                     deckUI();
@@ -1272,7 +1323,8 @@ public class GameController {
     }
 
     private static void viewInventory(String msg) {
-        switch (selectEqCategoryTo(msg)) {
+        inputStr = selectEqCategoryTo(msg);
+        switch (inputStr) {
             case "1":
                 ArrayList<Armour> tempEq = currentPlayer.getArmors();
                 if (tempEq.isEmpty()) {
@@ -1294,9 +1346,11 @@ public class GameController {
                 break;
             default:
                 print("Invalid input. Try again");
-                viewInventory(msg);
+                equipmentsUI();
                 break;
         }
+        if (inputStr != "98")
+        equipmentsUI();
     }
 
     private static void viewArmorsToBuy() {
@@ -1367,7 +1421,7 @@ public class GameController {
                 print("Invalid input. Try it again.");
         }
         if (inputStr != "98")
-            viewArmorsToBuy();
+        equipmentsUI();
     }
 
     private static void viewArtefactsToBuy() {
