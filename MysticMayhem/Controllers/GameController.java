@@ -21,7 +21,6 @@ import MysticMayhem.Grounds.Ground;
 import MysticMayhem.Grounds.Hillcrest;
 import MysticMayhem.Grounds.Marshland;
 import MysticMayhem.Characters.*;
-import MysticMayhem.UIs.CLIConsole;
 
 public class GameController {
     static Scanner stdin;
@@ -67,6 +66,7 @@ public class GameController {
 
     // start the console
     public static void start() {
+        Player.loadGameData();
         setPlayers();
         print("""
                 -----Mystic Mayhem-----
@@ -85,15 +85,8 @@ public class GameController {
             case "2":
                 createAccount();
                 break;
-            case "50":
-                Player.saveGameData();
-                start();
-                break;
-            case "51":
-                Player.loadGameData();
-                start();
-                break;
             case "99":
+                Player.saveGameData();
                 quitGame();
                 break;
             default:

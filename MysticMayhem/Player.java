@@ -23,6 +23,7 @@ import MysticMayhem.Characters.Character;
 
 import MysticMayhem.Equipments.*;
 import MysticMayhem.Grounds.Ground;
+import MysticMayhem.Grounds.Marshland;
 
 public class Player implements Serializable {
     private static int count = 0;
@@ -118,11 +119,12 @@ public class Player implements Serializable {
             in.close();
             file.close();
         } catch (FileNotFoundException e) {
-            System.out.println("file eka nathoo");
+            Player player1 = new Player("GeraltofRivia","whitewolf",new Marshland(),32,215);
+            players.put("whitewolf", player1);
         } catch (IOException e) {
-            System.out.println("aiyooo");
+            System.out.println("");
         } catch (ClassNotFoundException e) {
-            System.out.println("class eka nathoo");
+            System.out.println("");
         }
         try {
             FileInputStream file = new FileInputStream("usernames.cyc");
@@ -132,11 +134,11 @@ public class Player implements Serializable {
             in.close();
             file.close();
         } catch (FileNotFoundException e) {
-            System.out.println("file eka nathoo");
+            System.out.println("");
         } catch (IOException e) {
-            System.out.println("aiyooo");
+            System.out.println("");
         } catch (ClassNotFoundException e) {
-            System.out.println("class eka nathoo");
+            System.out.println("");
         }
     }
 
