@@ -9,7 +9,6 @@ public class CLIConsole {
     }
 
     public static String display(Scanner stdin, String UI_id){
-        print(System.getProperty("user.dir"));
         try{
             Scanner inputFile = new Scanner(new File(System.getProperty("user.dir")+"\\MysticMayhem\\UIs\\"+UI_id+".txt"));
             while(inputFile.hasNextLine()){

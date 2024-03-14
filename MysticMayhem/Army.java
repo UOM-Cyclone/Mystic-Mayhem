@@ -20,12 +20,20 @@ public class Army {
     public  void addHealer(Healer healer){this.healer = healer;}
     public  void addMythicalCreature(MythicalCreature mythicalCreature){this.mythicalCreature = mythicalCreature;}
 
+
+    public Character getArcher(){return this.archer;}
+    public Character getKnight(){return this.knight;}
+    public Character getMage(){return this.mage;}
+    public Character getHealer(){return this.healer;}
+    public Character getMythicalCreature(){return this.mythicalCreature;}
+
     public boolean isReadyToBattle(){
         boolean isArcher = archer != null;
         boolean isKnight = knight != null;
         boolean isMage = mage != null;
         boolean isHealer = healer != null;
         boolean isCreature = mythicalCreature != null;
+
 
         return isArcher || isKnight || isMage || isHealer || isCreature;
     }
