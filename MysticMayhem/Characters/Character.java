@@ -8,6 +8,10 @@ import MysticMayhem.RoundSummery;
 import java.util.Vector;
 
 public interface Character {
+    default float roundToFirstDecimal(float value){
+        return (float) Math.round(value * 10) / 10;
+    }
+
     public boolean addArmour(Armour armour);
     public Armour removeArmour();
     public boolean addArtefacts(Artefacts artefacts);

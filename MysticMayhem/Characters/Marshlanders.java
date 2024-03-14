@@ -26,7 +26,7 @@ public abstract class Marshlanders implements Type{
             attack += armour.getAttack();
             defence += armour.getDefence();
 
-            current_value += 0.2 * armour.getPrice();
+            current_value += roundToFirstDecimal((float) (0.2 * armour.getPrice()));
             return true;
         } else {
             return false;
@@ -43,7 +43,7 @@ public abstract class Marshlanders implements Type{
             attack -= armour.getAttack();
             defence -= armour.getDefence();
 
-            current_value -= 0.2 * armour.getPrice();
+            current_value -= roundToFirstDecimal((float) (0.2 * armour.getPrice()));
             Armour temp = armour;
             armour = null;
             return temp;
@@ -65,7 +65,7 @@ public abstract class Marshlanders implements Type{
             attack += artefact.getAttack();
             defence += artefact.getDefence();
 
-            current_value += 0.2 * artefact.getPrice();
+            current_value += roundToFirstDecimal((float) (0.2 * artefact.getPrice()));
             return true;
         } else {
             return false;
@@ -82,7 +82,7 @@ public abstract class Marshlanders implements Type{
             attack -= artefact.getAttack();
             defence -= artefact.getDefence();
 
-            current_value -= 0.2 * artefact.getPrice();
+            current_value -= roundToFirstDecimal((float) (0.2 * artefact.getPrice()));
             Artefacts temp = artefact;
             artefact = null;
             return temp;
@@ -164,14 +164,14 @@ public abstract class Marshlanders implements Type{
     @Override
     public float defence(float value) {
         float lostHealth = (float) (0.5 * value - 0.1 * defence);
-        health = (lostHealth >= health) ? 0: (health-lostHealth);
+        health = (lostHealth >= health) ? 0: roundToFirstDecimal(health-lostHealth);
         return health;
     }
 
     @Override
     public void addBonusHealth(){
         if(isBonusHealth){
-            health += 0.1 * health;
+            health += roundToFirstDecimal((float) (0.1 * health));
         }
     }
 
