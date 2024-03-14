@@ -4,9 +4,10 @@ import MysticMayhem.Characters.*;
 import MysticMayhem.Characters.Character;
 import MysticMayhem.Grounds.Ground;
 
+import java.io.Serializable;
 import java.util.Vector;
 
-public class Army {
+public class Army implements Serializable {
     Archer archer = null;
     Knight knight = null;
     Mage mage = null;

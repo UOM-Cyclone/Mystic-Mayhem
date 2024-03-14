@@ -1,4 +1,6 @@
 package MysticMayhem.Grounds;
 
-public interface Ground {
+import java.io.Serializable;
+
+public interface Ground extends Serializable {
 }

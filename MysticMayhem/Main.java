@@ -28,16 +28,16 @@ public class Main {
                 " |_|  |_|\\__, |___/\\__|_|\\___| |_|  |_|\\__,_|\\__, |_| |_|\\___|_| |_| |_|\n" +
                 "          __/ |                               __/ |                     \n" +
                 "         |___/                               |___/                      \n" + ColoredText.RESET);
-        Scanner stdin = new Scanner(System.in);
-        GameController.setInput(stdin);
-        GameController.start();
+        //Scanner stdin = new Scanner(System.in);
+        //GameController.setInput(stdin);
+        //GameController.start();
 
         // System.out.println("test");
 
         // Shooter obj= new Shooter();
 
         // System.out.println(obj.defence(3));
-        stdin.close();
+        //stdin.close();
         // System.out.println(obj.defence(3));
 
 

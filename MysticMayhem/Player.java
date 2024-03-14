@@ -1,19 +1,16 @@
 package MysticMayhem;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-import MysticMayhem.Characters.Archer;
-import MysticMayhem.Characters.Healer;
-import MysticMayhem.Characters.Knight;
-import MysticMayhem.Characters.Mage;
+import MysticMayhem.Characters.*;
 import MysticMayhem.Characters.Character;
-import MysticMayhem.Characters.MythicalCreature;
 import MysticMayhem.Equipments.*;
 import MysticMayhem.Grounds.Ground;
 
-public class Player {
+public class Player implements Serializable {
     private static int count = 0;
     private static Map<String,Player> players = new HashMap<>();
     private static ArrayList<String> usernames = new ArrayList<>();
