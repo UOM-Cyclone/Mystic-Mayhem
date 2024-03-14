@@ -24,27 +24,9 @@ import MysticMayhem.Characters.*;
 import MysticMayhem.UIs.CLIConsole;
 
 public class GameController {
-    static int UI_id_num;
     static Scanner stdin;
-
-    private static ArrayList<String> plyrs = new ArrayList<String>();
-    private static ArrayList<String> pwds = new ArrayList<String>();
-
     private static String inputStr = "";
     private static Player currentPlayer, opponentPlayer;
-
-    private static Character[][] charArr = {
-            { new Shooter(), new Ranger(), new Sunfire(), new Zing(), new Saggitarius() },
-            { new Squire(), new Cavalier(), new Templar(), new Zoro(), new Swiftblade() },
-            { new Warlock(), new Illusionist(), new Enchanter(), new Conjurer(), new Eldritch() },
-            { new Soother(), new Medic(), new Alchemist(), new Saint(), new Lightbringer() },
-            { new Dragon(), new Basilisk(), new Hydra(), new Phoenix(), new Pegasus() }
-    };
-
-    private static Equipment[][] eqArr = {
-            { new Chainmail(), new Regalia(), new Fleece() },
-            { new Excalibur(), new Amulet(), new Crystal() }
-    };
 
     static Player tempPlayer;
 
@@ -57,10 +39,6 @@ public class GameController {
     }
 
     public static void setPlayers() {
-        plyrs.add("player-1");
-        plyrs.add("player-2");
-        pwds.add("player-1");
-        pwds.add("player-2");
         new Player("Thumul Dasun", "thumul", new Arcane());
         new Player("Devinda Dilshan", "devinda",new Desert());
         new Player("Shanil Praveen", "shanil", new Hillcrest());
@@ -106,6 +84,14 @@ public class GameController {
                 break;
             case "2":
                 createAccount();
+                break;
+            case "50":
+                Player.saveGameData();
+                start();
+                break;
+            case "51":
+                Player.loadGameData();
+                start();
                 break;
             case "99":
                 quitGame();
@@ -214,7 +200,6 @@ public class GameController {
 
         print("""
                 -----------------
-                                
                 1. Combat
                 2. My Profile
                 3. My Army

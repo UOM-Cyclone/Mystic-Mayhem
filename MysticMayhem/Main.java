@@ -31,7 +31,7 @@ public class Main {
         Scanner stdin = new Scanner(System.in);
         GameController.setInput(stdin);
         GameController.start();
-
+//        Player.saveGameData();
         // System.out.println("test");
 
         // Shooter obj= new Shooter();
