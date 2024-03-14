@@ -90,7 +90,16 @@ public class GameController {
     // start the console
     public static void start() {
         setPlayers();
-        inputStr = CLIConsole.display(stdin, "UI00");
+        print("""
+                -----Mystic Mayhem-----
+                                
+                1. Login
+                2. New Player
+                3. Instructions
+                99. Quit Game
+                -----------------------
+                """);
+        inputStr = stdin.nextLine();
         switch (inputStr) {
             case "1":
                 LogIn();
@@ -203,7 +212,16 @@ public class GameController {
 
         print("\n" + currentPlayer.getName() + " @" + currentPlayer.getUserName());
 
-        inputStr = CLIConsole.display(stdin, "UI10");
+        print("""
+                -----------------
+                                
+                1. Combat
+                2. My Profile
+                3. My Army
+                98. LogOut
+                -----------------
+                """);
+        inputStr = stdin.nextLine();
 
         switch (inputStr) {
             case "1":
@@ -1139,7 +1157,7 @@ public class GameController {
         if (inputStr != "98") {
             if ((tempCharacter == null)) {
                 print("1. Add Character\n98. Back");
-                if(stdin.nextLine() == "1"){
+                if(stdin.nextLine().equals("1")){
                     addDeckFromBarrack(tempStr);
                     deckUI();
                 }else{
