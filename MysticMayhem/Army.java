@@ -34,7 +34,9 @@ public class Army {
         boolean isHealer = healer != null;
         boolean isCreature = mythicalCreature != null;
 
+
         return isArcher && isKnight && isMage && isHealer && isCreature;
+
     }
     public Vector<Character> toBattle(Ground ground){ // to send army to battle
         Vector<Character> battleArmy = new Vector<>();

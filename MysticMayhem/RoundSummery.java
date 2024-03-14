@@ -74,7 +74,9 @@ public class RoundSummery {
 
         if(isBonusRound){
             summery += String.format("""
+
                 %sTurn %d (bonus round) : %s 
+
                 %s attacks %s
                 %s's health : %.1f
                 %s's health : %.1f

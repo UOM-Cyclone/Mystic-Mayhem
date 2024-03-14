@@ -88,6 +88,7 @@ public class Battle {
             if(arr.get(i) instanceof Knight){
                 temp.add(arr.get(i));
             }
+
         }
         for (int i = start; i <= end; i++){
             if(arr.get(i) instanceof MythicalCreature){
@@ -108,6 +109,7 @@ public class Battle {
             arr.set(i,temp.get(i-start));
         }
 
+
     }
 
     public void start(Player attacker, Player defender){
@@ -120,20 +122,6 @@ public class Battle {
         defenderAlive = defender.getArmy().toBattle(battleGround);
         attackerAlive = generateAttackerQue(attackerAlive);
         defenderAlive = generateAttackerQue(defenderAlive);
-
-        for(Character f : attackerAlive){
-            System.out.println(f);
-            System.out.println(f.getSpeed());
-            System.out.println(f.getDefense());
-            System.out.println(f.getAttack());
-        }
-
-        for(Character f : defenderAlive){
-            System.out.println(f);
-            System.out.println(f.getSpeed());
-            System.out.println(f.getDefense());
-            System.out.println(f.getAttack());
-        }
 
         for (int i = 0; i < ROUNDS; i++){
             //(i+1) th round attacker attacking to defender
