@@ -173,15 +173,15 @@ public class Battle {
                 attacker.increaseXP(+1);
                 attacker.changeGC((int) (0.1*defender.getGC()));
                 defender.changeGC((int) (-0.1*defender.getGC()));
-                System.out.println("Congratulations "+ attacker.getName() + " !!\n" + "You Won The Battle " +"\n"+ "XP : " +attacker.getXP() +"\n"+ "Gold Coins : "+attacker.getGC());
+                System.out.println(ColoredText.PURPLE + "Congratulations "+ attacker.getName() + " !!\n" + "You Won The Battle " +"\n"+ "XP : " +attacker.getXP() +"\n"+ "Gold Coins : "+attacker.getGC() + ColoredText.RESET);
             } else {//do battle final things if defender win
                 defender.increaseXP(+1);
                 defender.changeGC((int) (0.1*attacker.getGC()));
                 attacker.changeGC((int) (-0.1*attacker.getGC()));
-                System.out.println("Congratulations "+ defender.getName() + " !!\n" + "You Won The Battle " + "\n"+ "XP : " +defender.getXP() + "\n"+ "Gold Coins : "+defender.getGC());
+                System.out.println(ColoredText.PURPLE + "Congratulations "+ defender.getName() + " !!\n" + "You Won The Battle " + "\n"+ "XP : " +defender.getXP() + "\n"+ "Gold Coins : "+defender.getGC() + ColoredText.RESET);
             }
         } else {//do battle final things if battle draw
-            System.out.println("Draw !!" +"\n"+"Great Battle ");
+            System.out.println(ColoredText.YELLOW + "Draw !!" +"\n"+"Great Battle " + ColoredText.RESET);
             for(Character f : attackerAlive){
                 System.out.println(f);
             }

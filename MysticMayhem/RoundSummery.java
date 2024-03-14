@@ -67,24 +67,24 @@ public class RoundSummery {
                 defendChar, defenderHealth,
                 attackChar, attackerHealth);
         if(defenderHealth == 0 ){
-            summery += String.format("\n%s Died !\n\n",defendChar);
+            summery += String.format(ColoredText.RED + "\n%s Died !\n\n" + ColoredText.RED,defendChar);
         }
 
 //        System.out.println(isBonusRound);
 
         if(isBonusRound){
             summery += String.format("""
-                Turn %d (bonus round) : %s 
+                %sTurn %d (bonus round) : %s 
                 %s attacks %s
                 %s's health : %.1f
                 %s's health : %.1f
                 """,
-                    roundNo, attackPlayer,
+                    ColoredText.BLUE,roundNo, attackPlayer,
                     attackChar, bonusDefendChar,
                     bonusDefendChar, bonusDefenderHealth,
                     attackChar, attackerHealth);
             if(bonusDefenderHealth == 0 ){
-                summery += String.format("\n%s Died !\n\n",defendChar);
+                summery += String.format(ColoredText.RED + "\n%s Died !\n\n" + ColoredText.RESET,defendChar);
             }
         }
         System.out.print(summery);

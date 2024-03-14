@@ -6,7 +6,7 @@ import java.util.Vector;
 
 public class Warlock extends Marshlanders implements Mage{
 
-    public final static int price = 180;
+    public final static int price = 100;
     public final static float initialHealth = 10;
     public final static float initialSpeed = 12;
     public final static float initialAttack = 12;
