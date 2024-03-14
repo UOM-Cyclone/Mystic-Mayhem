@@ -8,8 +8,13 @@ import MysticMayhem.Characters.Archer;
 import MysticMayhem.Characters.Healer;
 import MysticMayhem.Characters.Knight;
 import MysticMayhem.Characters.Mage;
+import MysticMayhem.Characters.Medic;
 import MysticMayhem.Characters.Character;
+import MysticMayhem.Characters.Dragon;
 import MysticMayhem.Characters.MythicalCreature;
+import MysticMayhem.Characters.Ranger;
+import MysticMayhem.Characters.Squire;
+import MysticMayhem.Characters.Warlock;
 import MysticMayhem.Equipments.*;
 import MysticMayhem.Grounds.Ground;
 
@@ -94,6 +99,29 @@ public class Player {
         usernames.add(uName);
 
         players.put(uName, this);
+    }
+
+    Player(String name, String uName, Ground hg, int xp, int gc){
+        this.name = name;
+        this.username = uName;
+        this.hg = hg;
+        this.gc = gc;
+        this.xp = xp;
+        
+        Army tempArmy = new Army();
+        Archer tempArcher = new Ranger();
+        tempArcher.addArmour(new Chainmail());
+        Healer tempHealer = new Medic();
+        tempHealer.addArtefacts(new Amulet());
+
+        tempArmy.addArcher(tempArcher);
+        tempArmy.addKnight(new Squire());
+        tempArmy.addMage(new Warlock());
+        tempArmy.addHealer(tempHealer);
+        tempArmy.addMythicalCreature(new Dragon());
+
+        this.setArmy(tempArmy);
+
     }
 
     public void updateHashMap(){
