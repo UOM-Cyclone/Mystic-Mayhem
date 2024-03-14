@@ -28,7 +28,7 @@ public class Player {
     private ArrayList<Artefacts> artefacts = new ArrayList();
   
     private int gc, xp, uID;
-    private String username, pwd, name;
+    private String username, name;
     private Ground hg;
     private Army army;
 
@@ -83,10 +83,10 @@ public class Player {
 
     public void setArmy(Army army){this.army = army;}
 
-    public Player(String name, String uName, String pwd){
+    public Player(String name, String uName, Ground hg){
         this.name = name;
         this.username = uName;
-        this.pwd = pwd; 
+        this.hg = hg;
         gc = 500;
         xp = 0;
         count++;
@@ -94,10 +94,6 @@ public class Player {
         usernames.add(uName);
 
         players.put(uName, this);
-    }
-
-    Player(String name,String uName){
-        
     }
 
     public void updateHashMap(){
@@ -120,10 +116,6 @@ public class Player {
         return this.xp;
     }
 
-    public String getPwd(){
-        return this.pwd;
-    }
-
     public Ground getHomeGround(){
         return this.hg;
     }
@@ -134,10 +126,6 @@ public class Player {
 
     public void changeGC(int amount){
         this.gc += amount;
-    }
-
-    public void chnagePwd(String newPwd){
-        this.pwd = newPwd;
     }
 
     public void changeUserName(String newUName){
