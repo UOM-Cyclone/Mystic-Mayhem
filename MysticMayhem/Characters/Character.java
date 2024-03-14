@@ -5,9 +5,10 @@ import MysticMayhem.Equipments.Artefacts;
 import MysticMayhem.Grounds.Ground;
 import MysticMayhem.RoundSummery;
 
+import java.io.Serializable;
 import java.util.Vector;
 
-public interface Character {
+public interface Character extends Serializable {
     default float roundToFirstDecimal(float value){
         return (float) Math.round(value * 10) / 10;
     }

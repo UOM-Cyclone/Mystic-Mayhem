@@ -24,27 +24,9 @@ import MysticMayhem.Characters.*;
 import MysticMayhem.UIs.CLIConsole;
 
 public class GameController {
-    static int UI_id_num;
     static Scanner stdin;
-
-    private static ArrayList<String> plyrs = new ArrayList<String>();
-    private static ArrayList<String> pwds = new ArrayList<String>();
-
     private static String inputStr = "";
     private static Player currentPlayer, opponentPlayer;
-
-    private static Character[][] charArr = {
-            { new Shooter(), new Ranger(), new Sunfire(), new Zing(), new Saggitarius() },
-            { new Squire(), new Cavalier(), new Templar(), new Zoro(), new Swiftblade() },
-            { new Warlock(), new Illusionist(), new Enchanter(), new Conjurer(), new Eldritch() },
-            { new Soother(), new Medic(), new Alchemist(), new Saint(), new Lightbringer() },
-            { new Dragon(), new Basilisk(), new Hydra(), new Phoenix(), new Pegasus() }
-    };
-
-    private static Equipment[][] eqArr = {
-            { new Chainmail(), new Regalia(), new Fleece() },
-            { new Excalibur(), new Amulet(), new Crystal() }
-    };
 
     static Player tempPlayer;
 
@@ -57,10 +39,6 @@ public class GameController {
     }
 
     public static void setPlayers() {
-        plyrs.add("player-1");
-        plyrs.add("player-2");
-        pwds.add("player-1");
-        pwds.add("player-2");
         new Player("Thumul Dasun", "thumul", new Arcane());
         new Player("Devinda Dilshan", "devinda", new Desert());
         new Player("Shanil Praveen", "shanil", new Hillcrest());
@@ -90,13 +68,30 @@ public class GameController {
     // start the console
     public static void start() {
         setPlayers();
-        inputStr = CLIConsole.display(stdin, "UI00");
+        print("""
+                -----Mystic Mayhem-----
+                                
+                1. Login
+                2. New Player
+                3. Instructions
+                99. Quit Game
+                -----------------------
+                """);
+        inputStr = stdin.nextLine();
         switch (inputStr) {
             case "1":
                 LogIn();
                 break;
             case "2":
                 createAccount();
+                break;
+            case "50":
+                Player.saveGameData();
+                start();
+                break;
+            case "51":
+                Player.loadGameData();
+                start();
                 break;
             case "99":
                 quitGame();
@@ -207,7 +202,15 @@ public class GameController {
 
         print("\n" + currentPlayer.getName() + " @" + currentPlayer.getUserName());
 
-        inputStr = CLIConsole.display(stdin, "UI10");
+        print("""
+                -----------------
+                1. Combat
+                2. My Profile
+                3. My Army
+                98. LogOut
+                -----------------
+                """);
+        inputStr = stdin.nextLine();
 
         switch (inputStr) {
             case "1":
@@ -1152,7 +1155,9 @@ public class GameController {
         if (tempStr != "98") {
             if (tempCharacter == null) {
                 print("1. Add Character\n98. Back");
+
                 if (stdin.nextLine().equals("1")) {
+
                     addDeckFromBarrack(tempStr);
                     deckUI();
                 } else {

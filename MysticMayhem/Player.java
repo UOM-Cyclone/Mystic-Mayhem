@@ -1,8 +1,10 @@
 package MysticMayhem;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
+
 
 import MysticMayhem.Characters.Archer;
 import MysticMayhem.Characters.Healer;
@@ -15,10 +17,14 @@ import MysticMayhem.Characters.MythicalCreature;
 import MysticMayhem.Characters.Ranger;
 import MysticMayhem.Characters.Squire;
 import MysticMayhem.Characters.Warlock;
+
+import MysticMayhem.Characters.*;
+import MysticMayhem.Characters.Character;
+
 import MysticMayhem.Equipments.*;
 import MysticMayhem.Grounds.Ground;
 
-public class Player {
+public class Player implements Serializable {
     private static int count = 0;
     private static Map<String,Player> players = new HashMap<>();
     private static ArrayList<String> usernames = new ArrayList<>();
@@ -73,6 +79,65 @@ public class Player {
 
     public static int getPlayerCount(){
         return count;
+    }
+
+    public static void saveGameData(){
+        try {
+            FileOutputStream file = new FileOutputStream("players.cyc");
+            ObjectOutputStream out = new ObjectOutputStream(file);
+            System.out.println(players);
+            out.writeObject(players);
+            out.close();
+            file.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("kela una");
+        } catch (IOException e) {
+            System.out.println("aiyoooo");
+        }
+
+        try {
+            FileOutputStream file = new FileOutputStream("usernames.cyc");
+            ObjectOutputStream out = new ObjectOutputStream(file);
+            System.out.println(usernames);
+            out.writeObject(usernames);
+            out.close();
+            file.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("kela una");
+        } catch (IOException e) {
+            System.out.println("aiyoooo");
+        }
+    }
+
+    public static void loadGameData(){
+        try {
+            FileInputStream file = new FileInputStream("players.cyc");
+            ObjectInputStream in = new ObjectInputStream(file);
+            players = (Map<String, Player>) in.readObject();
+            System.out.println(players);
+            in.close();
+            file.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("file eka nathoo");
+        } catch (IOException e) {
+            System.out.println("aiyooo");
+        } catch (ClassNotFoundException e) {
+            System.out.println("class eka nathoo");
+        }
+        try {
+            FileInputStream file = new FileInputStream("usernames.cyc");
+            ObjectInputStream in = new ObjectInputStream(file);
+            usernames = (ArrayList<String>) in.readObject();
+            System.out.println(usernames);
+            in.close();
+            file.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("file eka nathoo");
+        } catch (IOException e) {
+            System.out.println("aiyooo");
+        } catch (ClassNotFoundException e) {
+            System.out.println("class eka nathoo");
+        }
     }
 
     public static Player getRandomPlayer(){
