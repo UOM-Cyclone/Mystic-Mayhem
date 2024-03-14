@@ -10,6 +10,7 @@ public interface Catogery extends Character{
 
         for (Character i : defenders){
             if(lowestValue > i.getDefense()){
+                lowestValue = i.getDefense();
                 lowestDefenders.clear();
                 lowestDefenders.add(i);
             } else if(lowestValue == i.getDefense()){

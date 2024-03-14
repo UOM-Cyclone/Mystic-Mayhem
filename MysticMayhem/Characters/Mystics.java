@@ -4,7 +4,6 @@ import MysticMayhem.Equipments.Armour;
 import MysticMayhem.Equipments.Artefacts;
 import MysticMayhem.Grounds.Arcane;
 import MysticMayhem.Grounds.Ground;
-import MysticMayhem.Grounds.Hillcrest;
 import MysticMayhem.Grounds.Marshland;
 
 public abstract class Mystics implements Type{

@@ -58,35 +58,33 @@ public class RoundSummery {
     public void printSummery(){
         String summery = String.format("""
                 Turn %d : %s 
-                %s attacks %s
+               %s %s attacks %s
                 %s's health : %.1f
-                %s's health : %.1f              
+                %s's health : %.1f   %s           
                 """,
                 roundNo, attackPlayer,
-                attackChar, defendChar,
+                ColoredText.CYAN,attackChar, defendChar,
                 defendChar, defenderHealth,
-                attackChar, attackerHealth);
+                attackChar, attackerHealth,ColoredText.RESET);
         if(defenderHealth == 0 ){
-            summery += String.format(ColoredText.RED + "\n%s Died !\n\n" + ColoredText.RED,defendChar);
+            summery += String.format(ColoredText.RED + "\n %s Died !\n" + ColoredText.RESET,defendChar);
         }
 
 //        System.out.println(isBonusRound);
 
         if(isBonusRound){
             summery += String.format("""
-
-                %sTurn %d (bonus round) : %s 
-
-                %s attacks %s
-                %s's health : %.1f
-                %s's health : %.1f
+                 Turn %d (bonus round) : %s 
+                %s %s attacks %s
+                 %s's health : %.1f
+                 %s's health : %.1f  %s
                 """,
-                    ColoredText.BLUE,roundNo, attackPlayer,
-                    attackChar, bonusDefendChar,
+                    roundNo, attackPlayer,
+                    ColoredText.BLUE,attackChar, bonusDefendChar,
                     bonusDefendChar, bonusDefenderHealth,
-                    attackChar, attackerHealth);
+                    attackChar, attackerHealth,ColoredText.RESET);
             if(bonusDefenderHealth == 0 ){
-                summery += String.format(ColoredText.RED + "\n%s Died !\n\n" + ColoredText.RESET,defendChar);
+                summery += String.format(ColoredText.RED + "\n %s Died !\n" + ColoredText.RESET,defendChar);
             }
         }
         System.out.print(summery);

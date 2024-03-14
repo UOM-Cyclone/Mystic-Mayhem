@@ -13,19 +13,22 @@ import MysticMayhem.Characters.*;
 
 
 import MysticMayhem.Controllers.GameController;
+import MysticMayhem.Equipments.*;
 import MysticMayhem.Grounds.Arcane;
+import MysticMayhem.Grounds.Desert;
 import MysticMayhem.Grounds.Hillcrest;
+import MysticMayhem.Grounds.Marshland;
 
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println(ColoredText.RED+"\n" +
-                "  __  __           _   _        __  __             _                    \n" +
-                " |  \\/  |         | | (_)      |  \\/  |           | |                   \n" +
-                " | \\  / |_   _ ___| |_ _  ___  | \\  / | __ _ _   _| |__   ___ _ __ ___  \n" +
-                " | |\\/| | | | / __| __| |/ __| | |\\/| |/ _` | | | | '_ \\ / _ \\ '_ ` _ \\ \n" +
-                " | |  | | |_| \\__ \\ |_| | (__  | |  | | (_| | |_| | | | |  __/ | | | | |\n" +
-                " |_|  |_|\\__, |___/\\__|_|\\___| |_|  |_|\\__,_|\\__, |_| |_|\\___|_| |_| |_|\n" +
+                System.out.println(ColoredText.RED+"\n" +
+                "  __  __           _   _         __  __             _                    \n" +
+                " |  \\/  |         | | (_)       |  \\/  |           | |                   \n" +
+                " | \\  / |_   _ ___| |_ _  ___   | \\  / | __ _ _   _| |__   ___ _ __ ___  \n" +
+                " | |\\/| | | | / __| __| |/ __|  | |\\/| |/ _` | | | | '_ \\ / _ \\ '_ ` _ \\ \n" +
+                " | |  | | |_| \\__ \\ |_| | (__   | |  | | (_| | |_| | | | |  __/ | | | | |\n" +
+                " |_|  |_|\\__, |___/\\__|_|\\___|  |_|  |_|\\__,_|\\__, |_| |_|\\___|_| |_| |_|\n" +
                 "          __/ |                               __/ |                     \n" +
                 "         |___/                               |___/                      \n" + ColoredText.RESET);
         //Scanner stdin = new Scanner(System.in);
@@ -84,25 +87,37 @@ public class Main {
         Army army1 = new Army();
         Army army2 = new Army();
 
-        army1.addArcher(new Shooter());
-        army1.addKnight(new Zoro());
-        army1.addMage(new Enchanter());
-        army1.addHealer(new Medic());
-        army1.addMythicalCreature(new Pegasus());
+        Armour chain = new Chainmail();
+        Artefacts amulet = new Amulet();
 
-        army2.addKnight(new Cavalier());
+        Ranger ran = new Ranger();
+        ran.addArmour(chain);
+
+        Medic med = new Medic();
+        med.addArtefacts(amulet);
+
+
+        army1.addArcher(ran);
+        army1.addKnight(new Squire());
+        army1.addMage(new Warlock());
+        army1.addHealer(med);
+        army1.addMythicalCreature(new Dragon());
+
+        army2.addKnight(new Squire());
         army2.addMage(new Warlock());
-        army2.addArcher(new Sunfire());
-        army2.addHealer(new Lightbringer());
-        army2.addMythicalCreature(new Basilisk());
+        army2.addArcher(new Shooter());
+        army2.addHealer(new Soother());
+        army2.addMythicalCreature(new Dragon());
 
-        Player player1 = new Player("dev","dev","dev");
-        Player player2 = new Player("shan","shan","shan");
+        Player player1 = new Player("GeraltofRivia","whitewolf",new Marshland());
+        player1.increaseXP(32);
+        Player player2 = new Player("Devinda","Devinda123",new Hillcrest());
+        player2.changeGC(-480);
 
         player1.setArmy(army1);
         player2.setArmy(army2);
 
-        player1.setHomeGround(new Hillcrest());
+        player1.setHomeGround(new Desert());
         player2.setHomeGround(new Hillcrest());
 
         Battle battle1 = new Battle();
