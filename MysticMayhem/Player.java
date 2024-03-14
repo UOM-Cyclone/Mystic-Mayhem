@@ -5,6 +5,11 @@ import java.util.Map;
 import java.util.Random;
 
 import MysticMayhem.Characters.Archer;
+import MysticMayhem.Characters.Healer;
+import MysticMayhem.Characters.Knight;
+import MysticMayhem.Characters.Mage;
+import MysticMayhem.Characters.Character;
+import MysticMayhem.Characters.MythicalCreature;
 import MysticMayhem.Equipments.Amulet;
 import MysticMayhem.Grounds.Ground;
 
@@ -12,6 +17,13 @@ public class Player {
     private static int count = 0;
     private static Map<String,Player> players = new HashMap<>();
     private static ArrayList<String> usernames = new ArrayList<>();
+
+    private ArrayList<Character> archers = new ArrayList();
+    private ArrayList<Character> knights = new ArrayList();
+    private ArrayList<Character> mages = new ArrayList();
+    private ArrayList<Character> healers = new ArrayList();
+    private static ArrayList<Character> mythicalCreatures = new ArrayList();
+  
     private int gc, xp, uID;
     private String username, pwd, name;
     private Ground hg;
@@ -21,6 +33,18 @@ public class Player {
     public static Map<String,Player> getPlayers(){
         return players;
     }
+
+    public ArrayList<Character> getArchers(){return this.archers;}
+    public ArrayList<Character> getKnights(){return this.knights;}
+    public ArrayList<Character> getMages(){return this.mages;}
+    public ArrayList<Character> getHealers(){return this.healers;}
+    public ArrayList<Character> getMythicalCreatures(){return this.mythicalCreatures;}
+
+    public void addArcher(Character archer){archers.add(archer);}
+    public void addKnight(Character knight){knights.add(knight);}
+    public void addMage(Character mage){mages.add(mage);}
+    public void addHealer(Character healer){healers.add(healer);}
+    public void addMythicalCreature(Character archer){mythicalCreatures.add(archer);}
 
     public static ArrayList<String> getUserNames(){
         return usernames;

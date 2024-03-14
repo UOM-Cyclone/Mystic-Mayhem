@@ -20,15 +20,12 @@ public class Army {
     public  void addHealer(Healer healer){this.healer = healer;}
     public  void addMythicalCreature(MythicalCreature mythicalCreature){this.mythicalCreature = mythicalCreature;}
 
-    public boolean isReadyToBattle(){
-        boolean isArcher = archer != null;
-        boolean isKnight = knight != null;
-        boolean isMage = mage != null;
-        boolean isHealer = healer != null;
-        boolean isCreature = mythicalCreature != null;
+    public Character getArcher(){return this.archer;}
+    public Character getKnight(){return this.knight;}
+    public Character getMage(){return this.mage;}
+    public Character getHealer(){return this.healer;}
+    public Character getMythicalCreature(){return this.mythicalCreature;}
 
-        return isArcher || isKnight || isMage || isHealer || isCreature;
-    }
     public Vector<Character> toBattle(Ground ground){ // to send army to battle
         Vector<Character> battleArmy = new Vector<>();
         cloneCharacter(battleArmy, archer);
@@ -36,9 +33,6 @@ public class Army {
         cloneCharacter(battleArmy, mage);
         cloneCharacter(battleArmy, healer);
         cloneCharacter(battleArmy, mythicalCreature);
-
-        for (Character i : battleArmy) i.addBattleGround(ground);
-
         return battleArmy;
     }
 
