@@ -12,7 +12,7 @@ import MysticMayhem.Characters.Zoro;
 import MysticMayhem.Characters.*;
 
 
-import MysticMayhem.Controllers.GameController;
+import MysticMayhem.Controllers.Navigator;
 import MysticMayhem.Equipments.*;
 import MysticMayhem.Grounds.Arcane;
 import MysticMayhem.Grounds.Desert;
@@ -32,10 +32,14 @@ public class Main {
                 "          __/ |                               __/ |                     \n" +
                 "         |___/                               |___/                      \n" + ColoredText.RESET);
 
-        Scanner stdin = new Scanner(System.in);
-        GameController.setInput(stdin);
-        GameController.start();
-        stdin.close();
+//        Scanner stdin = new Scanner(System.in);
+//        GameController.setInput(stdin);
+//        GameController.start();
+//        stdin.close();
+
+        Navigator nav = new Navigator();
+
+        nav.buyArcher();
 
     }
 
