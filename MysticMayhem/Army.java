@@ -28,6 +28,10 @@ public class Army implements Serializable {
     public Character getHealer(){return this.healer;}
     public Character getMythicalCreature(){return this.mythicalCreature;}
 
+    public void removeArcher(){
+        this.archer = null;
+    }
+
     public boolean isReadyToBattle(){
         boolean isArcher = archer != null;
         boolean isKnight = knight != null;

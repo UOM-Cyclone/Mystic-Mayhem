@@ -49,6 +49,9 @@ public class Player implements Serializable {
 
     public Vector<Archer> getArchers(){return archers;}
     public Vector<Knight> getKnights(){return knights;}
+    public Vector<Mage> getMages(){return mages;}
+    public Vector<Healer> getHealers(){return healers;}
+    public Vector<MythicalCreature> getCreatures(){return creatures;}
     public String getName(){return name;}
     public Ground getHomeGround(){return homeGround;}
     public Army getArmy(){return army;}

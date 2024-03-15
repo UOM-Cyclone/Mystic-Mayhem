@@ -4,7 +4,9 @@ import MysticMayhem.Characters.*;
 import MysticMayhem.Grounds.*;
 import MysticMayhem.Player;
 
+import java.lang.Character;
 import java.util.Scanner;
+import java.util.Vector;
 
 public class Navigator {
 
@@ -235,7 +237,7 @@ public class Navigator {
                     buyCharacter();
                     break;
                 case "3":
-                    System.out.println("eee");
+                    sellCharacter();
                     break;
                 case "4":
                     System.out.println("eee");
@@ -248,6 +250,7 @@ public class Navigator {
             }
         }while (true);
     }
+
 
     public void buyCharacter(){
         String details = """
@@ -272,13 +275,86 @@ public class Navigator {
                     buyArcher();
                     break;
                 case "2":
+                    buyKnight();
                     break;
                 case "3":
+                    buyMage();
                     break;
                 case "4":
+                    buyHealer();
                     break;
                 case "5":
+                    buyCreature();
                     break;
+                case "98":
+                    return;
+                default:
+                    System.out.println("Please enter the valid input.");
+                    break;
+            }
+        }
+    }
+    public void sellCharacter(){
+        String details = """
+                which type of character do you wanna sell?
+                
+                1) Archer
+                2) Knight
+                3) Mage
+                4) Healer
+                5) creature
+                
+                98) Back
+                """;
+
+        while (true){
+            System.out.println(details);
+            System.out.print("Select the option : ");
+            String userInput = scanner.nextLine();
+
+            switch (userInput){
+                case "1":
+                    Vector<Archer> archers = currentPlayer.getArchers();
+                    if(archers.isEmpty()){
+                        System.out.println("You don't have any archer to sell");
+                    } else {
+                        for (int i = 0; i < archers.size(); i++){
+                            System.out.println(String.format("""
+                                    %d) %s              %.2f
+                                    """,(i+1),
+                                    String.valueOf(archers.get(i).getClass()).substring(30),
+                                    archers.get(i).getCurrentValue() * 0.9));
+                        }
+
+                        System.out.println("98) Back");
+
+                        System.out.print("Enter number : ");
+                        userInput = scanner.nextLine();
+                        int index = Integer.valueOf(userInput);
+
+                        if(userInput.equals(98)){
+                            return;
+                        } else if()
+                        currentPlayer.changeGC((int) (archers.get(index).getCurrentValue() * 0.9));
+                        if(currentPlayer.getArmy().getArcher() == archers.get(index)){
+                            currentPlayer.getArmy().removeArcher();
+                        }
+                        archers.remove(archers.get(index));
+
+                    }
+                    return;
+                case "2":
+                    sellKnight();
+                    return;
+                case "3":
+                    sellMage();
+                    return;
+                case "4":
+                    buyHealer();
+                    return;
+                case "5":
+                    buyCreature();
+                    return;
                 case "98":
                     return;
                 default:
@@ -405,6 +481,183 @@ public class Navigator {
             }
         }
     }
+    public void buyMage(){
+        currentPlayer = new Player("dev", "dev", new Arcane());
+        System.out.println("which one do you wanna buy ?");
+
+        showCharDetails(1,"Warlock", Warlock.initialAttack, Warlock.initialDefence,
+                Warlock.initialHealth,Warlock.initialSpeed,Warlock.price);
+        showCharDetails(2,"Illusionist", Illusionist.initialAttack, Illusionist.initialDefence,
+                Illusionist.initialHealth, Illusionist.initialSpeed,Illusionist.price);
+        showCharDetails(3,"Enchanter", Enchanter.initialAttack, Enchanter.initialDefence,
+                Enchanter.initialHealth,Enchanter.initialSpeed,Enchanter.price);
+        showCharDetails(4,"Conjurer", Conjurer.initialAttack, Conjurer.initialDefence,
+                Conjurer.initialHealth,Conjurer.initialSpeed,Conjurer.price);
+        showCharDetails(5,"Eldritch", Eldritch.initialAttack, Eldritch.initialDefence,
+                Eldritch.initialHealth,Eldritch.initialSpeed,Eldritch.price);
+        System.out.println("98) Back");
+
+        Mage mage ;
+
+        while (true){
+            mage = null;
+            System.out.print("Enter the number : ");
+            String userInput = scanner.nextLine();
+
+            switch (userInput){
+                case "1":
+                    mage = new Warlock();
+                    break;
+                case "2":
+                    mage = new Illusionist();
+                    break;
+                case "3":
+                    mage = new Enchanter();
+                    break;
+                case "4":
+                    mage = new Conjurer();
+                    break;
+                case "5":
+                    mage = new Eldritch();
+                    break;
+                case "98":
+                    return;
+                default:
+                    System.out.println("Please enter the valid input.");
+                    break;
+            }
+            if (mage != null){
+                if(currentPlayer.getGC() >= mage.getCurrentValue()){
+                    currentPlayer.getMages().add(mage);
+                    currentPlayer.changeGC((int) (0-mage.getCurrentValue()));
+                    System.out.println(String.format("succussfully add %s to camp",
+                            String.valueOf(mage.getClass()).substring(30)));
+                    return;
+                } else {
+                    System.out.println("you don't have enough gc to buy selected Archer.");
+                    return;
+                }
+            }
+        }
+    }
+    public void buyHealer(){
+        currentPlayer = new Player("dev", "dev", new Arcane());
+        System.out.println("which one do you wanna buy ?");
+
+        showCharDetails(1,"Soother", Soother.initialAttack, Soother.initialDefence,
+                Soother.initialHealth,Soother.initialSpeed,Soother.price);
+        showCharDetails(2,"Medic", Medic.initialAttack, Medic.initialDefence,
+                Medic.initialHealth, Medic.initialSpeed,Medic.price);
+        showCharDetails(3,"Alchemist", Alchemist.initialAttack, Alchemist.initialDefence,
+                Alchemist.initialHealth,Alchemist.initialSpeed,Alchemist.price);
+        showCharDetails(4,"Saint", Saint.initialAttack, Saint.initialDefence,
+                Saint.initialHealth,Saint.initialSpeed,Saint.price);
+        showCharDetails(5,"Lightbringer", Lightbringer.initialAttack, Lightbringer.initialDefence,
+                Lightbringer.initialHealth,Lightbringer.initialSpeed,Lightbringer.price);
+        System.out.println("98) Back");
+
+        Healer healer ;
+
+        while (true){
+            healer = null;
+            System.out.print("Enter the number : ");
+            String userInput = scanner.nextLine();
+
+            switch (userInput){
+                case "1":
+                    healer = new Soother();
+                    break;
+                case "2":
+                    healer = new Medic();
+                    break;
+                case "3":
+                    healer = new Alchemist();
+                    break;
+                case "4":
+                    healer = new Saint();
+                    break;
+                case "5":
+                    healer = new Lightbringer();
+                    break;
+                case "98":
+                    return;
+                default:
+                    System.out.println("Please enter the valid input.");
+                    break;
+            }
+            if (healer != null){
+                if(currentPlayer.getGC() >= healer.getCurrentValue()){
+                    currentPlayer.getHealers().add(healer);
+                    currentPlayer.changeGC((int) (0-healer.getCurrentValue()));
+                    System.out.println(String.format("succussfully add %s to camp",
+                            String.valueOf(healer.getClass()).substring(30)));
+                    return;
+                } else {
+                    System.out.println("you don't have enough gc to buy selected Archer.");
+                    return;
+                }
+            }
+        }
+    }
+    public void buyCreature(){
+        currentPlayer = new Player("dev", "dev", new Arcane());
+        System.out.println("which one do you wanna buy ?");
+
+        showCharDetails(1,"Dragon", Dragon.initialAttack, Dragon.initialDefence,
+                Dragon.initialHealth,Dragon.initialSpeed,Dragon.price);
+        showCharDetails(2,"Basilisk", Basilisk.initialAttack, Basilisk.initialDefence,
+                Basilisk.initialHealth, Basilisk.initialSpeed,Basilisk.price);
+        showCharDetails(3,"Hydra", Hydra.initialAttack, Hydra.initialDefence,
+                Hydra.initialHealth,Hydra.initialSpeed,Hydra.price);
+        showCharDetails(4,"Phoenix", Phoenix.initialAttack, Phoenix.initialDefence,
+                Phoenix.initialHealth,Phoenix.initialSpeed,Phoenix.price);
+        showCharDetails(5,"Pegasus", Pegasus.initialAttack, Pegasus.initialDefence,
+                Pegasus.initialHealth,Pegasus.initialSpeed,Pegasus.price);
+        System.out.println("98) Back");
+
+        MythicalCreature creature ;
+
+        while (true){
+            creature = null;
+            System.out.print("Enter the number : ");
+            String userInput = scanner.nextLine();
+
+            switch (userInput){
+                case "1":
+                    creature = new Dragon();
+                    break;
+                case "2":
+                    creature = new Basilisk();
+                    break;
+                case "3":
+                    creature = new Hydra();
+                    break;
+                case "4":
+                    creature = new Phoenix();
+                    break;
+                case "5":
+                    creature = new Pegasus();
+                    break;
+                case "98":
+                    return;
+                default:
+                    System.out.println("Please enter the valid input.");
+                    break;
+            }
+            if (creature != null){
+                if(currentPlayer.getGC() >= creature.getCurrentValue()){
+                    currentPlayer.getCreatures().add(creature);
+                    currentPlayer.changeGC((int) (0-creature.getCurrentValue()));
+                    System.out.println(String.format("succussfully add %s to camp",
+                            String.valueOf(creature.getClass()).substring(30)));
+                    return;
+                } else {
+                    System.out.println("you don't have enough gc to buy selected Archer.");
+                    return;
+                }
+            }
+        }
+    }
 
     public void showCharDetails(int index, String name, float attack, float defence,
                                 float health, float speed, int price){
@@ -414,6 +667,4 @@ public class Navigator {
                 """, attack);
         System.out.println(details);
     }
-
-
 }
