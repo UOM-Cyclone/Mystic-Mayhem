@@ -23,11 +23,10 @@ import MysticMayhem.Grounds.Marshland;
 import MysticMayhem.Characters.*;
 
 public class GameController {
-    static Scanner stdin;
+    private static Scanner stdin;
     private static String inputStr = "";
     private static Player currentPlayer, opponentPlayer;
-
-    static Player tempPlayer;
+    private static Player tempPlayer;
 
     private static void print(String phrase) {
         System.out.println(phrase);
@@ -37,12 +36,9 @@ public class GameController {
         stdin = scnr;
     }
 
-
-
-    // to check and get the index of user
     private static boolean isTakenUserName(String plyrName) {
         boolean taken = false;
-        for (int i = 0; i < Player.getPlayerCount(); i++) {
+        for (int i = 0; i < Player.getUserNames().size(); i++) {
             if (Player.getUserNames().get(i).equals(plyrName)) {
                 taken = true;
                 break;
@@ -51,7 +47,7 @@ public class GameController {
         return taken;
     }
 
-    public static boolean areYouSure(String msg) {
+    private static boolean areYouSure(String msg) {
         boolean answer;
         print("Are you sure you want to " + msg + "? (Y/N)");
         inputStr = stdin.nextLine();
@@ -59,18 +55,14 @@ public class GameController {
         return answer;
     }
 
-    // start the console
-    public static void start() {
+    public static void start(){
         Player.loadGameData();
-        print("""
-                -----Mystic Mayhem-----
-                                
-                1. Login
-                2. New Player
-                3. Instructions
-                99. Quit Game
-                -----------------------
-                """);
+        homeUI();
+    }
+
+    // start the console
+    private static void homeUI() {
+        print("-----Mystic Mayhem-----\n \n1. Login \n2. New Player \n3. Instructions \n99. Quit Game \n-----------------------");
         inputStr = stdin.nextLine();
         switch (inputStr) {
             case "1":
@@ -84,23 +76,26 @@ public class GameController {
                 quitGame();
                 break;
             default:
-                print("Nothing special");
-
+                print("Invalid input. Try again.");
+                homeUI();
         }
     }
 
-    public static void quitGame() {
+    private static void quitGame() {
         if (areYouSure("quit the game")) {
             return;
         }
-        start();
+        homeUI();
     }
 
-    public static void LogIn() {
+    private static void LogIn() {
         while (true) {
             print("Enter your username");
             inputStr = stdin.nextLine();
-            if (isTakenUserName(inputStr)) {
+            if(inputStr.equals("98")){
+                homeUI();
+                break;
+            }else if (isTakenUserName(inputStr)) {
                 tempPlayer = Player.getPlayers().get(inputStr);
                 currentPlayer = tempPlayer;
                 break;
@@ -148,7 +143,7 @@ public class GameController {
         playerUI();
     }
 
-    public static void createAccount() {
+    private static void createAccount() {
         String name, uName, pwd;
         print("Enter your name:");
         name = stdin.nextLine();
@@ -163,7 +158,7 @@ public class GameController {
             }
         }
 
-        print("SElect a Homeground");
+        print("Select a Homeground");
         print("1. Marshland\n2. Hillcrest\n3. Desert\n4. Arcane");
         Ground hg = new Arcane();
         inputStr = stdin.nextLine();
@@ -177,26 +172,18 @@ public class GameController {
             hg = new Arcane();
         new Player(name, uName, hg);
         print("Successfully created a new account..");
-        start();
+        homeUI();
     }
 
-    public static void playerUI() {
+    private static void playerUI() {
         if (currentPlayer == null) {
             print("You should login first.");
             return;
         }
 
-
         print("\n" + currentPlayer.getName() + " @" + currentPlayer.getUserName());
 
-        print("""
-                -----------------
-                1. Combat
-                2. My Profile
-                3. My Army
-                98. LogOut
-                -----------------
-                """);
+        print("-----------------\n1. Combat\n2. My Profile\n3. My Army\n98. LogOut\n-----------------\n");
         inputStr = stdin.nextLine();
 
         switch (inputStr) {
@@ -225,11 +212,12 @@ public class GameController {
         }
     }
 
-    public static void logOut() {
+    private static void logOut() {
         if (areYouSure("logout")) {
             print("Saving data...");
+            currentPlayer.updateHashMap();
             currentPlayer = null;
-            start();
+            homeUI();
         } else {
             playerUI();
         }
@@ -764,7 +752,7 @@ public class GameController {
             case "1":
                 if (currentPlayer.getGC() > Dragon.price) {
                     currentPlayer.addMythicalCreature(new Dragon());
-                    currentPlayer.changeGC( -1 * Dragon.price);
+                    currentPlayer.changeGC(-1 * Dragon.price);
                     print("Successfully added a Dragon to the Barrack. \nAvailable balance:" + currentPlayer.getGC()
                             + " gc");
                 } else {
@@ -854,7 +842,7 @@ public class GameController {
         print("   Artifact : " + artefact + "\n");
     }
 
-    public static void selectOpponentUI() {
+    private static void selectOpponentUI() {
         inputStr = "2";
         while (inputStr.equals("2")) {
             tempPlayer = Player.getRandomPlayer();
@@ -871,7 +859,7 @@ public class GameController {
                 opponentPlayer = tempPlayer;
 
                 Battle battle1 = new Battle();
-                battle1.start(currentPlayer,opponentPlayer);
+                battle1.start(currentPlayer, opponentPlayer);
                 playerUI();
 
                 break;
@@ -884,7 +872,7 @@ public class GameController {
         }
     }
 
-    public static void armyUI() {
+    private static void armyUI() {
         print("1. Soldiers");
         print("2. Battle Deck");
         print("3. Equipments");
@@ -896,6 +884,7 @@ public class GameController {
                 break;
             case "2":
                 deckUI();
+                // print("triggered-0");
                 break;
             case "3":
                 equipmentsUI();
@@ -906,11 +895,12 @@ public class GameController {
             default:
                 print("Invalid input. Try it again.");
                 armyUI();
+                break;
         }
     }
 
     // completed
-    public static void soldiersUI() {
+    private static void soldiersUI() {
         print("1. View Occupied Soldiers\n2. Buy Characters\n3. Sell Characters\n4. Upgrade Characters\n98. Back");
         switch (stdin.nextLine()) {
             case "1":
@@ -932,6 +922,7 @@ public class GameController {
             default:
                 print("Invalid input. Try it again.");
                 soldiersUI();
+                break;
         }
     }
 
@@ -1081,86 +1072,188 @@ public class GameController {
 
     private static void deckUI() {
         // select the category
-        String tempStr = "";
-        Army tempArmy;
-        Character tempCharacter = null;
-        inputStr = tempStr = selectCategoryTo("view and modify");
-        tempArmy = currentPlayer.getArmy();
-        switch (inputStr) {
-            case "1":
-                if (tempArmy == null || tempArmy.getArcher() == null) {
-                    print("No one is assigned as the Archer");
-                } else {
-                    tempCharacter = tempArmy.getArcher();
-                    viewCharacterStats(tempCharacter, "");
-                }
-                break;
+        if (currentPlayer != null) {
 
-            case "2":
-                if (tempArmy == null || tempArmy.getKnight() == null) {
-                    print("No one is assigned as the Knight");
-                } else {
-                    tempCharacter = tempArmy.getKnight();
-                    viewCharacterStats(tempCharacter, "");
-                }
-                break;
+            String tempStr = "";
+            Army tempArmy;
+            Character tempCharacter = null;
+            inputStr = tempStr = selectCategoryTo("view and modify");
+            tempArmy = currentPlayer.getArmy();
+            switch (inputStr) {
+                case "1":
+                    if (tempArmy == null || tempArmy.getArcher() == null) {
+                        print("No one is assigned as the Archer\n");
+                        print("1. Add Character\n98. Back");
+                        switch(stdin.nextLine()){
+                            case "1":
+                            addDeckFromBarrack("1");
+                            deckUI();
+                            break;
+                            case "98":
+                            armyUI();
+                            break;
+                            default:
+                            break;
+                        }
+                    } else {
+                        tempCharacter = tempArmy.getArcher();
+                        viewCharacterStats(tempCharacter, "");
+                        print("1. Remove Character from deck\n98. Back");
+                        switch(stdin.nextLine()){
+                            case "1":
+                            removeCharacterFromDeck("1");
+                            deckUI();
+                            break;
+                            case "98":
+                            armyUI();
+                            break;
+                            default:
+                            break;
+                        }
+                    }
+                    break;
 
-            case "3":
-                if (tempArmy == null || tempArmy.getMage() == null) {
-                    print("No one is assigned as the Mage");
-                } else {
-                    tempCharacter = tempArmy.getMage();
-                    viewCharacterStats(tempCharacter, "");
-                }
-                break;
+                case "2":
+                    if (tempArmy == null || tempArmy.getKnight() == null) {
+                        print("No one is assigned as the Knight\n");
+                        print("1. Add Character\n98. Back");
+                        switch(stdin.nextLine()){
+                            case "1":
+                            addDeckFromBarrack("2");
+                            deckUI();
+                            break;
+                            case "98":
+                            armyUI();
+                            break;
+                            default:
+                            break;
+                        }
+                    } else {
+                        tempCharacter = tempArmy.getKnight();
+                        viewCharacterStats(tempCharacter, "");
+                        print("1. Remove Character from deck\n98. Back");
+                        switch(stdin.nextLine()){
+                            case "1":
+                            removeCharacterFromDeck("2");
+                            deckUI();
+                            break;
+                            case "98":
+                            armyUI();
+                            break;
+                            default:
+                            break;
+                        }
+                    }
+                    break;
 
-            case "4":
-                if (tempArmy == null || tempArmy.getHealer() == null) {
-                    print("No one is assigned as the Healer");
-                } else {
-                    tempCharacter = tempArmy.getHealer();
-                    viewCharacterStats(tempCharacter, "");
-                }
-                break;
+                case "3":
+                    if (tempArmy == null || tempArmy.getMage() == null) {
+                        print("No one is assigned as the Mage\n");
+                        print("1. Add Character\n98. Back");
+                        switch(stdin.nextLine()){
+                            case "1":
+                            addDeckFromBarrack("3");
+                            deckUI();
+                            break;
+                            case "98":
+                            armyUI();
+                            break;
+                            default:
+                            break;
+                        }
+                    } else {
+                        tempCharacter = tempArmy.getMage();
+                        viewCharacterStats(tempCharacter, "");
+                        print("1. Remove Character from deck\n98. Back");
+                        switch(stdin.nextLine()){
+                            case "1":
+                            removeCharacterFromDeck("3");
+                            deckUI();
+                            break;
+                            case "98":
+                            armyUI();
+                            break;
+                            default:
+                            break;
+                        }
+                    }
+                    break;
 
-            case "5":
-                if (tempArmy == null || tempArmy.getMythicalCreature() == null) {
-                    print("No one is assigned as the Mythical Creature");
-                } else {
-                    tempCharacter = tempArmy.getMythicalCreature();
-                    viewCharacterStats(tempCharacter, "");
-                }
-                break;
+                case "4":
+                    if (tempArmy == null || tempArmy.getHealer() == null) {
+                        print("No one is assigned as the Healer\n");
+                        print("1. Add Character\n98. Back");
+                        switch(stdin.nextLine()){
+                            case "1":
+                            addDeckFromBarrack("4");
+                            deckUI();
+                            break;
+                            case "98":
+                            armyUI();
+                            break;
+                            default:
+                            break;
+                        }
+                    } else {
+                        tempCharacter = tempArmy.getHealer();
+                        viewCharacterStats(tempCharacter, "");
+                        print("1. Remove Character from deck\n98. Back");
+                        switch(stdin.nextLine()){
+                            case "1":
+                            removeCharacterFromDeck("4");
+                            deckUI();
+                            break;
+                            case "98":
+                            armyUI();
+                            break;
+                            default:
+                            break;
+                        }
+                    }
+                    break;
 
-            case "98":
-                armyUI();
-                break;
-            default:
-                print("Invalid input. Try it again.");
-                break;
-        }
-        if (tempStr != "98") {
-            if (tempCharacter == null) {
-                print("triggered");
-                print("1. Add Character\n98. Back");
+                case "5":
+                    if (tempArmy == null || tempArmy.getMythicalCreature() == null) {
+                        print("No one is assigned as the Mythical Creature\n");
+                        print("1. Add Character\n98. Back");
+                        switch(stdin.nextLine()){
+                            case "1":
+                            addDeckFromBarrack("5");
+                            deckUI();
+                            break;
+                            case "98":
+                            armyUI();
+                            break;
+                            default:
+                            break;
+                        }
+                    } else {
+                        tempCharacter = tempArmy.getMythicalCreature();
+                        viewCharacterStats(tempCharacter, "");
+                        print("1. Remove Character from deck\n98. Back");
+                        switch(stdin.nextLine()){
+                            case "1":
+                            removeCharacterFromDeck("5");
+                            deckUI();
+                            break;
+                            case "98":
+                            armyUI();
+                            break;
+                            default:
+                            break;
+                        }
+                    }
+                    break;
 
-                if (stdin.nextLine().equals("1")) {
-
-                    addDeckFromBarrack(tempStr);
-                    deckUI();
-                } else {
-                    deckUI();
-                }
-            } else {
-                print("1. Remove Character from deck\n98. Back");
-                if (stdin.nextLine().equals("1")) {
-                    removeCharacterFromDeck(tempStr);
-                }
-                deckUI();
+                case "98":
+                    armyUI();
+                    break;
+                default:
+                    print("Invalid input. Try it again.");
+                    break;
             }
         }
 
-        // have to complete
     }
 
     private static void removeCharacterFromDeck(String id) {
@@ -1173,6 +1266,7 @@ public class GameController {
                 currentPlayer.addArcher(tempCharacter);
                 name = String.valueOf(tempCharacter.getClass()).substring(30);
                 tempArmy.addArcher(null);
+                currentPlayer.setArmy(tempArmy);
                 print("Successfully removed " + name + " from the deck\n");
                 break;
 
@@ -1181,6 +1275,7 @@ public class GameController {
                 currentPlayer.addKnight(tempCharacter);
                 name = String.valueOf(tempCharacter.getClass()).substring(30);
                 tempArmy.addKnight(null);
+                currentPlayer.setArmy(tempArmy);
                 print("Successfully removed " + name + " from the deck\n");
                 break;
 
@@ -1189,6 +1284,7 @@ public class GameController {
                 currentPlayer.addMage(tempCharacter);
                 name = String.valueOf(tempCharacter.getClass()).substring(30);
                 tempArmy.addMage(null);
+                currentPlayer.setArmy(tempArmy);
                 print("Successfully removed " + name + " from the deck\n");
                 break;
 
@@ -1197,6 +1293,7 @@ public class GameController {
                 currentPlayer.addHealer(tempCharacter);
                 name = String.valueOf(tempCharacter.getClass()).substring(30);
                 tempArmy.addHealer(null);
+                currentPlayer.setArmy(tempArmy);
                 print("Successfully removed " + name + " from the deck\n");
                 break;
 
@@ -1205,6 +1302,7 @@ public class GameController {
                 currentPlayer.addMythicalCreature(tempCharacter);
                 name = String.valueOf(tempCharacter.getClass()).substring(30);
                 tempArmy.addMythicalCreature(null);
+                currentPlayer.setArmy(tempArmy);
                 print("Successfully removed " + name + " from the deck\n");
                 break;
             default:
@@ -1234,6 +1332,7 @@ public class GameController {
                     name = String.valueOf(tempCharacter.getClass()).substring(30);
                     tempArmy.addArcher((Archer) tempCharacter);
                     currentPlayer.setArmy(tempArmy);
+                    currentPlayer.removeArcher(tempCharacter);
                     print("Successfully added " + name + " to the deck");
                 }
                 break;
@@ -1253,6 +1352,7 @@ public class GameController {
                     name = String.valueOf(tempCharacter.getClass()).substring(30);
                     tempArmy.addKnight((Knight) tempCharacter);
                     currentPlayer.setArmy(tempArmy);
+                    currentPlayer.removeKnight(tempCharacter);
                     print("Successfully added " + name + " to the deck");
                 }
                 break;
@@ -1273,6 +1373,7 @@ public class GameController {
                     name = String.valueOf(tempCharacter.getClass()).substring(30);
                     tempArmy.addMage((Mage) tempCharacter);
                     currentPlayer.setArmy(tempArmy);
+                    currentPlayer.removeMage(tempCharacter);
                     print("Successfully added " + name + " to the deck");
                 }
                 break;
@@ -1293,6 +1394,7 @@ public class GameController {
                     name = String.valueOf(tempCharacter.getClass()).substring(30);
                     tempArmy.addHealer((Healer) tempCharacter);
                     currentPlayer.setArmy(tempArmy);
+                    currentPlayer.removeHealer(tempCharacter);
                     print("Successfully added " + name + " to the deck");
                 }
                 break;
@@ -1314,6 +1416,7 @@ public class GameController {
                     name = String.valueOf(tempCharacter.getClass()).substring(30);
                     tempArmy.addMythicalCreature((MythicalCreature) tempCharacter);
                     currentPlayer.setArmy(tempArmy);
+                    currentPlayer.removeMythicalCreature(tempCharacter);
                     print("Successfully added " + name + " to the deck");
                 }
 
@@ -1383,6 +1486,10 @@ public class GameController {
 
     private static Armour getArmourFromInventory() {
         viewArmours(currentPlayer.getArmors());
+        if(currentPlayer.getArmors().isEmpty()){
+            print("There is not any available armours in the inventory.");
+            return null;
+        }
         int out;
         while (true) {
             inputStr = stdin.nextLine();
@@ -1394,16 +1501,23 @@ public class GameController {
                 continue;
             }
             if (out == 98) {
-                continue;
+                break;
             } else if (out <= currentPlayer.getArmors().size()) {
                 break;
             }
+        }
+        if(out==98){
+            return null;
         }
         return currentPlayer.getArmors().get(out - 1);
     }
 
     private static Artefacts getArtefactFromInventory() {
         viewArtefacts(currentPlayer.getArtefacts());
+        if(currentPlayer.getArtefacts().isEmpty()){
+            print("There is not any available artefacts in the inventory.");
+            return null;
+        }
         int out;
         while (true) {
             inputStr = stdin.nextLine();
@@ -1415,10 +1529,13 @@ public class GameController {
                 return getArtefactFromInventory();
             }
             if (out == 98) {
-                continue;
+                break;
             } else if (out <= currentPlayer.getArtefacts().size()) {
                 break;
             }
+        }
+        if(out==98){
+            return null;
         }
         return currentPlayer.getArtefacts().get(out - 1);
     }
@@ -1428,6 +1545,10 @@ public class GameController {
         switch (selectEqCategoryTo("upgrade")) {
             case "1":
                 Armour armour = getArmourFromInventory();
+                if(armour==null){
+                    soldiersUI();
+                    return;
+                } 
                 if (chrtr.getArmour() != null) {
                     currentPlayer.addArmor(chrtr.getArmour());
                 }
@@ -1438,6 +1559,10 @@ public class GameController {
 
             case "2":
                 Artefacts artefact = getArtefactFromInventory();
+                if(artefact==null){
+                    soldiersUI();
+                    return;
+                } 
                 if (chrtr.getArtefact() != null) {
                     currentPlayer.addArtefact(chrtr.getArtefact());
                 }
@@ -1496,7 +1621,7 @@ public class GameController {
                 break;
             default:
                 print("Invalid input. Try it again.");
-                soldiersUI();
+                equipmentsUI();
         }
     }
 
@@ -1512,7 +1637,7 @@ public class GameController {
             case "1":
                 ArrayList<Armour> tempEq = currentPlayer.getArmors();
                 if (tempEq.isEmpty()) {
-                    print("There is no any available armours in the inventory.");
+                    print("There is not any available armours in the inventory.");
                 } else {
                     viewArmours(tempEq);
                 }
@@ -1520,7 +1645,7 @@ public class GameController {
             case "2":
                 ArrayList<Artefacts> tempArtfcts = currentPlayer.getArtefacts();
                 if (tempArtfcts.isEmpty()) {
-                    print("There is no any available artefacts in the inventory.");
+                    print("There is not any available artefacts in the inventory.");
                 } else {
                     viewArtefacts(tempArtfcts);
                 }
@@ -1574,7 +1699,7 @@ public class GameController {
                             + currentPlayer.getGC()
                             + " gc");
                 } else {
-                    print("Your gold coin balance is insufficient to buy this character.\nTry to buy another character.");
+                    print("Your gold coin balance is insufficient to buy this armour.\nTry to buy another armour.");
 
                 }
                 break;
@@ -1585,7 +1710,7 @@ public class GameController {
                     print("Successfully added a Regalia to the Inventory\nAvailable balance:" + currentPlayer.getGC()
                             + " gc");
                 } else {
-                    print("Your gold coin balance is insufficient to buy this character.\nTry to buy another character.");
+                    print("Your gold coin balance is insufficient to buy this armour.\nTry to buy another armourr.");
                 }
                 break;
             case "3":
@@ -1595,7 +1720,7 @@ public class GameController {
                     print("Successfully added a Fleece to the Inventory\nAvailable balance:" + currentPlayer.getGC()
                             + " gc");
                 } else {
-                    print("Your gold coin balance is insufficient to buy this character.\nTry to buy another character.");
+                    print("Your gold coin balance is insufficient to buy this armour.\nTry to buy another armour.");
                 }
                 break;
             case "98":
@@ -1645,7 +1770,7 @@ public class GameController {
                             + currentPlayer.getGC()
                             + " gc");
                 } else {
-                    print("Your gold coin balance is insufficient to buy this character.\nTry to buy another character.");
+                    print("Your gold coin balance is insufficient to buy this artefact.\nTry to buy another artefact.");
                 }
                 break;
             case "2":
@@ -1655,7 +1780,7 @@ public class GameController {
                     print("Successfully added a Amulet to the Inventory\nAvailable balance:" + currentPlayer.getGC()
                             + " gc");
                 } else {
-                    print("Your gold coin balance is insufficient to buy this character.\nTry to buy another character.");
+                    print("Your gold coin balance is insufficient to buy this artefact.\nTry to buy another artefact.");
                 }
                 break;
             case "3":
@@ -1665,7 +1790,7 @@ public class GameController {
                     print("Successfully added a Crystal to the Inventory\nAvailable balance:" + currentPlayer.getGC()
                             + " gc");
                 } else {
-                    print("Your gold coin balance is insufficient to buy this character.\nTry to buy another character.");
+                    print("Your gold coin balance is insufficient to buy this artefact.\nTry to buy another artefact.");
                 }
                 break;
             case "98":

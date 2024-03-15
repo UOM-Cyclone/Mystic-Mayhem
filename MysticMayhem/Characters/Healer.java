@@ -4,7 +4,7 @@ import java.util.Vector;
 
 public interface Healer extends Catogery{
     default Character chooseAndAttack(Vector<Character> attacker, Vector<Character> defender, float attack) {
-        Character lowestHealthHolder = attacker.getFirst();
+        Character lowestHealthHolder = attacker.firstElement();
 
         for (Character i : attacker) {
             if (lowestHealthHolder.getHealth() > i.getHealth()) {

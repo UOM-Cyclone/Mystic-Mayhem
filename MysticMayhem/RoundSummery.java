@@ -55,13 +55,11 @@ public class RoundSummery {
     public void setBonusDefenderHealth(float health){
         this.bonusDefenderHealth = health;
     }
+    /**
+     * 
+     */
     public void printSummery(){
-        String summery = String.format("""
-                Turn %d : %s 
-               %s %s attacks %s
-                %s's health : %.1f
-                %s's health : %.1f   %s           
-                """,
+        String summery = String.format("Turn %d : %s \n%s %s attacks %s\n%s's health : %.1f\n%s's health : %.1f   %s",
                 roundNo, attackPlayer,
                 ColoredText.CYAN,attackChar, defendChar,
                 defendChar, defenderHealth,
@@ -73,12 +71,7 @@ public class RoundSummery {
 //        System.out.println(isBonusRound);
 
         if(isBonusRound){
-            summery += String.format("""
-                 Turn %d (bonus round) : %s 
-                %s %s attacks %s
-                 %s's health : %.1f
-                 %s's health : %.1f  %s
-                """,
+            summery += String.format("Turn %d (bonus round) : %s\n%s %s attacks %s\n%s's health : %.1f\n%s's health : %.1f  %s",
                     roundNo, attackPlayer,
                     ColoredText.BLUE,attackChar, bonusDefendChar,
                     bonusDefendChar, bonusDefenderHealth,

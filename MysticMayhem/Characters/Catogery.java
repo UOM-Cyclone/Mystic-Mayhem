@@ -6,7 +6,7 @@ public interface Catogery extends Character{
     default Character findDefender(Vector<Character> defenders){
         Vector<Character> lowestDefenders = new Vector<>();
 
-        float lowestValue = defenders.getFirst().getDefense();
+        float lowestValue = defenders.firstElement().getDefense();
 
         for (Character i : defenders){
             if(lowestValue > i.getDefense()){

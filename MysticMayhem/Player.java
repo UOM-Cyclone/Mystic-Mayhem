@@ -19,7 +19,7 @@ import MysticMayhem.Characters.Squire;
 import MysticMayhem.Characters.Warlock;
 
 import MysticMayhem.Characters.*;
-import MysticMayhem.Characters.Character;
+
 
 import MysticMayhem.Equipments.*;
 import MysticMayhem.Grounds.Ground;
@@ -113,7 +113,6 @@ public class Player implements Serializable {
             FileInputStream file = new FileInputStream("players.cyc");
             ObjectInputStream in = new ObjectInputStream(file);
             players = (Map<String, Player>) in.readObject();
-            System.out.println(players);
             in.close();
             file.close();
         } catch (FileNotFoundException e) {
@@ -128,11 +127,11 @@ public class Player implements Serializable {
             FileInputStream file = new FileInputStream("usernames.cyc");
             ObjectInputStream in = new ObjectInputStream(file);
             usernames = (ArrayList<String>) in.readObject();
-            System.out.println(usernames);
             in.close();
             file.close();
         } catch (FileNotFoundException e) {
             System.out.println("");
+            usernames.add("whitewolf");
         } catch (IOException e) {
             System.out.println("");
         } catch (ClassNotFoundException e) {
@@ -142,11 +141,14 @@ public class Player implements Serializable {
 
     public static Player getRandomPlayer(){
         Player randomPlayer;
-        do {
-            Random rand = new Random();
+        Random rand = new Random();
+        while(true){
             int randomnum = rand.nextInt(usernames.size());
             randomPlayer = players.get(usernames.get(randomnum));
-        } while (randomPlayer.getArmy() != null && randomPlayer.getArmy().isReadyToBattle());
+            if (randomPlayer.getArmy() != null && randomPlayer.getArmy().isReadyToBattle()) break;
+        }
+            
+        
 
         return randomPlayer;
     }
@@ -172,7 +174,7 @@ public class Player implements Serializable {
         this.hg = hg;
         this.gc = gc;
         this.xp = xp;
-        
+
         Army tempArmy = new Army();
         Archer tempArcher = new Ranger();
         tempArcher.addArmour(new Chainmail());
@@ -189,47 +191,25 @@ public class Player implements Serializable {
 
     }
 
-    public void updateHashMap(){
-        players.put(this.username, this);
-    }
+    public void updateHashMap(){players.put(this.username, this);}
 
-    public String getUserName(){
-        return this.username;
-    }
+    public String getUserName(){return this.username;}
 
-    public String getName(){
-        return this.name;
-    }
+    public String getName(){return this.name;}
 
-    public int getGC() {
-        return this.gc;
-    }
+    public int getGC() {return this.gc;}
 
-    public int getXP(){
-        return this.xp;
-    }
+    public int getXP(){return this.xp;}
 
-    public Ground getHomeGround(){
-        return this.hg;
-    }
+    public Ground getHomeGround(){return this.hg;}
 
-    public void increaseXP(int i){
-        this.xp += i;
-    }
+    public void increaseXP(int i){this.xp += i;}
 
-    public void changeGC(int amount){
-        this.gc += amount;
-    }
+    public void changeGC(int amount){this.gc += amount;}
 
-    public void changeUserName(String newUName){
-        this.username = newUName;
-    }
+    public void changeUserName(String newUName){this.username = newUName;}
 
-    public void changeName(String newName){
-        this.name = newName;
-    }
+    public void changeName(String newName){this.name = newName;}
 
-    public void setHomeGround(Ground ground){
-        this.hg = ground;
-    }
+    public void setHomeGround(Ground ground){this.hg = ground;}
 }

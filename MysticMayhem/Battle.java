@@ -49,7 +49,7 @@ public class Battle {
         int start, end;
         while (!aliveList.isEmpty()){
             start = result.size();
-            highestSpeed = aliveList.getFirst().getSpeed();
+            highestSpeed = aliveList.firstElement().getSpeed();
             for (int i = 0; i < aliveList.size(); i++){
                 if(highestSpeed < aliveList.get(i).getSpeed()){
                     highestSpeed = aliveList.get(i).getSpeed();
