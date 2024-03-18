@@ -1,5 +1,6 @@
 package MysticMayhem.Controllers;
 
+import MysticMayhem.Army;
 import MysticMayhem.Characters.*;
 import MysticMayhem.Equipments.Amulet;
 import MysticMayhem.Equipments.Armour;
@@ -239,7 +240,7 @@ public class Navigator {
             String userInput = scanner.nextLine();
             switch (userInput) {
                 case "1":
-                    System.out.println("ddd");
+                    battleDeck();
                     break;
                 case "2":
                     buyCharacter();
@@ -259,7 +260,267 @@ public class Navigator {
         } while (true);
     }
 
-    public void buyCharacter() {
+
+    public void battleDeck(){
+
+        while (true){
+            String details = "Your battle deck\n\n";
+
+            Army army = currentPlayer.getArmy();
+            if (army.getArcher() == null){
+                details += String.format(" Archer - %s\n\n", "None");
+            } else {
+                details += String.format(" Archer - %s\n\n",
+                        String.valueOf(army.getArcher().getClass()).substring(30));
+            }
+            if (army.getKnight() == null){
+                details += String.format(" Knight - %s\n\n", "None");
+            } else {
+                details += String.format(" Knight - %s\n\n",
+                        String.valueOf(army.getKnight().getClass()).substring(30));
+            }
+            if (army.getMage() == null){
+                details += String.format(" Mage - %s\n\n", "None");
+            } else {
+                details += String.format(" Mage - %s\n\n",
+                        String.valueOf(army.getMage().getClass()).substring(30));
+            }
+            if (army.getHealer() == null){
+                details += String.format(" Healer - %s\n\n", "None");
+            } else {
+                details += String.format(" Healer - %s\n\n",
+                        String.valueOf(army.getHealer().getClass()).substring(30));
+            }
+            if (army.getMythicalCreature() == null){
+                details += String.format(" Mythical Creature - %s\n\n", "None");
+            } else {
+                details += String.format(" Mythical Creature - %s\n\n",
+                        String.valueOf(army.getMythicalCreature().getClass()).substring(30));
+            }
+
+            details += String.format("""
+                1) Change Archer
+                2) Change Knight
+                3) Change Mage
+                4) Change Healer
+                5) Change Mythical Creature
+                
+                98) Back
+                """);
+
+            System.out.println(details);
+            System.out.print("Select the option : ");
+            String userInput = scanner.nextLine();
+
+            switch (userInput){
+                case "1":
+                    changeArcher();
+                    break;
+                case "2":
+                    changeKnight();
+                    break;
+                case "3":
+                    changeMage();
+                    break;
+                case "4":
+                    changeHealer();
+                    break;
+                case "5":
+                    changeCreature();
+                    break;
+                case "98":
+                    return;
+                default:
+                    System.out.println("Please enter the valid input.");
+                    break;
+            }
+        }
+
+    }
+
+    public void changeArcher(){
+        String userInput;
+        Vector<Archer> archers = currentPlayer.getArchers();
+        if(archers.isEmpty()){
+            System.out.println("You don't have any archer to change");
+        } else {
+            for (int i = 0; i < archers.size(); i++){
+                System.out.println(String.format("""
+                                    %d) %s
+                                    """,(i+1),
+                        String.valueOf(archers.get(i).getClass()).substring(30)));
+            }
+
+            System.out.println("98) Back");
+            while (true) {
+                try {
+                    System.out.print("Enter number : ");
+                    userInput = scanner.nextLine();
+                    int index = Integer.valueOf(userInput);
+
+                    if (userInput.equals("98")) {
+                        return;
+                    } else if (0 < index  && index <= archers.size()) {
+                        currentPlayer.getArmy().addArcher(archers.get(index - 1 ));
+                        System.out.println(String.format("You have successfully changed your battle archer to %s",
+                                String.valueOf(archers.get(index - 1).getClass()).substring(30)));
+                        return;
+                    } else {
+                        System.out.println("Enter valid input");
+                    }
+                } catch (Exception e){
+                    System.out.println("Enter valid input");
+                }
+            }
+        }
+    }
+    public void changeKnight(){
+        String userInput;
+        Vector<Knight> knights = currentPlayer.getKnights();
+        if(knights.isEmpty()){
+            System.out.println("You don't have any knight to change");
+        } else {
+            for (int i = 0; i < knights.size(); i++){
+                System.out.println(String.format("""
+                                    %d) %s
+                                    """,(i+1),
+                        String.valueOf(knights.get(i).getClass()).substring(30)));
+            }
+
+            System.out.println("98) Back");
+            while (true) {
+                try {
+                    System.out.print("Enter number : ");
+                    userInput = scanner.nextLine();
+                    int index = Integer.valueOf(userInput);
+
+                    if (userInput.equals("98")) {
+                        return;
+                    } else if (0 < index  && index <= knights.size()) {
+                        currentPlayer.getArmy().addKnight(knights.get(index - 1));
+                        System.out.println(String.format("You have successfully changed your battle archer to %s",
+                                String.valueOf(knights.get(index - 1).getClass()).substring(30)));
+                        return;
+                    } else {
+                        System.out.println("Enter valid input");
+                    }
+                } catch (Exception e){
+                    System.out.println("Enter valid input");
+                }
+            }
+        }
+    }
+    public void changeMage(){
+        String userInput;
+        Vector<Mage> mages = currentPlayer.getMages();
+        if(mages.isEmpty()){
+            System.out.println("You don't have any mage to change");
+        } else {
+            for (int i = 0; i < mages.size(); i++){
+                System.out.println(String.format("""
+                                    %d) %s
+                                    """,(i+1),
+                        String.valueOf(mages.get(i).getClass()).substring(30)));
+            }
+
+            System.out.println("98) Back");
+            while (true) {
+                try {
+                    System.out.print("Enter number : ");
+                    userInput = scanner.nextLine();
+                    int index = Integer.valueOf(userInput);
+
+                    if (userInput.equals("98")) {
+                        return;
+                    } else if (0 < index  && index <= mages.size()) {
+                        currentPlayer.getArmy().addMage(mages.get(index - 1));
+                        System.out.println(String.format("You have successfully changed your battle archer to %s",
+                                String.valueOf(mages.get(index - 1).getClass()).substring(30)));
+                        return;
+                    } else {
+                        System.out.println("Enter valid input");
+                    }
+                } catch (Exception e){
+                    System.out.println("Enter valid input");
+                }
+            }
+        }
+    }
+    public void changeHealer(){
+        String userInput;
+        Vector<Healer> healers = currentPlayer.getHealers();
+        if(healers.isEmpty()){
+            System.out.println("You don't have any healer to change");
+        } else {
+            for (int i = 0; i < healers.size(); i++){
+                System.out.println(String.format("""
+                                    %d) %s
+                                    """,(i+1),
+                        String.valueOf(healers.get(i).getClass()).substring(30)));
+            }
+
+            System.out.println("98) Back");
+            while (true) {
+                try {
+                    System.out.print("Enter number : ");
+                    userInput = scanner.nextLine();
+                    int index = Integer.valueOf(userInput);
+
+                    if (userInput.equals("98")) {
+                        return;
+                    } else if (0 < index  && index <= healers.size()) {
+                        currentPlayer.getArmy().addHealer(healers.get(index - 1));
+                        System.out.println(String.format("You have successfully changed your battle archer to %s",
+                                String.valueOf(healers.get(index - 1).getClass()).substring(30)));
+                        return;
+                    } else {
+                        System.out.println("Enter valid input");
+                    }
+                } catch (Exception e){
+                    System.out.println("Enter valid input");
+                }
+            }
+        }
+    }
+    public void changeCreature(){
+        String userInput;
+        Vector<MythicalCreature> creatures = currentPlayer.getCreatures();
+        if(creatures.isEmpty()){
+            System.out.println("You don't have any healer to change");
+        } else {
+            for (int i = 0; i < creatures.size(); i++){
+                System.out.println(String.format("""
+                                    %d) %s
+                                    """,(i+1),
+                        String.valueOf(creatures.get(i).getClass()).substring(30)));
+            }
+
+            System.out.println("98) Back");
+            while (true) {
+                try {
+                    System.out.print("Enter number : ");
+                    userInput = scanner.nextLine();
+                    int index = Integer.valueOf(userInput);
+
+                    if (userInput.equals("98")) {
+                        return;
+                    } else if (0 < index  && index <= creatures.size()) {
+                        currentPlayer.getArmy().addMythicalCreature(creatures.get(index - 1));
+                        System.out.println(String.format("You have successfully changed your battle archer to %s",
+                                String.valueOf(creatures.get(index - 1).getClass()).substring(30)));
+                        return;
+                    } else {
+                        System.out.println("Enter valid input");
+                    }
+                } catch (Exception e){
+                    System.out.println("Enter valid input");
+                }
+            }
+        }
+    }
+
+    public void buyCharacter(){
+
         String details = """
                 which type of character do you wanna buy?
 
@@ -322,34 +583,7 @@ public class Navigator {
 
             switch (userInput){
                 case "1":
-                    Vector<Archer> archers = currentPlayer.getArchers();
-                    if(archers.isEmpty()){
-                        System.out.println("You don't have any archer to sell");
-                    } else {
-                        for (int i = 0; i < archers.size(); i++){
-                            System.out.println(String.format("""
-                                    %d) %s              %.2f
-                                    """,(i+1),
-                                    String.valueOf(archers.get(i).getClass()).substring(30),
-                                    archers.get(i).getCurrentValue() * 0.9));
-                        }
-
-                        System.out.println("98) Back");
-
-                        System.out.print("Enter number : ");
-                        userInput = scanner.nextLine();
-                        int index = Integer.valueOf(userInput);
-
-                        if(userInput.equals(98)){
-                            return;
-                        } else if()
-                        currentPlayer.changeGC((int) (archers.get(index).getCurrentValue() * 0.9));
-                        if(currentPlayer.getArmy().getArcher() == archers.get(index)){
-                            currentPlayer.getArmy().removeArcher();
-                        }
-                        archers.remove(archers.get(index));
-
-                    }
+                    sellArcher();
                     return;
                 case "2":
                     sellKnight();
@@ -358,10 +592,10 @@ public class Navigator {
                     sellMage();
                     return;
                 case "4":
-                    buyHealer();
+                    sellHealer();
                     return;
                 case "5":
-                    buyCreature();
+                    sellCreature();
                     return;
                 case "98":
                     return;
@@ -371,6 +605,7 @@ public class Navigator {
             }
         }
     }
+
 
     public void upgradeCharacter() {
         String details = """
@@ -792,7 +1027,224 @@ public class Navigator {
         }
     }
 
-    public void buyArcher() {
+
+    public void sellArcher(){
+        String userInput;
+        Vector<Archer> archers = currentPlayer.getArchers();
+        if(archers.isEmpty()){
+            System.out.println("You don't have any archer to sell");
+        } else {
+            for (int i = 0; i < archers.size(); i++){
+                System.out.println(String.format("""
+                                    %d) %s              %.2f
+                                    """,(i+1),
+                        String.valueOf(archers.get(i).getClass()).substring(30),
+                        archers.get(i).getCurrentValue() * 0.9));
+            }
+
+            System.out.println("98) Back");
+            while (true) {
+                try {
+                    System.out.print("Enter number : ");
+                    userInput = scanner.nextLine();
+                    int index = Integer.valueOf(userInput);
+
+                    if (userInput.equals("98")) {
+                        return;
+                    } else if (0 < index  && index <= archers.size()) {
+                        Archer sellingChar = archers.get(index - 1);
+                        currentPlayer.changeGC((int) (sellingChar.getCurrentValue() * 0.9));
+                        if (currentPlayer.getArmy().getArcher() == sellingChar) {
+                            currentPlayer.getArmy().removeArcher();
+                        }
+                        archers.remove(archers.get(index - 1));
+                        System.out.println(String.format("You have successfully sold %s for %d",
+                                String.valueOf(sellingChar.getClass()).substring(30),
+                                (int) sellingChar.getCurrentValue()));
+                        return;
+                    } else {
+                        System.out.println("Enter valid input");
+                    }
+                } catch (Exception e){
+                    System.out.println("Enter valid input");
+                }
+            }
+        }
+    }
+    public void sellKnight(){
+        String userInput;
+        Vector<Knight> knights = currentPlayer.getKnights();
+        if(knights.isEmpty()){
+            System.out.println("You don't have any knight to sell");
+        } else {
+            for (int i = 0; i < knights.size(); i++){
+                System.out.println(String.format("""
+                                    %d) %s              %.2f
+                                    """,(i+1),
+                        String.valueOf(knights.get(i).getClass()).substring(30),
+                        knights.get(i).getCurrentValue() * 0.9));
+            }
+
+            System.out.println("98) Back");
+            while (true) {
+                try {
+                    System.out.print("Enter number : ");
+                    userInput = scanner.nextLine();
+                    int index = Integer.valueOf(userInput);
+
+                    if (userInput.equals("98")) {
+                        return;
+                    } else if (0 < index  && index <= knights.size()) {
+                        Knight sellingChar = knights.get(index - 1);
+                        currentPlayer.changeGC((int) (sellingChar.getCurrentValue() * 0.9));
+                        if (currentPlayer.getArmy().getKnight() == sellingChar) {
+                            currentPlayer.getArmy().removeKnight();
+                        }
+                        knights.remove(knights.get(index - 1));
+                        System.out.println(String.format("You have successfully sold %s for %d",
+                                String.valueOf(sellingChar.getClass()).substring(30),
+                                (int) sellingChar.getCurrentValue()));
+                        return;
+                    } else {
+                        System.out.println("Enter valid input");
+                    }
+                } catch (Exception e){
+                    System.out.println("Enter valid input");
+                }
+            }
+        }
+    }
+    public void sellMage(){
+        String userInput;
+        Vector<Mage> mages = currentPlayer.getMages();
+        if(mages.isEmpty()){
+            System.out.println("You don't have any mage to sell");
+        } else {
+            for (int i = 0; i < mages.size(); i++){
+                System.out.println(String.format("""
+                                    %d) %s              %.2f
+                                    """,(i+1),
+                        String.valueOf(mages.get(i).getClass()).substring(30),
+                        mages.get(i).getCurrentValue() * 0.9));
+            }
+
+            System.out.println("98) Back");
+            while (true) {
+                try {
+                    System.out.print("Enter number : ");
+                    userInput = scanner.nextLine();
+                    int index = Integer.valueOf(userInput);
+
+                    if (userInput.equals("98")) {
+                        return;
+                    } else if (0 < index  && index <= mages.size()) {
+                        Mage sellingChar = mages.get(index - 1);
+                        currentPlayer.changeGC((int) (sellingChar.getCurrentValue() * 0.9));
+                        if (currentPlayer.getArmy().getMage() == sellingChar) {
+                            currentPlayer.getArmy().removeMage();
+                        }
+                        mages.remove(mages.get(index - 1));
+                        System.out.println(String.format("You have successfully sold %s for %d",
+                                String.valueOf(sellingChar.getClass()).substring(30),
+                                (int) sellingChar.getCurrentValue()));
+                        return;
+                    } else {
+                        System.out.println("Enter valid input");
+                    }
+                } catch (Exception e){
+                    System.out.println("Enter valid input");
+                }
+            }
+        }
+    }
+    public void sellHealer(){
+        String userInput;
+        Vector<Healer> healers = currentPlayer.getHealers();
+        if(healers.isEmpty()){
+            System.out.println("You don't have any healer to sell");
+        } else {
+            for (int i = 0; i < healers.size(); i++){
+                System.out.println(String.format("""
+                                    %d) %s              %.2f
+                                    """,(i+1),
+                        String.valueOf(healers.get(i).getClass()).substring(30),
+                        healers.get(i).getCurrentValue() * 0.9));
+            }
+
+            System.out.println("98) Back");
+            while (true) {
+                try {
+                    System.out.print("Enter number : ");
+                    userInput = scanner.nextLine();
+                    int index = Integer.valueOf(userInput);
+
+                    if (userInput.equals("98")) {
+                        return;
+                    } else if (0 < index  && index <= healers.size()) {
+                        Healer sellingChar = healers.get(index - 1);
+                        currentPlayer.changeGC((int) (sellingChar.getCurrentValue() * 0.9));
+                        if (currentPlayer.getArmy().getHealer() == sellingChar) {
+                            currentPlayer.getArmy().removeHealer();
+                        }
+                        healers.remove(healers.get(index - 1));
+                        System.out.println(String.format("You have successfully sold %s for %d",
+                                String.valueOf(sellingChar.getClass()).substring(30),
+                                (int) sellingChar.getCurrentValue()));
+                        return;
+                    } else {
+                        System.out.println("Enter valid input");
+                    }
+                } catch (Exception e){
+                    System.out.println("Enter valid input");
+                }
+            }
+        }
+    }
+    public void sellCreature(){
+        String userInput;
+        Vector<MythicalCreature> creatures = currentPlayer.getCreatures();
+        if(creatures.isEmpty()){
+            System.out.println("You don't have any mythical creature to sell");
+        } else {
+            for (int i = 0; i < creatures.size(); i++){
+                System.out.println(String.format("""
+                                    %d) %s              %.2f
+                                    """,(i+1),
+                        String.valueOf(creatures.get(i).getClass()).substring(30),
+                        creatures.get(i).getCurrentValue() * 0.9));
+            }
+
+            System.out.println("98) Back");
+            while (true) {
+                try {
+                    System.out.print("Enter number : ");
+                    userInput = scanner.nextLine();
+                    int index = Integer.valueOf(userInput);
+
+                    if (userInput.equals("98")) {
+                        return;
+                    } else if (0 < index  && index <= creatures.size()) {
+                        MythicalCreature sellingChar = creatures.get(index - 1);
+                        currentPlayer.changeGC((int) (sellingChar.getCurrentValue() * 0.9));
+                        if (currentPlayer.getArmy().getMythicalCreature() == sellingChar) {
+                            currentPlayer.getArmy().removeCreature();
+                        }
+                        creatures.remove(creatures.get(index - 1));
+                        System.out.println(String.format("You have successfully sold %s for %d",
+                                String.valueOf(sellingChar.getClass()).substring(30),
+                                (int) sellingChar.getCurrentValue()));
+                        return;
+                    } else {
+                        System.out.println("Enter valid input");
+                    }
+                } catch (Exception e){
+                    System.out.println("Enter valid input");
+                }
+            }
+        }
+    }
+
+    public void buyArcher(){
         System.out.println("which one do you wanna buy ?");
 
         showCharDetails(1, "Shooter", Shooter.initialAttack, Shooter.initialDefence,
@@ -851,8 +1303,8 @@ public class Navigator {
         }
     }
 
-    public void buyKnight() {
-        currentPlayer = new Player("dev", "dev", new Arcane());
+    public void buyKnight(){
+
         System.out.println("which one do you wanna buy ?");
 
         showCharDetails(1, "Squire", Squire.initialAttack, Squire.initialDefence,
@@ -911,8 +1363,7 @@ public class Navigator {
         }
     }
 
-    public void buyMage() {
-        currentPlayer = new Player("dev", "dev", new Arcane());
+    public void buyMage(){
         System.out.println("which one do you wanna buy ?");
 
         showCharDetails(1, "Warlock", Warlock.initialAttack, Warlock.initialDefence,
@@ -971,8 +1422,7 @@ public class Navigator {
         }
     }
 
-    public void buyHealer() {
-        currentPlayer = new Player("dev", "dev", new Arcane());
+    public void buyHealer(){
         System.out.println("which one do you wanna buy ?");
 
         showCharDetails(1, "Soother", Soother.initialAttack, Soother.initialDefence,
@@ -1031,8 +1481,7 @@ public class Navigator {
         }
     }
 
-    public void buyCreature() {
-        currentPlayer = new Player("dev", "dev", new Arcane());
+    public void buyCreature(){
         System.out.println("which one do you wanna buy ?");
 
         showCharDetails(1, "Dragon", Dragon.initialAttack, Dragon.initialDefence,
@@ -1079,7 +1528,10 @@ public class Navigator {
             if (creature != null) {
                 if (currentPlayer.getGC() >= creature.getCurrentValue()) {
                     currentPlayer.getCreatures().add(creature);
-                    currentPlayer.changeGC((int) (0 - creature.getCurrentValue()));
+
+                    currentPlayer.changeGC((int) (0-creature.getCurrentValue()));
+                    System.out.println(String.format("now you have %d gc",currentPlayer.getGC()));
+
                     System.out.println(String.format("succussfully add %s to camp",
                             String.valueOf(creature.getClass()).substring(30)));
                     return;
