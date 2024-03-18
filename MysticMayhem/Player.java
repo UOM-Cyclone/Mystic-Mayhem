@@ -176,16 +176,17 @@ public class Player implements Serializable {
 //        }
 //    }
 //
-//    public static Player getRandomPlayer(){
-//        Player randomPlayer;
-//        do {
-//            Random rand = new Random();
-//            int randomnum = rand.nextInt(usernames.size());
-//            randomPlayer = players.get(usernames.get(randomnum));
-//        } while (randomPlayer.getArmy() != null && randomPlayer.getArmy().isReadyToBattle());
-//
-//        return randomPlayer;
-//    }
+   public static Player getRandomPlayer(){
+       Player randomPlayer;
+       Object[] usernames = players.keySet().toArray();
+       do {
+           Random rand = new Random();
+           int randomnum = rand.nextInt(usernames.length);
+           randomPlayer = players.get(usernames[randomnum]);
+       } while (randomPlayer.getArmy() != null && randomPlayer.getArmy().isReadyToBattle());
+
+       return randomPlayer;
+   }
 //
 //    public void setArmy(Army army){this.army = army;}
 //
