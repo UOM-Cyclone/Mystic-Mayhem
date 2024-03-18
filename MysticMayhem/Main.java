@@ -1,5 +1,7 @@
 package MysticMayhem;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import MysticMayhem.Characters.Character;
@@ -32,13 +34,9 @@ public class Main {
                 "          __/ |                               __/ |                     \n" +
                 "         |___/                               |___/                      \n" + ColoredText.RESET);
 
-//        Scanner stdin = new Scanner(System.in);
-//        GameController.setInput(stdin);
-//        GameController.start();
-//        stdin.close();
+
 
         Navigator nav = new Navigator();
-
         nav.start();
 
     }

@@ -35,6 +35,7 @@ public class Battle {
         Vector<Character> result = new Vector<>();
         float highestSpeed ;
         int start, end;
+
         while (!aliveList.isEmpty()){
             start = result.size();
             highestSpeed = aliveList.getFirst().getSpeed();
@@ -101,6 +102,15 @@ public class Battle {
     }
 
     public void start(Player attacker, Player defender){
+        String symbol = """
+             />
+(           ///-------------------------------------(
+()OXOXOXOXO(>======================================\\
+(           \\\\---------------------------------------)
+             \\>
+""";
+        System.out.println(ColoredText.GREEN + symbol + ColoredText.RESET);
+
         System.out.println(ColoredText.PURPLE + "||  " + attacker.getName() + " VS " + defender.getName() + "  ||"  + "\n" + "BattleGround : " + (String.valueOf(defender.getHomeGround().getClass()).substring(27))+"\n" + ColoredText.RESET);
 
         RoundSummery roundSummery;
@@ -173,6 +183,7 @@ public class Battle {
                     +"\n"+defender.getName() + "'s Gold Coins : "+defender.getGC() + ColoredText.RESET);
 
         }
+        Player.saveGameData();
 
     }
 
