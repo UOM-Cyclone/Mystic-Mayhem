@@ -14,6 +14,7 @@ import MysticMayhem.Equipments.Regalia;
 import MysticMayhem.Grounds.*;
 import MysticMayhem.Player;
 import MysticMayhem.Characters.Character;
+import MysticMayhem.ColoredText;
 
 import java.util.Scanner;
 import java.util.Vector;
@@ -23,12 +24,14 @@ public class Navigator {
     Player currentPlayer;
     Scanner scanner = new Scanner(System.in);
 
+
     public void start() {
         Player test = new Player("dev", "dev", new Marshland());
 
         String details = """
                 1) Login
                 2) Create a account
+                3) Instructions
                 99) Exit
                 """;
 
@@ -43,6 +46,9 @@ public class Navigator {
                 case "2":
                     createAcc();
                     break;
+                case "3":
+                    instructions();
+                    break;
                 case "99":
                     return;
                 default:
@@ -50,6 +56,42 @@ public class Navigator {
                     break;
             }
         } while (true);
+    }
+
+    private void instructions(){
+        String ins = String.format("""
+        
+        %s Welcome to Mystic Mayhem %s
+        %s  
+        (*) First you have to create a player profile by giving your name , a username and a Homeground.
+        
+        (*) Then login to the game by providing the username.
+        
+        (*) Go to the army tab and buy soldiers from any category you want.
+         - You can upgrade your soldiers using Armours and Artifacts.
+         - After add them to your battle deck.The soldiers you selected to battle stay at the battle deck.
+         - You need have one soldier from each category to battle with others.
+        
+        (*) Go to battle tab and select your opponent.
+        
+        (*) Check your profile to find out the XP level and available amount of gold coins.
+        %s
+        %s  LET THE BATTLE BEGIN ! %s
+        
+        98) Back""",ColoredText.BLUE,ColoredText.RESET,ColoredText.GREEN,ColoredText.RESET,ColoredText.RED,ColoredText.RESET);
+        System.out.println(ins);
+
+        while (true){
+            System.out.print("Enter number : ");
+            String userInput = scanner.nextLine();
+            if(userInput.equals("98")){
+                return;
+            }
+            else{
+                System.out.println("Enter a valid input");
+            }
+        }
+
     }
 
     public void login() {
@@ -623,7 +665,7 @@ public class Navigator {
         String details = """
                 *You can upgrade characters by adding armours and artefacts.*
 
-                which type of character do you wanna upgrade?
+                Which type of character do you want to upgrade?
 
                 1) Archer
                 2) Knight
@@ -658,7 +700,7 @@ public class Navigator {
                 case "98":
                     return;
                 default:
-                    System.out.println("Please enter the valid input.");
+                    System.out.println("Please enter a valid input.");
                     break;
             }
         }
@@ -696,7 +738,7 @@ public class Navigator {
                 if (userInput.equals("98")) {
                     return;
                 } else if (0 < index && index <= archers.size()) {
-                    Archer upgradingChar = archers.get(index);
+                    Archer upgradingChar = archers.get(index-1);
                     upgradeEquipment((Character) upgradingChar);
                     return;
                 } else {
@@ -704,6 +746,7 @@ public class Navigator {
                 }
             } catch (Exception e) {
                 System.out.println("Enter valid input");
+
             }
         }
     }
@@ -901,7 +944,7 @@ public class Navigator {
         Armour armour;
         Artefacts artefact;
         String options = """
-                which type of equipment do you wanna add?
+                Which type of equipment do you want to add?
 
                 1) Armour
                 2) Artefact
@@ -926,7 +969,7 @@ public class Navigator {
                     artefact = getArtefact();
                     if(artefact != null){
                         character.addArtefacts(artefact);
-                        currentPlayer.changeGC( - (int)artefact.getPrice());F
+                        currentPlayer.changeGC( - (int)artefact.getPrice());
                     }
                     
                     break;
@@ -941,7 +984,7 @@ public class Navigator {
 
     public Armour getArmour() {
         while (true) {
-            System.out.println("Select a armour to add\n(It costs the mentiond price to add)\n");
+            System.out.println("Select a armour to add\n(It costs the mentioned price to add)\n");
             showEqDetails(1, "Chainmail", Chainmail.PRICE, Chainmail.ATTACK, Chainmail.DEFENCE, Chainmail.HEALTH,
                     Chainmail.SPEED);
             showEqDetails(2, "Regalia", Regalia.PRICE, Regalia.ATTACK, Regalia.DEFENCE, Regalia.HEALTH, Regalia.SPEED);
@@ -990,7 +1033,7 @@ public class Navigator {
 
     public Artefacts getArtefact() {
         while (true) {
-            System.out.println("Select a artefact to add\n(It costs the mentiond price to add)\n");
+            System.out.println("Select a artefact to add\n(It costs the mentioned price to add)\n");
             showEqDetails(1, "Excalibur", Excalibur.PRICE, Excalibur.ATTACK, Excalibur.DEFENCE,
                     Excalibur.HEALTH, Excalibur.SPEED);
             showEqDetails(2, "Amulet", Amulet.PRICE, Amulet.ATTACK, Amulet.DEFENCE, Amulet.HEALTH,
@@ -1572,7 +1615,7 @@ public class Navigator {
     public void showCharDetails(int index, String name, float attack, float defence,
             float health, float speed, int price) {
         String details = String.format("""
-                   %d)  Name : %s
+                   %d)   Name : %s
                       Attack : %s
                      Defence : %s
                       Health : %s
