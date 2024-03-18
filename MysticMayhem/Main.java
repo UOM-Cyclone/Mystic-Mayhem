@@ -39,7 +39,7 @@ public class Main {
 
         Navigator nav = new Navigator();
 
-        nav.buyArcher();
+        nav.start();
 
     }
 
