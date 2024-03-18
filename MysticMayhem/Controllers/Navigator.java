@@ -11,6 +11,7 @@ import MysticMayhem.Equipments.Excalibur;
 import MysticMayhem.Equipments.Fleece;
 import MysticMayhem.Equipments.Regalia;
 import MysticMayhem.Grounds.*;
+import MysticMayhem.Battle;
 import MysticMayhem.Player;
 import MysticMayhem.Characters.Character;
 
@@ -19,7 +20,7 @@ import java.util.Vector;
 
 public class Navigator {
 
-    Player currentPlayer;
+    Player currentPlayer, opponentPlayer;
     Scanner scanner = new Scanner(System.in);
 
     public void start() {
@@ -153,8 +154,11 @@ public class Navigator {
             String userInput = scanner.nextLine();
             switch (userInput) {
                 case "1":
-                    System.out.println("ddd");
+                    if (currentPlayer.getArmy() == null || !currentPlayer.getArmy().isReadyToBattle()) {
+                        System.out.println("First, you should buy characters and create a deck to battle.");
+                    } else {
 
+                    }
                     break;
                 case "2":
                     armyMenu();
@@ -169,6 +173,36 @@ public class Navigator {
                     break;
             }
         } while (true);
+    }
+
+    public void combat() {
+        Player tempPlayer;
+        String userInput;
+        while (true) {
+            tempPlayer = Player.getRandomPlayer();
+            if (tempPlayer == currentPlayer) {
+                continue;
+            }
+            System.out.print("Select opponent to combat\n\t" + tempPlayer.getName() + "\n\t  -XP Level : "
+                    + tempPlayer.getXP() + "\n1. Challenge\n2.Skip\n98.Back to menu\n");
+            userInput = scanner.nextLine();
+            switch (userInput) {
+                case "1":
+                    opponentPlayer = tempPlayer;
+
+                    Battle battle = new Battle();
+                    battle.start(currentPlayer, opponentPlayer);
+                    return;
+
+                case "2":
+                    break;
+                case "98":
+                    return;
+                default:
+                    System.out.println("Please enter the valid input.");
+                    break;
+            }
+        }
     }
 
     public void showProfile() {
