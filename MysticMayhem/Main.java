@@ -1,26 +1,5 @@
 package MysticMayhem;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-
-import MysticMayhem.Characters.Character;
-import MysticMayhem.Characters.Enchanter;
-import MysticMayhem.Characters.Highlander;
-import MysticMayhem.Characters.Shooter;
-import MysticMayhem.Characters.Squire;
-import MysticMayhem.Characters.Zoro;
-
-import MysticMayhem.Characters.*;
-
-
 import MysticMayhem.Controllers.Navigator;
-import MysticMayhem.Equipments.*;
-import MysticMayhem.Grounds.Arcane;
-import MysticMayhem.Grounds.Desert;
-import MysticMayhem.Grounds.Hillcrest;
-import MysticMayhem.Grounds.Marshland;
-
 
 public class Main {
     public static void main(String[] args) {
