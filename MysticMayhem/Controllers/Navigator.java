@@ -29,7 +29,8 @@ public class Navigator {
         String details = """
                 1) Login
                 2) Create a account
-                99) Exit""";
+                99) Exit
+                """;
 
         do {
             System.out.println(details);
@@ -85,13 +86,13 @@ public class Navigator {
         }
 
         while (true) {
-            System.out.print("\nIf your want to cancel creating account type '-1'\nEnter your username : ");
+            System.out.print("\nEnter your username : ");
             userInput = scanner.nextLine();
             if (userInput.equals("-1")) {
                 return;
             } else {
                 if (Player.players.containsKey(userInput)) {
-                    System.out.println("Entered username is already taken. Please enter valid username");
+                    System.out.println("The username you entered is already taken. Please enter different username");
                     continue;
                 } else {
                     userName = userInput;
@@ -101,11 +102,10 @@ public class Navigator {
         }
 
         while (true) {
-            System.out.println("""
-                    If you want to cancel creating account enter '-1'
 
-                    New account needs a homeground,
-
+            System.out.println("""                                       
+                    Select a Homeground :
+                                        
                     1) Arcane
                     2) Desert
                     3) Hillcrest
@@ -118,19 +118,22 @@ public class Navigator {
                 case "1":
                     homeGround = new Arcane();
                     new Player(name, userName, homeGround);
-                    System.out.println("\nyou just created new profile. please login.");
+                    System.out.println("\nWelcome ! \nProfile successfully created ! \nPlease login now.\n");
                     return;
                 case "2":
                     homeGround = new Desert();
                     new Player(name, userName, homeGround);
+                    System.out.println("\nWelcome ! \nProfile successfully created ! \nPlease login now.\n");
                     return;
                 case "3":
                     homeGround = new Hillcrest();
                     new Player(name, userName, homeGround);
+                    System.out.println("\nWelcome ! \nProfile successfully created ! \nPlease login now.\n");
                     return;
                 case "4":
                     homeGround = new Marshland();
                     new Player(name, userName, homeGround);
+                    System.out.println("\nWelcome ! \nProfile successfully created ! \nPlease login now.\n");
                     return;
                 case "-1":
                     return;
@@ -143,6 +146,8 @@ public class Navigator {
 
     public void Menu() {
         String details = """
+                Welcome Back !!
+                
                 1) Battle
                 2) Army
                 3) Profile
@@ -176,14 +181,17 @@ public class Navigator {
 
         do {
             String details = String.format("""
-                    Your name : %s
-                    username : %s
-                    XP : %d
-                    Coins : %d
-                    Home Ground : %s
 
-                    1) Change name
-                    98) Back""",
+                
+                Your name : %s
+                username : %s
+                XP : %d
+                Coins : %d
+                Home Ground : %s
+                
+                1) Change name
+                98) Back""",
+
                     currentPlayer.getName(),
                     currentPlayer.getUsername(),
                     currentPlayer.getXP(),
@@ -191,15 +199,18 @@ public class Navigator {
                     String.valueOf(currentPlayer.getHomeGround().getClass()).substring(27));
 
             System.out.println(details);
-            System.out.print("Select the option : ");
+            System.out.print("Select a option : ");
             String userInput = scanner.nextLine();
             switch (userInput) {
                 case "1":
                     System.out.print("Enter your new name : ");
                     String newName = scanner.nextLine();
                     System.out.print(
-                            String.format("change %s to %s ?\n" +
-                                    "Enter Y/N :", currentPlayer.getName(), newName));
+
+                            String.format("Change %s to %s ?\n" +
+                                    "Enter Y/N :", currentPlayer.getName(), newName)
+                    );
+
                     boolean isValid = false;
                     while (!isValid) {
                         userInput = scanner.nextLine();
@@ -362,7 +373,7 @@ public class Navigator {
                         return;
                     } else if (0 < index  && index <= archers.size()) {
                         currentPlayer.getArmy().addArcher(archers.get(index - 1 ));
-                        System.out.println(String.format("You have successfully changed your battle archer to %s",
+                        System.out.println(String.format("You have selected %s as your Archer.",
                                 String.valueOf(archers.get(index - 1).getClass()).substring(30)));
                         return;
                     } else {
@@ -398,7 +409,7 @@ public class Navigator {
                         return;
                     } else if (0 < index  && index <= knights.size()) {
                         currentPlayer.getArmy().addKnight(knights.get(index - 1));
-                        System.out.println(String.format("You have successfully changed your battle archer to %s",
+                        System.out.println(String.format("You have selected %s as your Knight.",
                                 String.valueOf(knights.get(index - 1).getClass()).substring(30)));
                         return;
                     } else {
@@ -434,7 +445,7 @@ public class Navigator {
                         return;
                     } else if (0 < index  && index <= mages.size()) {
                         currentPlayer.getArmy().addMage(mages.get(index - 1));
-                        System.out.println(String.format("You have successfully changed your battle archer to %s",
+                        System.out.println(String.format("You have selected %s as your Mage.",
                                 String.valueOf(mages.get(index - 1).getClass()).substring(30)));
                         return;
                     } else {
@@ -470,7 +481,7 @@ public class Navigator {
                         return;
                     } else if (0 < index  && index <= healers.size()) {
                         currentPlayer.getArmy().addHealer(healers.get(index - 1));
-                        System.out.println(String.format("You have successfully changed your battle archer to %s",
+                        System.out.println(String.format("You have selected %s as your Healer.",
                                 String.valueOf(healers.get(index - 1).getClass()).substring(30)));
                         return;
                     } else {
@@ -506,7 +517,7 @@ public class Navigator {
                         return;
                     } else if (0 < index  && index <= creatures.size()) {
                         currentPlayer.getArmy().addMythicalCreature(creatures.get(index - 1));
-                        System.out.println(String.format("You have successfully changed your battle archer to %s",
+                        System.out.println(String.format("You have selected %s as your Mythical Creature.",
                                 String.valueOf(creatures.get(index - 1).getClass()).substring(30)));
                         return;
                     } else {
@@ -522,14 +533,15 @@ public class Navigator {
     public void buyCharacter(){
 
         String details = """
-                which type of character do you wanna buy?
 
+                Select the type of character you want to buy
+                
                 1) Archer
                 2) Knight
                 3) Mage
                 4) Healer
-                5) creature
-
+                5) Mythical Creature
+                
                 98) Back
                 """;
 
@@ -557,7 +569,7 @@ public class Navigator {
                 case "98":
                     return;
                 default:
-                    System.out.println("Please enter the valid input.");
+                    System.out.println("Please enter a valid input.");
                     break;
             }
         }
@@ -565,13 +577,13 @@ public class Navigator {
 
     public void sellCharacter(){
         String details = """
-                which type of character do you wanna sell?
+                Select the type of character do you want to sell
                 
                 1) Archer
                 2) Knight
                 3) Mage
                 4) Healer
-                5) creature
+                5) Mythical Creature
                 
                 98) Back
                 """;
@@ -600,7 +612,7 @@ public class Navigator {
                 case "98":
                     return;
                 default:
-                    System.out.println("Please enter the valid input.");
+                    System.out.println("Please enter a valid input.");
                     break;
             }
         }
@@ -1036,10 +1048,10 @@ public class Navigator {
         } else {
             for (int i = 0; i < archers.size(); i++){
                 System.out.println(String.format("""
-                                    %d) %s              %.2f
+                                    %d) %s              %d
                                     """,(i+1),
                         String.valueOf(archers.get(i).getClass()).substring(30),
-                        archers.get(i).getCurrentValue() * 0.9));
+                        Math.round(archers.get(i).getCurrentValue() * 0.9)));
             }
 
             System.out.println("98) Back");
@@ -1060,7 +1072,8 @@ public class Navigator {
                         archers.remove(archers.get(index - 1));
                         System.out.println(String.format("You have successfully sold %s for %d",
                                 String.valueOf(sellingChar.getClass()).substring(30),
-                                (int) sellingChar.getCurrentValue()));
+                                Math.round(sellingChar.getCurrentValue() * 0.9)));
+                        System.out.println(String.format("Available Gold coins : %d" , currentPlayer.getGC()));
                         return;
                     } else {
                         System.out.println("Enter valid input");
@@ -1079,10 +1092,10 @@ public class Navigator {
         } else {
             for (int i = 0; i < knights.size(); i++){
                 System.out.println(String.format("""
-                                    %d) %s              %.2f
+                                    %d) %s              %d
                                     """,(i+1),
                         String.valueOf(knights.get(i).getClass()).substring(30),
-                        knights.get(i).getCurrentValue() * 0.9));
+                        Math.round(knights.get(i).getCurrentValue() * 0.9)));
             }
 
             System.out.println("98) Back");
@@ -1103,7 +1116,8 @@ public class Navigator {
                         knights.remove(knights.get(index - 1));
                         System.out.println(String.format("You have successfully sold %s for %d",
                                 String.valueOf(sellingChar.getClass()).substring(30),
-                                (int) sellingChar.getCurrentValue()));
+                                Math.round(sellingChar.getCurrentValue() * 0.9)));
+                        System.out.println(String.format("Available Gold coins : %d" , currentPlayer.getGC()));
                         return;
                     } else {
                         System.out.println("Enter valid input");
@@ -1122,10 +1136,10 @@ public class Navigator {
         } else {
             for (int i = 0; i < mages.size(); i++){
                 System.out.println(String.format("""
-                                    %d) %s              %.2f
+                                    %d) %s              %d
                                     """,(i+1),
                         String.valueOf(mages.get(i).getClass()).substring(30),
-                        mages.get(i).getCurrentValue() * 0.9));
+                        Math.round(mages.get(i).getCurrentValue() * 0.9)));
             }
 
             System.out.println("98) Back");
@@ -1146,7 +1160,8 @@ public class Navigator {
                         mages.remove(mages.get(index - 1));
                         System.out.println(String.format("You have successfully sold %s for %d",
                                 String.valueOf(sellingChar.getClass()).substring(30),
-                                (int) sellingChar.getCurrentValue()));
+                                Math.round(sellingChar.getCurrentValue() * 0.9)));
+                        System.out.println(String.format("Available Gold coins : %d" , currentPlayer.getGC()));
                         return;
                     } else {
                         System.out.println("Enter valid input");
@@ -1165,10 +1180,10 @@ public class Navigator {
         } else {
             for (int i = 0; i < healers.size(); i++){
                 System.out.println(String.format("""
-                                    %d) %s              %.2f
+                                    %d) %s              %d
                                     """,(i+1),
                         String.valueOf(healers.get(i).getClass()).substring(30),
-                        healers.get(i).getCurrentValue() * 0.9));
+                        Math.round(healers.get(i).getCurrentValue() * 0.9)));
             }
 
             System.out.println("98) Back");
@@ -1189,7 +1204,8 @@ public class Navigator {
                         healers.remove(healers.get(index - 1));
                         System.out.println(String.format("You have successfully sold %s for %d",
                                 String.valueOf(sellingChar.getClass()).substring(30),
-                                (int) sellingChar.getCurrentValue()));
+                                Math.round(sellingChar.getCurrentValue() * 0.9)));
+                        System.out.println(String.format("Available Gold coins : %d" , currentPlayer.getGC()));
                         return;
                     } else {
                         System.out.println("Enter valid input");
@@ -1208,10 +1224,10 @@ public class Navigator {
         } else {
             for (int i = 0; i < creatures.size(); i++){
                 System.out.println(String.format("""
-                                    %d) %s              %.2f
+                                    %d) %s              %d
                                     """,(i+1),
                         String.valueOf(creatures.get(i).getClass()).substring(30),
-                        creatures.get(i).getCurrentValue() * 0.9));
+                        Math.round(creatures.get(i).getCurrentValue() * 0.9)));
             }
 
             System.out.println("98) Back");
@@ -1232,7 +1248,8 @@ public class Navigator {
                         creatures.remove(creatures.get(index - 1));
                         System.out.println(String.format("You have successfully sold %s for %d",
                                 String.valueOf(sellingChar.getClass()).substring(30),
-                                (int) sellingChar.getCurrentValue()));
+                                Math.round(sellingChar.getCurrentValue() * 0.9)));
+                        System.out.println(String.format("Available Gold coins : %d" , currentPlayer.getGC()));
                         return;
                     } else {
                         System.out.println("Enter valid input");
@@ -1245,7 +1262,8 @@ public class Navigator {
     }
 
     public void buyArcher(){
-        System.out.println("which one do you wanna buy ?");
+        System.out.println("Which one do you want to buy ?");
+        System.out.println(String.format("Available Gold coins : %d" , currentPlayer.getGC()));
 
         showCharDetails(1, "Shooter", Shooter.initialAttack, Shooter.initialDefence,
                 Shooter.initialHealth, Shooter.initialSpeed, Shooter.price);
@@ -1296,7 +1314,7 @@ public class Navigator {
                             String.valueOf(archer.getClass()).substring(30)));
                     return;
                 } else {
-                    System.out.println("you don't have enough gc to buy selected Archer.");
+                    System.out.println("you don't have enough Gold coins to buy selected Archer.");
                     return;
                 }
             }
@@ -1305,7 +1323,8 @@ public class Navigator {
 
     public void buyKnight(){
 
-        System.out.println("which one do you wanna buy ?");
+        System.out.println("Which one do you want to buy ?");
+        System.out.println(String.format("Available Gold coins : %d" , currentPlayer.getGC()));
 
         showCharDetails(1, "Squire", Squire.initialAttack, Squire.initialDefence,
                 Squire.initialHealth, Squire.initialSpeed, Squire.price);
@@ -1364,7 +1383,9 @@ public class Navigator {
     }
 
     public void buyMage(){
-        System.out.println("which one do you wanna buy ?");
+        System.out.println("Which one do you want to buy ?");
+        System.out.println(String.format("Available Gold coins : %d" , currentPlayer.getGC()));
+
 
         showCharDetails(1, "Warlock", Warlock.initialAttack, Warlock.initialDefence,
                 Warlock.initialHealth, Warlock.initialSpeed, Warlock.price);
@@ -1423,7 +1444,9 @@ public class Navigator {
     }
 
     public void buyHealer(){
-        System.out.println("which one do you wanna buy ?");
+        System.out.println("Which one do you want to buy ?");
+        System.out.println(String.format("Available Gold coins : %d" , currentPlayer.getGC()));
+
 
         showCharDetails(1, "Soother", Soother.initialAttack, Soother.initialDefence,
                 Soother.initialHealth, Soother.initialSpeed, Soother.price);
@@ -1482,7 +1505,9 @@ public class Navigator {
     }
 
     public void buyCreature(){
-        System.out.println("which one do you wanna buy ?");
+        System.out.println("Which one do you want to buy ?");
+        System.out.println(String.format("Available Gold coins : %d" , currentPlayer.getGC()));
+
 
         showCharDetails(1, "Dragon", Dragon.initialAttack, Dragon.initialDefence,
                 Dragon.initialHealth, Dragon.initialSpeed, Dragon.price);
@@ -1522,7 +1547,7 @@ public class Navigator {
                 case "98":
                     return;
                 default:
-                    System.out.println("Please enter the valid input.");
+                    System.out.println("Please enter a valid input.");
                     break;
             }
             if (creature != null) {
@@ -1530,13 +1555,14 @@ public class Navigator {
                     currentPlayer.getCreatures().add(creature);
 
                     currentPlayer.changeGC((int) (0-creature.getCurrentValue()));
-                    System.out.println(String.format("now you have %d gc",currentPlayer.getGC()));
 
-                    System.out.println(String.format("succussfully add %s to camp",
+                    System.out.println(String.format("Now you have %d Gold coins",currentPlayer.getGC()));
+                    System.out.println(String.format("Succussfully add %s to camp !",
+
                             String.valueOf(creature.getClass()).substring(30)));
                     return;
                 } else {
-                    System.out.println("you don't have enough gc to buy selected Archer.");
+                    System.out.println("You don't have enough Gold coins to buy selected Archer.");
                     return;
                 }
             }
@@ -1546,9 +1572,13 @@ public class Navigator {
     public void showCharDetails(int index, String name, float attack, float defence,
             float health, float speed, int price) {
         String details = String.format("""
-                index)  name : name
-                        attack : %s
-                """, attack);
+                   %d)  Name : %s
+                      Attack : %s
+                     Defence : %s
+                      Health : %s
+                       Speed : %s
+                       Price : %s
+                """, index,name,attack,defence,health,speed,price);
         System.out.println(details);
     }
 }
