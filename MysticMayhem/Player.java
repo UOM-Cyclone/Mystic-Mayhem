@@ -57,7 +57,7 @@ public class Player implements Serializable {
     public Army getArmy(){return army;}
     public void increaseXP(int val){xp += val;}
     public int getGC(){return gc;}
-    public void changeGC(int val){gc += val;}
+    public void changeGC(int val){this.gc += val;}
     public int getXP(){return xp;}
 
     public String getUsername(){
