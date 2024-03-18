@@ -87,7 +87,17 @@ public class RoundSummery {
                 summery += String.format(ColoredText.RED + "\n %s Died !\n" + ColoredText.RESET,defendChar);
             }
         }
+        try {
+            Thread.sleep(500);
+        } catch (Exception e) {
+            System.out.println((e.getMessage()));
+        }
         System.out.print(summery);
+        try {
+            Thread.sleep(500);
+        } catch (Exception e) {
+            System.out.println((e.getMessage()));
+        }
     }
 
 }

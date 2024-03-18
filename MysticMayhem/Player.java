@@ -1,13 +1,14 @@
 package MysticMayhem;
 import java.io.*;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import MysticMayhem.Characters.*;
 import MysticMayhem.Equipments.*;
 import MysticMayhem.Grounds.*;
 
 public class Player implements Serializable {
-    private static int playerCount = 0;
+    public static int playerCount = 0;
     public static Map<String,Player> players = new HashMap<>();
 
     private String name ;
@@ -38,6 +39,7 @@ public class Player implements Serializable {
         this.homeGround = homeGround;
         this.gc = gc;
         this.xp = xp;
+        this.uID = ++playerCount;
 
         Archer tempArcher = new Ranger();
         tempArcher.addArmour(new Chainmail());
@@ -49,6 +51,7 @@ public class Player implements Serializable {
         this.army.addMage(new Warlock());
         this.army.addHealer(tempHealer);
         this.army.addMythicalCreature(new Dragon());
+        players.put(uName, this);
     }
 
     public Vector<Archer> getArchers(){return archers;}
@@ -92,7 +95,6 @@ public class Player implements Serializable {
             file.close();
         } catch (FileNotFoundException e) {
             Player player1 = new Player("GeraltofRivia","whitewolf",new Marshland(),32,215);
-            players.put("whitewolf", player1);
         } catch (IOException e) {
             System.out.println("ERROR! Saved data not loaded");
         } catch (ClassNotFoundException e) {
@@ -101,14 +103,16 @@ public class Player implements Serializable {
     }
 
    public static Player getRandomPlayer(){
-       Player randomPlayer;
-       Object[] usernames = players.keySet().toArray();
-       do {
-           Random rand = new Random();
-           int randomnum = rand.nextInt(usernames.length);
-           randomPlayer = players.get(usernames[randomnum]);
-       } while (randomPlayer.getArmy() != null && randomPlayer.getArmy().isReadyToBattle());
+       Random rand = new Random();
+       Player randomPlayer = null;
+       List<Player> usernames = new ArrayList<>(Player.players.values());
+       List<Player> readyPlayers = usernames.stream().filter(player -> player.getArmy().isReadyToBattle())
+               .collect(Collectors.toList());
+       if (readyPlayers.size() <= 1){
+           return null;
+       } else {
+           return readyPlayers.get(rand.nextInt(readyPlayers.size()));
+       }
 
-       return randomPlayer;
    }
 }

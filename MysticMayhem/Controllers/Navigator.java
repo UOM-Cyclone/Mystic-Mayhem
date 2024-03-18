@@ -18,8 +18,8 @@ public class Navigator {
     Scanner scanner = new Scanner(System.in);
 
     public void start() {
-        Player test = new Player("dev", "dev", new Marshland());
-
+        Player.loadGameData();
+        System.out.println(Player.playerCount);
         String details = """
                 1) Login
                 2) Create a account
@@ -37,11 +37,13 @@ public class Navigator {
                     break;
                 case "2":
                     createAcc();
+                    Player.saveGameData();
                     break;
                 case "3":
                     instructions();
                     break;
                 case "99":
+                    Player.saveGameData();
                     return;
                 default:
                     System.out.println("Please enter the valid input.\n");
@@ -179,13 +181,13 @@ public class Navigator {
     }
 
     public void Menu() {
+        System.out.println("Welcome back !!");
         String details = """
-                Welcome Back !!
-                
+       
                 1) Battle
                 2) Army
                 3) Profile
-                98) Back""";
+                98) Logout""";
 
         do {
             System.out.println(details);
@@ -208,6 +210,7 @@ public class Navigator {
                     showProfile();
                     break;
                 case "98":
+                    Player.saveGameData();
                     return;
                 default:
                     System.out.println("Please enter the valid input.");
@@ -219,29 +222,34 @@ public class Navigator {
     public void combat() {
         Player tempPlayer;
         String userInput;
+        System.out.println("Select opponent to combat\n");
         while (true) {
             tempPlayer = Player.getRandomPlayer();
             if (tempPlayer == currentPlayer) {
                 continue;
-            }
-            System.out.print("Select opponent to combat\n\t" + tempPlayer.getName() + "\n\t  -XP Level : "
-                    + tempPlayer.getXP() + "\n1. Challenge\n2.Skip\n98.Back to menu\n");
-            userInput = scanner.nextLine();
-            switch (userInput) {
-                case "1":
-                    opponentPlayer = tempPlayer;
+            } else if(tempPlayer == null){
+                System.out.println("comback later");
+                return;
+            } else {
+                System.out.print("\t" + tempPlayer.getName() + "\n\t  -XP Level : "
+                        + tempPlayer.getXP() + "\n1. Challenge\n2.Skip\n98.Back to menu\n  Select an option : ");
+                userInput = scanner.nextLine();
+                switch (userInput) {
+                    case "1":
+                        opponentPlayer = tempPlayer;
 
-                    Battle battle = new Battle();
-                    battle.start(currentPlayer, opponentPlayer);
-                    return;
+                        Battle battle = new Battle();
+                        battle.start(currentPlayer, opponentPlayer);
+                        return;
 
-                case "2":
-                    break;
-                case "98":
-                    return;
-                default:
-                    System.out.println("Please enter the valid input.");
-                    break;
+                    case "2":
+                        break;
+                    case "98":
+                        return;
+                    default:
+                        System.out.println("Please enter the valid input.");
+                        break;
+                }
             }
         }
     }
@@ -286,6 +294,7 @@ public class Navigator {
                         switch (userInput) {
                             case "Y", "y":
                                 currentPlayer.setName(newName);
+                                Player.saveGameData();
                                 isValid = true;
                                 break;
                             case "N", "n":
@@ -321,15 +330,18 @@ public class Navigator {
             switch (userInput) {
                 case "1":
                     battleDeck();
+                    Player.saveGameData();
                     break;
                 case "2":
                     buyCharacter();
                     break;
                 case "3":
                     sellCharacter();
+                    Player.saveGameData();
                     break;
                 case "4":
                     upgradeCharacter();
+                    Player.saveGameData();
                     break;
                 case "98":
                     return;
@@ -622,18 +634,23 @@ public class Navigator {
             switch (userInput) {
                 case "1":
                     buyArcher();
+                    Player.saveGameData();
                     break;
                 case "2":
                     buyKnight();
+                    Player.saveGameData();
                     break;
                 case "3":
                     buyMage();
+                    Player.saveGameData();
                     break;
                 case "4":
                     buyHealer();
+                    Player.saveGameData();
                     break;
                 case "5":
                     buyCreature();
+                    Player.saveGameData();
                     break;
                 case "98":
                     return;
@@ -1029,7 +1046,7 @@ public class Navigator {
             switch (userInput) {
                 case "1":
                     if (currentPlayer.getGC() >= Chainmail.PRICE) {
-                        System.out.println("Successfully added a chainmail to the character.");
+                        System.out.println("Successfully added a Chainmail to the character.");
                         return new Chainmail();
                     } else {
                         System.out.println(
@@ -1037,8 +1054,8 @@ public class Navigator {
                     }
                     break;
                 case "2":
-                    if (currentPlayer.getGC() >= Chainmail.PRICE) {
-                        System.out.println("Successfully added a regalia to the character.");
+                    if (currentPlayer.getGC() >= Regalia.PRICE) {
+                        System.out.println("Successfully added a Regalia to the character.");
                         return new Regalia();
                     } else {
                         System.out.println(
@@ -1047,8 +1064,8 @@ public class Navigator {
                     break;
 
                 case "3":
-                    if (currentPlayer.getGC() >= Chainmail.PRICE) {
-                        System.out.println("Successfully added a regalia to the character.");
+                    if (currentPlayer.getGC() >= Fleece.PRICE) {
+                        System.out.println("Successfully added a Fleece to the character.");
                         return new Fleece();
                     } else {
                         System.out.println(
@@ -1079,8 +1096,8 @@ public class Navigator {
 
             switch (userInput) {
                 case "1":
-                    if (currentPlayer.getGC() >= Chainmail.PRICE) {
-                        System.out.println("Successfully added a chainmail to the character.");
+                    if (currentPlayer.getGC() >= Excalibur.PRICE) {
+                        System.out.println("Successfully added a Excalibur to the character.");
                         return new Excalibur();
                     } else {
                         System.out.println(
@@ -1088,8 +1105,8 @@ public class Navigator {
                     }
                     break;
                 case "2":
-                    if (currentPlayer.getGC() >= Chainmail.PRICE) {
-                        System.out.println("Successfully added a regalia to the character.");
+                    if (currentPlayer.getGC() >= Amulet.PRICE) {
+                        System.out.println("Successfully added a Amulet to the character.");
                         return new Amulet();
                     } else {
                         System.out.println(
@@ -1098,8 +1115,8 @@ public class Navigator {
                     break;
 
                 case "3":
-                    if (currentPlayer.getGC() >= Chainmail.PRICE) {
-                        System.out.println("Successfully added a regalia to the character.");
+                    if (currentPlayer.getGC() >= Crystal.PRICE) {
+                        System.out.println("Successfully added a Crystal to the character.");
                         return new Crystal();
                     } else {
                         System.out.println(
