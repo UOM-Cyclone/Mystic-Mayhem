@@ -948,7 +948,7 @@ public class Navigator {
                     artefact = getArtefact();
                     if(artefact != null){
                         character.addArtefacts(artefact);
-                        currentPlayer.changeGC( - (int)artefact.getPrice());F
+                        currentPlayer.changeGC( - (int)artefact.getPrice());
                     }
                     
                     break;
