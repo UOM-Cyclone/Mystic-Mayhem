@@ -155,10 +155,12 @@ public class Navigator {
             String userInput = scanner.nextLine();
             switch (userInput) {
                 case "1":
-                    if (currentPlayer.getArmy() == null || !currentPlayer.getArmy().isReadyToBattle()) {
-                        System.out.println("First, you should buy characters and create a deck to battle.");
+                    if (currentPlayer.getArmy() == null){
+                        System.out.println("First, you should buy characters and create a deck to battle");
+                    }else if(!currentPlayer.getArmy().isReadyToBattle()) {
+                        System.out.println("Your deck should be contain all 5 type of characters to battle");
                     } else {
-
+                        combat();
                     }
                     break;
                 case "2":
@@ -692,6 +694,7 @@ public class Navigator {
         String armour, artefact;
         if (archers.isEmpty()) {
             System.out.println("You don't have any archer to upgrade");
+            return; //add-2
         } else {
             for (int i = 0; i < archers.size(); i++) {
                 armour = archers.get(i).getArmour() == null ? "none"
@@ -718,7 +721,7 @@ public class Navigator {
                 if (userInput.equals("98")) {
                     return;
                 } else if (0 < index && index <= archers.size()) {
-                    Archer upgradingChar = archers.get(index);
+                    Archer upgradingChar = archers.get(index-1); //add-1
                     upgradeEquipment((Character) upgradingChar);
                     return;
                 } else {
@@ -736,6 +739,7 @@ public class Navigator {
         String armour, artefact;
         if (knights.isEmpty()) {
             System.out.println("You don't have any knight to upgrade");
+            return;
         } else {
             for (int i = 0; i < knights.size(); i++) {
                 armour = knights.get(i).getArmour() == null ? "none"
@@ -762,7 +766,7 @@ public class Navigator {
                 if (userInput.equals("98")) {
                     return;
                 } else if (0 < index && index <= knights.size()) {
-                    Knight upgradingChar = knights.get(index);
+                    Knight upgradingChar = knights.get(index-1);
                     upgradeEquipment((Character) upgradingChar);
                     return;
                 } else {
@@ -780,6 +784,7 @@ public class Navigator {
         String armour, artefact;
         if (mages.isEmpty()) {
             System.out.println("You don't have any mage to upgrade");
+            return;
         } else {
             for (int i = 0; i < mages.size(); i++) {
                 armour = mages.get(i).getArmour() == null ? "none"
@@ -806,7 +811,7 @@ public class Navigator {
                 if (userInput.equals("98")) {
                     return;
                 } else if (0 < index && index <= mages.size()) {
-                    Mage upgradingChar = mages.get(index);
+                    Mage upgradingChar = mages.get(index-1);
                     upgradeEquipment((Character) upgradingChar);
                     return;
                 } else {
@@ -824,6 +829,7 @@ public class Navigator {
         String armour, artefact;
         if (healers.isEmpty()) {
             System.out.println("You don't have any healer to upgrade");
+            return;
         } else {
             for (int i = 0; i < healers.size(); i++) {
                 armour = healers.get(i).getArmour() == null ? "none"
@@ -850,7 +856,7 @@ public class Navigator {
                 if (userInput.equals("98")) {
                     return;
                 } else if (0 < index && index <= healers.size()) {
-                    Healer upgradingChar = healers.get(index);
+                    Healer upgradingChar = healers.get(index-1);
                     upgradeEquipment((Character) upgradingChar);
                     return;
                 } else {
@@ -868,6 +874,7 @@ public class Navigator {
         String armour, artefact;
         if (creatures.isEmpty()) {
             System.out.println("You don't have any creature to upgrade");
+            return;
         } else {
             for (int i = 0; i < creatures.size(); i++) {
                 armour = creatures.get(i).getArmour() == null ? "none"
@@ -894,7 +901,7 @@ public class Navigator {
                 if (userInput.equals("98")) {
                     return;
                 } else if (0 < index && index <= creatures.size()) {
-                    MythicalCreature upgradingChar = creatures.get(index);
+                    MythicalCreature upgradingChar = creatures.get(index-1);
                     upgradeEquipment((Character) upgradingChar);
                     return;
                 } else {
