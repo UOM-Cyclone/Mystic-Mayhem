@@ -2,15 +2,7 @@ package MysticMayhem.Controllers;
 
 import MysticMayhem.Army;
 import MysticMayhem.Characters.*;
-import MysticMayhem.Equipments.Amulet;
-import MysticMayhem.Equipments.Armour;
-import MysticMayhem.Equipments.Artefacts;
-import MysticMayhem.Equipments.Chainmail;
-import MysticMayhem.Equipments.Crystal;
-import MysticMayhem.Equipments.Equipment;
-import MysticMayhem.Equipments.Excalibur;
-import MysticMayhem.Equipments.Fleece;
-import MysticMayhem.Equipments.Regalia;
+import MysticMayhem.Equipments.*;
 import MysticMayhem.Grounds.*;
 import MysticMayhem.Battle;
 import MysticMayhem.Player;
@@ -24,7 +16,6 @@ public class Navigator {
 
     Player currentPlayer, opponentPlayer;
     Scanner scanner = new Scanner(System.in);
-
 
     public void start() {
         Player test = new Player("dev", "dev", new Marshland());
