@@ -19,7 +19,6 @@ public class Navigator {
 
     public void start() {
         Player.loadGameData();
-        System.out.println(Player.playerCount);
         String details = """
                 1) Login
                 2) Create a account
