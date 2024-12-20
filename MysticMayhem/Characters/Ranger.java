@@ -1,23 +1,22 @@
 package MysticMayhem.Characters;
 
-
 import MysticMayhem.RoundSummery;
 
 import java.util.Vector;
 
-public class Shooter extends Highlander implements  Archer {
-    public final static int price = 80;
-    public final static float initialHealth = 6;
-    public final static float initialSpeed = 9;
-    public final static float initialAttack = 11;
-    public final static float initialDefence = 4;
+public class Ranger extends Highlander implements Archer{
+    public final static int price = 115;
+    public final static float initialHealth = 8;
+    public final static float initialSpeed = 10;
+    public final static float initialAttack = 14;
+    public final static float initialDefence = 5;
     public final static String type = "Highlander";
 
     {
-        health += 6;
-        speed += 9;
-        attack += 11;
-        defence += 4;
+        health += initialHealth;
+        speed += initialSpeed;
+        attack += initialAttack;
+        defence += initialDefence;
         current_value += price;
     }
 

@@ -4,9 +4,9 @@ import MysticMayhem.Equipments.Armour;
 import MysticMayhem.Equipments.Artefacts;
 import MysticMayhem.Grounds.Arcane;
 import MysticMayhem.Grounds.Ground;
-import MysticMayhem.Grounds.Hillcrest;
+import MysticMayhem.Grounds.Marshland;
 
-public abstract class Highlander implements Type {
+public abstract class Mystics implements Type{
     protected float health = 0;
     protected float speed = 0;
     protected float attack = 0;
@@ -16,7 +16,7 @@ public abstract class Highlander implements Type {
     protected Ground battleGround = null;
     protected boolean isBonusRound = false;
     protected float current_value = 0;
-    private boolean isBonusHealth = false;
+    protected boolean isBonusHealth = false;
 
 
     @Override
@@ -105,7 +105,7 @@ public abstract class Highlander implements Type {
 
     @Override
     public void decreaseHealth(float value) {
-        health = (value >= health) ? 0 : roundToFirstDecimal(health - value);
+        health = (value >= health) ? 0 : (health - value);
     }
 
     @Override
@@ -146,13 +146,12 @@ public abstract class Highlander implements Type {
     @Override
     public boolean addBattleGround(Ground battleGround) {
 
-        if(battleGround instanceof Hillcrest){
-            attack += 1;
-            defence += 1;
-            isBonusRound = true;
-        } else if (battleGround instanceof Arcane){
+        if(battleGround instanceof Marshland){
             speed -= 1;
-            defence -= 1;
+
+        } else if (battleGround instanceof Arcane){
+            attack += 2;
+            isBonusHealth = true;
         }
 
         this.battleGround = battleGround;
@@ -170,7 +169,7 @@ public abstract class Highlander implements Type {
     @Override
     public void addBonusHealth(){
         if(isBonusHealth){
-            health += roundToFirstDecimal(roundToFirstDecimal((float) (0.1 * health)));
+            health += roundToFirstDecimal((float) (0.1 * health));
         }
     }
 
