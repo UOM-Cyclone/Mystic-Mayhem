@@ -1,10 +1,8 @@
 package MysticMayhem.Characters;
 
-import MysticMayhem.RoundSummery;
-
 import java.util.Vector;
 
-public  interface Archer extends Catogery{
+public interface Mage extends Catogery{
     default Character chooseAndAttack(Vector<Character> attacker, Vector<Character> defender, float attack) {
         Character lowestDefenceHolder = findDefender(defender);
 

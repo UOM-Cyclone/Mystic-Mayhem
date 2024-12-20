@@ -1,7 +1,0 @@
------Mystic Mayhem-----
-
-1. Login
-2. New Player
-3. Instructions
-99. Quit Game
------------------------
